@@ -1,19 +1,19 @@
 <template>
   <div>
-    <TestForm />
+    <LoginForm />
   </div>
 </template>
 
 <script>
-import TestForm from "~/components/TestForm";
+import LoginForm from "~/components/LoginForm";
 export default {
   data() {
     return {
-      name: "nuxt2",
+      name: "nuxt",
     };
   },
   components: {
-    TestForm,
+    LoginForm,
   },
 };
 </script>
