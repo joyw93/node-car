@@ -1,7 +1,6 @@
 {
   "name": "vue",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/vuetify": "^1.12.3",
     "nuxt": "^2.15.8",
-    "vue": "^2.6.14"
-  }
+    "vue": "^2.6.14",
+    "vuetify": "^2.6.3"
+  },
+  "description": ""
 }

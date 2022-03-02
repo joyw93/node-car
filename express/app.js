@@ -1,12 +1,23 @@
 const express = require('express');
-
+const cors = require('cors');
 const app = express();
-app.set('port', process.env.PORT || 3000);
+
+app.use(cors('http://127.0.0.1:62361'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set('port', process.env.PORT || 3080);
 
 app.get('/', (req, res) => {
     res.send('Hello Express');
 })
 
+app.post('/user', (req, res) => {
+    const { email, password } = req.body;
+    console.log(email, password)
+    res.send(email)
+})
+
 app.listen(app.get('port'), () => {
-    console.log('http://127.0.0.1:3000')
+    console.log('http://127.0.0.1:3080')
 })
