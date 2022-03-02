@@ -20,7 +20,7 @@ export const state = () => ({
       commit("setMe", payload);
     },
     logIn({ commit }, payload) {
-      this.$axios.post('http://127.0.0.1:3080/user', {
+      this.$axios.post('http://3.39.63.126:80/user', {
           email: payload.email,
           password: payload.password
       });

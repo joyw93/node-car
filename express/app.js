@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-app.use(cors('http://127.0.0.1:62361'));
+app.use(cors('http://15.164.45.134:80'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
