@@ -20,10 +20,10 @@ export const actions = {
     commit("setMe", payload);
   },
   logIn({ commit }, payload) {
-    this.$axios.post("http://3.39.63.126:80/user", {
-      email: payload.email,
-      password: payload.password,
-    });
+    // this.$axios.post("http://3.39.63.126:80/user", {
+    //   email: payload.email,
+    //   password: payload.password,
+    // });
     commit("setMe", payload);
   },
   logOut({ commit }, payload) {
