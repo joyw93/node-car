@@ -7,6 +7,7 @@ module.exports = {
   modules: ["@nuxtjs/axios"],
   vuetify: {},
   server: {
-      port: process.env.PORT || 3081,
-  }
+    port: process.env.PORT || 3081,
+  },
+  build: {},
 };

@@ -1,3 +1,12 @@
+const port = process.env.PORT;
+const env = process.env.NODE_ENV;
+
+if (env === "production") {
+  const url = `http://3.39.63.126:80:${port}`;
+} else if (env === "development") {
+  const url = `http://127.0.0.1:${port}`;
+}
+
 export const state = () => ({
   me: null,
 });
