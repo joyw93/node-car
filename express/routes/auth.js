@@ -1,48 +1,62 @@
-const express = require('express');
-const bcrypt = require('bcrypt');
-const User = require('../models/user');
+const express = require("express");
+const bcrypt = require("bcrypt");
+const User = require("../models/user");
+const passport = require("passport");
+const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
+
 const router = express.Router();
-const passport = require('passport')
 
+router.get("/", isLoggedIn, async (req, res, next) => {
+  const user = req.user;
+  res.json(user);
+});
 
-router.post('/signup', async (req, res) => {
-    const { email, name, password } = req.body;
-    try {
-        const exUser = await User.findOne({ where: {email } });
-        if (exUser) {
-            return res.send('이미 존재하는 이메일입니다.')
-        }
-        const hash = await bcrypt.hash(password, 12);
-        await User.create({
-            name,
-            email,
-            password: hash
-        });
-        return res.send('signup success')
-    } catch(error) {
-        console.error(error);
+router.post("/signup", async (req, res, next) => {
+  const { email, name, password } = req.body;
+  try {
+    const exUser = await User.findOne({ where: { email } });
+    if (exUser) {
+      return res.send("이미 존재하는 이메일입니다.");
     }
-})
+    const hash = await bcrypt.hash(password, 12);
+    await User.create({
+      name,
+      email,
+      password: hash,
+    });
+    return res.send("signup success");
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
 
-router.post('/login', (req, res, next) => {
-    
-    passport.authenticate('local', (authError, user, info) => {
-        if (authError) {
-            console.error(authError);
-            return next(authError);
-        }
-        if(!user) {
-            return res.redirect(`/?loginError=${info.message}`);
-        }
-        return req.login(user, (loginError) => {
-            if(loginError){
-                console.error(loginError);
-                return next(loginError);
-            }
-            return res.redirect('/');
-        });
-    })(req, res, next);
-   
+router.post("/login", isNotLoggedIn, (req, res, next) => {
+  passport.authenticate('local', (authError, user, info) => {
+    if (authError) {
+      console.error(authError);
+      return next(authError);
+    }
+    if (info) {
+      return res.status(401).send(info.message);
+    }
+    return req.login(user, (loginError) => {
+      if (loginError) {
+        console.error(loginError);
+        return next(loginError);
+      }
+      console.log(req.isAuthenticated());
+      return res.json(user);
+    });
+  })(req, res, next);
+});
+
+router.post("/logout", (req, res, next) => {
+  if (req.isAuthenticated()) {
+    req.logout();
+    req.session.destroy(); // 선택사항
+    return res.status(200).send("로그아웃 되었습니다.");
+  }
 });
 
 module.exports = router;

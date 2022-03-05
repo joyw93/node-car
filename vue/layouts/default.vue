@@ -8,12 +8,27 @@
 
         <nuxt-link id="board" class="nuxtlink" to="/board">게시판</nuxt-link>
         <v-spacer />
-        <v-toolbar-items>
-          <login-form id="loginform" :style="{ display: 'flex', alignItems: 'center', color: '#2196F3' }" />
-          <signup-form :style="{ display: 'flex', alignItems: 'center', color: '#2196F3' }" />
+        <v-toolbar-items v-if="!me">
+          <login-form
+            id="loginform"
+            :style="{ display: 'flex', alignItems: 'center', color: '#2196F3' }"
+          />
+          <signup-form
+            :style="{ display: 'flex', alignItems: 'center', color: '#2196F3' }"
+          />
+          
+        </v-toolbar-items>
+        <v-toolbar-items v-else>
+          <div
+            class="text-center"
+            :style="{ display: 'flex', alignItems: 'center' }"
+          >
+            <v-btn color="primary" @click="onLogout">로그아웃</v-btn>
+          </div>
         </v-toolbar-items>
       </v-toolbar>
       <Carousel />
+
       <nuxt />
     </v-card>
   </v-app>
@@ -21,17 +36,27 @@
 
 <script>
 import Carousel from "~/components/Carousel.vue";
-import SignupForm from "~/components/SignupForm.vue"
-import LoginForm from "~/components/LoginForm.vue"
+import SignupForm from "~/components/SignupForm.vue";
+import LoginForm from "~/components/LoginForm.vue";
 
 export default {
   components: {
     Carousel,
     SignupForm,
-    LoginForm
+    LoginForm,
   },
   data() {
     return {};
+  },
+  computed: {
+    me() {
+      return this.$store.state.users.me;
+    },
+  },
+  methods: {
+    onLogout() {
+      this.$store.dispatch("users/logout");
+    },
   },
 };
 </script>
