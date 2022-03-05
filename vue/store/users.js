@@ -1,3 +1,5 @@
+const url = (process.env.NODE_ENV === 'production') ? "http://3.39.63.126:80" : "http://127.0.0.1:3080"
+
 export const state = () => ({
   me: null,
 });
@@ -15,12 +17,15 @@ export const mutations = {
 export const actions = {
   //비동기
   signUp({ commit, state }, payload) {
-    console.log(process.env.NODE_ENV);
-    console.log(process.env);
+    this.$axios.post(`${url}/auth/signup`, {
+      name: payload.name,
+      email: payload.email,
+      password: payload.password,
+    });
     commit("setMe", payload);
   },
-  logIn({ commit }, payload) {
-    this.$axios.post("http://3.39.63.126:80/user", {
+  login({ commit }, payload) {
+    this.$axios.post(`${url}/auth/login`, {
       email: payload.email,
       password: payload.password,
     });

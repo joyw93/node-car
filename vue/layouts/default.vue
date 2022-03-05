@@ -9,20 +9,7 @@
         <nuxt-link id="board" class="nuxtlink" to="/board">게시판</nuxt-link>
         <v-spacer />
         <v-toolbar-items>
-          <v-text-field
-            label="검색"
-            hide-details
-            prepend-icon="mdi-magnify"
-            :style="{ display: 'flex', alignItems: 'center', color: '#2196F3' }"
-          />
-          <v-btn
-            text
-            nuxt
-            to="/profile"
-            :style="{ display: 'flex', alignItems: 'center', color: '#2196F3' }"
-          >
-            <div>로그인</div>
-          </v-btn>
+          <login-form id="loginform" :style="{ display: 'flex', alignItems: 'center', color: '#2196F3' }" />
           <signup-form :style="{ display: 'flex', alignItems: 'center', color: '#2196F3' }" />
         </v-toolbar-items>
       </v-toolbar>
@@ -35,11 +22,13 @@
 <script>
 import Carousel from "~/components/Carousel.vue";
 import SignupForm from "~/components/SignupForm.vue"
+import LoginForm from "~/components/LoginForm.vue"
 
 export default {
   components: {
     Carousel,
-    SignupForm
+    SignupForm,
+    LoginForm
   },
   data() {
     return {};
@@ -66,5 +55,9 @@ export default {
 
 .carousel-item {
   height: auto;
+}
+
+#loginform {
+  margin-right: 10px;
 }
 </style>

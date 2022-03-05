@@ -41,6 +41,7 @@
               v-model="password"
               placeholder="비밀번호"
               solo
+              :rules="passwordRules"
               label="비밀번호"
               type="password"
               required
@@ -50,6 +51,7 @@
               v-model="passwordCheck"
               placeholder="비밀번호확인"
               solo
+              :rules="passwordCheckRules"
               label="비밀번호확인"
               type="password"
               required
