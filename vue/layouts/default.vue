@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-card color="grey lighten-4" flat height="200px" tile>
-      <v-toolbar class="fixed-bar" color="white">
+      <v-toolbar class="fixed-bar" color="white" dark>
         <v-toolbar-title>
           <nuxt-link class="nuxtlink" to="/">COCODING</nuxt-link>
         </v-toolbar-title>
@@ -16,7 +16,6 @@
           <signup-form
             :style="{ display: 'flex', alignItems: 'center', color: '#2196F3' }"
           />
-          
         </v-toolbar-items>
         <v-toolbar-items v-else>
           <div
@@ -85,4 +84,5 @@ export default {
 #loginform {
   margin-right: 10px;
 }
+
 </style>

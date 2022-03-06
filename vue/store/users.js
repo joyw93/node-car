@@ -1,3 +1,4 @@
+import axios from "axios";
 const url =
   process.env.NODE_ENV === "production"
     ? "http://3.39.63.126:80"
@@ -20,7 +21,7 @@ export const mutations = {
 export const actions = {
   //비동기
   signUp({ commit, state }, payload) {
-    this.$axios
+    axios
       .post(
         `${url}/auth/signup`,
         {
@@ -41,7 +42,7 @@ export const actions = {
       });
   },
   login({ commit }, payload) {
-    this.$axios
+    axios
       .post(
         `${url}/auth/login`,
         {
@@ -60,7 +61,7 @@ export const actions = {
       });
   },
   logout({ commit }) {
-    this.$axios
+    axios
       .post(
         `${url}/auth/logout`,
         {},
