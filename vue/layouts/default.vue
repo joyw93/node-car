@@ -27,6 +27,7 @@
         </v-toolbar-items>
       </v-toolbar>
       <Carousel />
+      <SelectBrand />
 
       <nuxt />
     </v-card>
@@ -37,12 +38,14 @@
 import Carousel from "~/components/Carousel.vue";
 import SignupForm from "~/components/SignupForm.vue";
 import LoginForm from "~/components/LoginForm.vue";
+import SelectBrand from "~/components/SelectBrand.vue";
 
 export default {
   components: {
     Carousel,
     SignupForm,
     LoginForm,
+    SelectBrand
   },
   data() {
     return {};
