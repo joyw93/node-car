@@ -1,12 +1,17 @@
 <template>
-<v-container justify="center">
-    <h1>
+<div>
+<h1>
     브랜드를 선택해주세요.
-    </h1>
-      <v-sheet
-        class="px-1"    
-      >
+  </h1>
+<v-row justify="center">
+  <v-col
+      cols="12"
+      sm="7"
+      md="6"
+      lg="5"
+    >
         <v-chip-group
+        column
           mandatory
           active-class="primary--text"
         >
@@ -17,8 +22,10 @@
             {{ tag }}
           </v-chip>
         </v-chip-group>
-      </v-sheet>
-      </v-container>
+      
+  </v-col>
+      </v-row>
+</div>
 </template>
 
 <script>
