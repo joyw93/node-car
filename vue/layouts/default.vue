@@ -3,7 +3,7 @@
     <v-card color="grey lighten-4" flat height="200px" tile>
       <v-toolbar class="fixed-bar" color="white" dark>
         <v-toolbar-title>
-          <nuxt-link class="nuxtlink" to="/">COCODING</nuxt-link>
+          <nuxt-link class="nuxtlink" to="/">YongCar</nuxt-link>
         </v-toolbar-title>
 
         <nuxt-link id="board" class="nuxtlink" to="/board">게시판</nuxt-link>

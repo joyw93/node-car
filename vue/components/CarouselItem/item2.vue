@@ -3,8 +3,8 @@
     <v-sheet color="blue" height="100%">
       <v-row class="fill-height">
         <v-container class="container">
-          <h1>크라우드 펀딩 플랫폼</h1>
-          <h1>지식스폰서</h1>
+          <h1>중고차 시세 조회</h1>
+          <h1>YongCar!</h1>
         </v-container>
       </v-row>
     </v-sheet>
