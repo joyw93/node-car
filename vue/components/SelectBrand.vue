@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <v-row justify="center">
       <v-col cols="12" sm="8" md="8" lg="8">
         <h2 class="header">브랜드</h2>
@@ -18,20 +17,39 @@
           </v-chip>
         </v-chip-group>
       </v-col>
-      <v-col cols="8" sm="8" md="8" lg="8">
-        <h2 class="header">주행거리</h2>
-        <v-text-field
-          outlined
-          suffix="km"
-        ></v-text-field>
+      <v-col cols="8">
+        <v-row>
+          <v-col cols="6">
+            <h2 class="header">주행거리</h2>
+            <v-text-field
+              outlined
+              suffix="km"
+            ></v-text-field>
+          </v-col>
+          <v-col  cols="6">
+            <h2 class="header">연식</h2>
+            <v-select
+              :items="items"
+              label="연식을 선택하세요"
+              outlined
+            ></v-select>
+          </v-col>
+        </v-row>
       </v-col>
-      <v-col cols="8" sm="8" md="8" lg="8">
-        <h2 class="header">연식</h2>
-        <v-select
-          :items="items"
-          label="연식을 선택하세요"
-          outlined
-        ></v-select>
+      <v-col cols="8">
+        <v-chip-group
+            column
+          >
+            <v-chip class="chip1">
+              &nbsp;&nbsp;
+            </v-chip>
+            <v-chip class="chip2">
+              &nbsp;&nbsp;
+            </v-chip>
+            <v-chip class="chip3">
+              &nbsp;&nbsp;
+            </v-chip>
+          </v-chip-group>
       </v-col>
     </v-row>
   </div>
@@ -67,6 +85,7 @@ export default {
       "인피니티",
     ],
     items: ['2022', '2021', '2020', '2019'],
+  
   }),
 };
 </script>
@@ -76,6 +95,18 @@ export default {
   margin-top: 30px;
   margin-bottom: 15px;
   color: #2196f3;
+}
+
+.chip1 {
+  background: blue;
+}
+
+.chip2 {
+  background: red;
+}
+
+.chip3 {
+  background: yellow;
 }
 
 
