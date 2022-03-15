@@ -5,7 +5,6 @@
         <v-toolbar-title>
           <nuxt-link class="nuxtlink" to="/">YongCar</nuxt-link>
         </v-toolbar-title>
-
         <nuxt-link id="board" class="nuxtlink" to="/board">게시판</nuxt-link>
         <v-spacer />
         <v-toolbar-items v-if="!me">
@@ -28,7 +27,7 @@
       </v-toolbar>
       <Carousel />
       <SelectBrand />
-
+      <Predicted />
       <nuxt />
     </v-card>
   </v-app>
@@ -39,13 +38,15 @@ import Carousel from "~/components/Carousel.vue";
 import SignupForm from "~/components/SignupForm.vue";
 import LoginForm from "~/components/LoginForm.vue";
 import SelectBrand from "~/components/SelectBrand.vue";
+import Predicted from "~/components/Predicted.vue"
 
 export default {
   components: {
     Carousel,
     SignupForm,
     LoginForm,
-    SelectBrand
+    SelectBrand,
+    Predicted
   },
   data() {
     return {};
@@ -54,6 +55,9 @@ export default {
     me() {
       return this.$store.state.users.me;
     },
+    price() {
+      return this.$store.state.cars.price;
+    }
   },
   methods: {
     onLogout() {
