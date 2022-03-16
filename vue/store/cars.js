@@ -2,12 +2,16 @@ import axios from "axios";
 const mlServerUrl = "http://127.0.0.1:5000"
 export const state = () => ({
     price: null,
+    info: null,
   });
   
   export const mutations = {
     setPrice(state, payload) {
       state.price = payload;
     },
+    setInfo(state, payload) {
+      state.info = payload;
+    }
   };
   
   export const actions = {
@@ -21,9 +25,9 @@ export const state = () => ({
         fuel: payload.fuel,
       })
         .then((res) => {
-          console.log(res);
           console.log(res.data);
-          commit("setPrice", res.data)
+          commit("setInfo", payload);
+          commit("setPrice", res.data);
         })
         .catch((err) => {
           console.error(err);

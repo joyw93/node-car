@@ -1,18 +1,29 @@
 <template>
-  <div>
-    <h1 class="font-weight-bold">BMW 5시리즈 <span class="grey--text">조회 결과입니다.</span></h1>
-    <img src="../static/images/car/그랜저.png" width="450" height="300">
-    <p class="grey--text">2017년식 | 35,555km | 가솔린</p>
+  <v-row justify="center">
+    <v-col cols="8">
+    <h1 class="font-weight-bold">{{info.brand}} {{info.model}} <span class="grey--text">조회 결과입니다.</span></h1>
+    <img src="../static/images/car/현대/그랜저.jpg" width="450" height="300">
+    
+    <p class="grey--text">{{info.age}} | {{info.odo}}km | {{info.fuel}}</p>
     <p>
         <span>예측가격 &nbsp; </span>
-        <strong id="price">4,312만원</strong>
+        <strong id="price">{{price}}만원</strong>
     </p>
-  </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
 export default {
-
+  computed: {
+    info() {
+      return this.$store.state.cars.info
+    },
+    price() {
+      return this.$store.state.cars.price
+    }
+  },
+  
 }
 </script>
 

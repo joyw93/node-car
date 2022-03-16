@@ -26,8 +26,7 @@
         </v-toolbar-items>
       </v-toolbar>
       <Carousel />
-      <SelectBrand />
-      <Predicted />
+      
       <nuxt />
     </v-card>
   </v-app>

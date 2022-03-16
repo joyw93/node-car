@@ -3,17 +3,17 @@
     <v-row justify="center">
       <v-col cols="12" sm="8" md="8" lg="8">
         <h2 class="header">브랜드</h2>
-        <v-chip-group v-model="current_brand" column mandatory active-class="primary--text">
-          <v-chip v-for="brand in Object.keys(model_list)" :key="brand" :value="brand">
-            {{ brand }}
+        <v-chip-group v-model="brand" column mandatory active-class="primary--text">
+          <v-chip v-for="_brand in Object.keys(models)" :key="_brand" :value="_brand">
+            {{ _brand }}
           </v-chip>
         </v-chip-group>
       </v-col>
       <v-col cols="12" sm="8" md="8" lg="8">
         <h2 class="header">모델</h2>
-        <v-chip-group v-model="current_model" column mandatory active-class="primary--text">
-          <v-chip v-for="model in model_list[current_brand]" :key="model" :value="model">
-            {{ model }}
+        <v-chip-group v-model="model" column mandatory active-class="primary--text">
+          <v-chip v-for="_model in models[brand]" :key="_model" :value="_model">
+            {{ _model }}
           </v-chip>
         </v-chip-group>
       </v-col>
@@ -68,9 +68,12 @@
         </v-row>
       </v-col>
       <v-col cols="8">
+      {{brand}}
+      {{model}}
        <v-btn
        @click="dialog = false"
-       type="submit" 
+       
+       type="submit"
        block
        x-large
        color="primary">
@@ -91,8 +94,8 @@ export default {
   data: () => ({
     valid: false,
     dialog: false,
-    current_brand: '',
-    current_model: '',
+    brand: '',
+    model: '',
     odo: '',
     age: '',
     fuel: '',
@@ -106,7 +109,7 @@ export default {
     fuelRules: [
       (v) => !!v || "연료 타입을 선택하세요."
     ],
-    model_list: {
+    models: {
       "현대": ['그랜저', '쏘나타', '아반떼'],
       "기아": ['K3', 'K5', 'K7']
     },
@@ -124,13 +127,17 @@ export default {
       let isValid = this.$refs.form.validate();
       if (isValid) {
         this.$store.dispatch("cars/predictPrice", {
-          model: this.current_model,
+          brand: this.brand,
+          model: this.model,
           age: this.age,
           odo: this.odo,
           color: this.color,
           fuel: this.fuel,
         })
         .then(() => {
+          this.$router.push({
+              path: "/predicted",
+            });
           console.log("데이터 전송 성공")
         })
         .catch(() => {

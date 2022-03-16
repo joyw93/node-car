@@ -1,19 +1,18 @@
 <template>
-  <div>
-    
-  </div>
+  <SelectBrand />
 </template>
 
 <script>
-import LoginForm from "~/components/LoginForm";
+import SelectBrand from "~/components/SelectBrand.vue";
+
 export default {
+  components: {
+    SelectBrand
+  },
   data() {
     return {
       name: "nuxt",
     };
-  },
-  components: {
-    LoginForm,
   },
 };
 </script>
