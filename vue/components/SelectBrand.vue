@@ -87,7 +87,7 @@
 <script>
 export default {
   computed: {
-    price() {
+    info() {
       return this.$store.state.cars.price
     }
   },
@@ -122,6 +122,15 @@ export default {
       ['#F44336', '#FFEB3B'],
     ]
   }),
+  watch: {
+    info(value, oldvalue) {
+      if(value) {
+        this.$router.push({
+          path: '/predicted',
+        })
+      }
+    }
+  },
   methods: {
     onSubmitForm() {
       let isValid = this.$refs.form.validate();
@@ -135,9 +144,9 @@ export default {
           fuel: this.fuel,
         })
         .then(() => {
-          this.$router.push({
-              path: "/predicted",
-            });
+          // this.$router.push({
+          //     path: "/predicted",
+          //   });
           console.log("데이터 전송 성공")
         })
         .catch(() => {
