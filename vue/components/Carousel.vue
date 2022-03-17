@@ -1,5 +1,5 @@
 <template>
-  <v-carousel cycle height="400" hide-delimiter-background show-arrows-on-hover>
+  <v-carousel cycle height="300" hide-delimiter-background show-arrows-on-hover>
     <item1 />
     <item2 />
   </v-carousel>

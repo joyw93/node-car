@@ -3,19 +3,57 @@
     <v-row justify="center">
       <v-col cols="12" sm="8" md="8" lg="8">
         <h2 class="header">브랜드</h2>
-        <v-chip-group v-model="brand" column mandatory active-class="primary--text">
-          <v-chip v-for="_brand in Object.keys(models)" :key="_brand" :value="_brand">
+        <v-chip-group 
+        v-model="brand" 
+        column
+        mandatory 
+        active-class="primary--text">
+          <v-chip outlined v-for="_brand in Object.keys(models)" :key="_brand" :value="_brand">
+            <img :src='require(`@/static/images/logo/${_brand}.png`)' width="25" height="25"/>
+            &nbsp;
             {{ _brand }}
           </v-chip>
         </v-chip-group>
       </v-col>
       <v-col cols="12" sm="8" md="8" lg="8">
         <h2 class="header">모델</h2>
-        <v-chip-group v-model="model" column mandatory active-class="primary--text">
-          <v-chip v-for="_model in models[brand]" :key="_model" :value="_model">
-            {{ _model }}
-          </v-chip>
-        </v-chip-group>
+        <v-item-group v-model="model" active-class="primary">
+          <v-container>
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+                sm="6"
+                xs="8"
+                v-for="_model in models[brand]" 
+                :key="_model"
+              >
+                <v-item 
+                v-slot="{ active, toggle }"
+                :value="_model"
+                >
+                <v-hover v-slot="{ hover }">
+                  <v-card
+                    :elevation="hover ? 12 : 2"
+                    :class="{ 'on-hover': hover }"
+                    class="d-flex align-center"
+                    @click="toggle"
+                  >
+                  <img :src='require(`@/static/images/car/${brand}/${_model}.jpg`)' width="150" height="150"/>
+                    <v-scroll-y-transition>
+                      <div
+                        v-if="active"
+                        class="text-h2 flex-grow-1 text-center"
+                      >
+                      </div>
+                    </v-scroll-y-transition>
+                  </v-card>
+                </v-hover>
+                </v-item>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-item-group>
       </v-col>
       <v-col cols="8">
         <v-row>
@@ -68,11 +106,8 @@
         </v-row>
       </v-col>
       <v-col cols="8">
-      {{brand}}
-      {{model}}
        <v-btn
        @click="dialog = false"
-       
        type="submit"
        block
        x-large
@@ -111,7 +146,11 @@ export default {
     ],
     models: {
       "현대": ['그랜저', '쏘나타', '아반떼'],
-      "기아": ['K3', 'K5', 'K7']
+      "기아": ['K3', 'K5', 'K7'],
+      "르노삼성": ['SM3', 'SM5', 'SM6', 'SM7'],
+      "BMW": ['3시리즈', '5시리즈', '7시리즈'],
+      "벤츠": ['C클래스', 'E클래스', 'S클래스'],
+      "아우디": ['A4', 'A6', 'A7']
     },
     years: ['2022', '2021', '2020', '2019'],
     fuels: ['가솔린', '디젤', 'LPG', '하이브리드', '전기'],
@@ -120,7 +159,8 @@ export default {
       ['#FFFFFF', '#795548'],
       ['#9E9E9E', '#4CAF50'],
       ['#F44336', '#FFEB3B'],
-    ]
+    ],
+    transparent: 'rgba(255, 255, 255, 0)',
   }),
   watch: {
     info(value, oldvalue) {
@@ -144,9 +184,6 @@ export default {
           fuel: this.fuel,
         })
         .then(() => {
-          // this.$router.push({
-          //     path: "/predicted",
-          //   });
           console.log("데이터 전송 성공")
         })
         .catch(() => {
@@ -166,4 +203,15 @@ export default {
   margin-bottom: 15px;
   color: #2196f3;
 }
+.v-card {
+  transition: opacity .4s ease-in-out;
+}
+
+#card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 </style>
