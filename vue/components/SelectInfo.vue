@@ -1,8 +1,8 @@
 <template>
   <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
     <v-row justify="center">
-      <v-col cols="12" sm="8" md="8" lg="8">
-        <h2 class="header">브랜드</h2>
+      <v-col cols="12" sm="9" md="9" lg="9">
+        <h2 class="header">제조사</h2>
         <v-chip-group
           v-model="brand"
           column
@@ -25,7 +25,7 @@
           </v-chip>
         </v-chip-group>
       </v-col>
-      <v-col cols="12" sm="8" md="8" lg="8">
+      <v-col cols="12" sm="9" md="9" lg="9">
         <h2 class="header">모델</h2>
         <v-item-group v-model="model" active-class="primary">
           <v-container>
@@ -60,7 +60,11 @@
                             height="150"
                           />
                         </div>
-                        <div id="text" class="card" :class="{'card-selected': active}">
+                        <div
+                          id="text"
+                          class="card"
+                          :class="{ 'card-selected': active }"
+                        >
                           {{ _model }}
                         </div>
                       </div>
@@ -75,7 +79,7 @@
           </v-container>
         </v-item-group>
       </v-col>
-      <v-col cols="8">
+      <v-col cols="9">
         <v-row>
           <v-col cols="12" sm="12" md="6">
             <h2 class="header">주행거리</h2>
@@ -99,20 +103,23 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="8">
+      <v-col cols="9">
         <v-row>
-          <v-col cols="12" sm="12" md="6" >
+          <v-col cols="12" sm="12" md="6">
             <h2 class="header">색상</h2>
-            <v-color-picker
-              v-model="color"
-              swatches-max-height="200"
-              :swatches="swatches"
-              show-swatches
-              hide-inputs
-              hide-canvas
-              hide-sliders
-            >
-            </v-color-picker>
+            <div class="color-select">
+              <v-color-picker
+                class="color-picker"
+                v-model="color"
+                swatches-max-height="100"
+                :swatches="swatches"
+                show-swatches
+                hide-inputs
+                hide-canvas
+                hide-sliders
+              >
+              </v-color-picker>
+            </div>
           </v-col>
           <v-col cols="12" sm="12" md="6">
             <h2 class="header">연료타입</h2>
@@ -124,16 +131,12 @@
               outlined
             ></v-select>
           </v-col>
+          
         </v-row>
+        <v-divider class="divider"></v-divider>
       </v-col>
-      <v-col cols="8">
-        <v-btn
-          @click="dialog = false"
-          type="submit"
-          block
-          x-large
-          color="primary"
-        >
+      <v-col cols="9">
+        <v-btn @click="dialog = false" type="submit" x-large color="primary">
           결과 확인
         </v-btn>
       </v-col>
@@ -190,7 +193,11 @@ export default {
   methods: {
     onSubmitForm() {
       let isValid = this.$refs.form.validate();
-      if (isValid) {
+      let isModelSelected = this.model;
+      if (!isModelSelected) {
+        alert("차량 모델을 선택하세요");
+      }
+      if (isValid && isModelSelected) {
         this.$store
           .dispatch("cars/predictPrice", {
             brand: this.brand,
@@ -237,6 +244,18 @@ export default {
   color: white;
 }
 
+.color-picker {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e0e0e0;
+  background-color: #f5f5f5;
+}
+
+.divider {
+  margin-bottom:30px;
+  margin-top: 30px;
+}
+
 #text {
   margin-bottom: 15px;
 }
@@ -244,6 +263,4 @@ export default {
 #text-selected {
   color: white;
 }
-
-
 </style>

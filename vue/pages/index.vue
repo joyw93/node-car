@@ -1,13 +1,13 @@
 <template>
-  <SelectBrand />
+  <SelectInfo />
 </template>
 
 <script>
-import SelectBrand from "~/components/SelectBrand.vue";
+import SelectInfo from "~/components/SelectInfo.vue";
 
 export default {
   components: {
-    SelectBrand
+    SelectInfo
   },
   data() {
     return {

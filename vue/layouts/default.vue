@@ -26,9 +26,10 @@
         </v-toolbar-items>
       </v-toolbar>
       <Carousel />
-      
       <nuxt />
+       <Footer />
     </v-card>
+    
   </v-app>
 </template>
 
@@ -36,16 +37,18 @@
 import Carousel from "~/components/Carousel.vue";
 import SignupForm from "~/components/SignupForm.vue";
 import LoginForm from "~/components/LoginForm.vue";
-import SelectBrand from "~/components/SelectBrand.vue";
-import Predicted from "~/components/Predicted.vue"
+import SelectInfo from "~/components/SelectInfo.vue";
+import Predicted from "~/components/Predicted.vue";
+import Footer from "~/components/Footer.vue";
 
 export default {
   components: {
     Carousel,
     SignupForm,
     LoginForm,
-    SelectBrand,
-    Predicted
+    SelectInfo,
+    Predicted,
+    Footer
   },
   data() {
     return {};
