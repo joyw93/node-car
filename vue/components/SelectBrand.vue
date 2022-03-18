@@ -3,13 +3,23 @@
     <v-row justify="center">
       <v-col cols="12" sm="8" md="8" lg="8">
         <h2 class="header">브랜드</h2>
-        <v-chip-group 
-        v-model="brand" 
-        column
-        mandatory 
-        active-class="primary--text">
-          <v-chip outlined v-for="_brand in Object.keys(models)" :key="_brand" :value="_brand">
-            <img :src='require(`@/static/images/logo/${_brand}.png`)' width="25" height="25"/>
+        <v-chip-group
+          v-model="brand"
+          column
+          mandatory
+          active-class="primary--text"
+        >
+          <v-chip
+            outlined
+            v-for="_brand in Object.keys(models)"
+            :key="_brand"
+            :value="_brand"
+          >
+            <img
+              :src="require(`@/static/images/logo/${_brand}.png`)"
+              width="25"
+              height="25"
+            />
             &nbsp;
             {{ _brand }}
           </v-chip>
@@ -25,30 +35,40 @@
                 md="4"
                 sm="6"
                 xs="8"
-                v-for="_model in models[brand]" 
+                v-for="_model in models[brand]"
                 :key="_model"
               >
-                <v-item 
-                v-slot="{ active, toggle }"
-                :value="_model"
+                <v-item
+                  class="card"
+                  v-slot="{ active, toggle }"
+                  :value="_model"
                 >
-                <v-hover v-slot="{ hover }">
-                  <v-card
-                    :elevation="hover ? 12 : 2"
-                    :class="{ 'on-hover': hover }"
-                    class="d-flex align-center"
-                    @click="toggle"
-                  >
-                  <img :src='require(`@/static/images/car/${brand}/${_model}.jpg`)' width="150" height="150"/>
-                    <v-scroll-y-transition>
-                      <div
-                        v-if="active"
-                        class="text-h2 flex-grow-1 text-center"
-                      >
+                  <v-hover v-slot="{ hover }">
+                    <v-card
+                      :elevation="hover ? 12 : 2"
+                      :class="{ 'on-hover': hover }"
+                      class="d-flex align-center"
+                      @click="toggle"
+                    >
+                      <div>
+                        <div>
+                          <img
+                            :src="
+                              require(`@/static/images/car/${brand}/${_model}.jpg`)
+                            "
+                            width="150"
+                            height="150"
+                          />
+                        </div>
+                        <div id="text" class="card" :class="{'card-selected': active}">
+                          {{ _model }}
+                        </div>
                       </div>
-                    </v-scroll-y-transition>
-                  </v-card>
-                </v-hover>
+                      <v-scroll-y-transition>
+                        <div v-if="active" class="card-selected"></div>
+                      </v-scroll-y-transition>
+                    </v-card>
+                  </v-hover>
                 </v-item>
               </v-col>
             </v-row>
@@ -57,7 +77,7 @@
       </v-col>
       <v-col cols="8">
         <v-row>
-          <v-col cols="6">
+          <v-col cols="12" sm="12" md="6">
             <h2 class="header">주행거리</h2>
             <v-text-field
               :rules="odoRules"
@@ -67,7 +87,7 @@
               suffix="km"
             ></v-text-field>
           </v-col>
-          <v-col  cols="6">
+          <v-col cols="12" sm="12" md="6">
             <h2 class="header">연식</h2>
             <v-select
               :rules="ageRules"
@@ -81,19 +101,20 @@
       </v-col>
       <v-col cols="8">
         <v-row>
-          <v-col cols="6">
-          <h2 class="header">색상</h2>
+          <v-col cols="12" sm="12" md="6" >
+            <h2 class="header">색상</h2>
             <v-color-picker
-            v-model="color"
-            swatches-max-height="200"
-            :swatches="swatches"
-            show-swatches
-            hide-inputs
-            hide-canvas
-            hide-sliders>
+              v-model="color"
+              swatches-max-height="200"
+              :swatches="swatches"
+              show-swatches
+              hide-inputs
+              hide-canvas
+              hide-sliders
+            >
             </v-color-picker>
           </v-col>
-          <v-col cols="6">
+          <v-col cols="12" sm="12" md="6">
             <h2 class="header">연료타입</h2>
             <v-select
               :rules="fuelRules"
@@ -106,14 +127,15 @@
         </v-row>
       </v-col>
       <v-col cols="8">
-       <v-btn
-       @click="dialog = false"
-       type="submit"
-       block
-       x-large
-       color="primary">
+        <v-btn
+          @click="dialog = false"
+          type="submit"
+          block
+          x-large
+          color="primary"
+        >
           결과 확인
-       </v-btn>
+        </v-btn>
       </v-col>
     </v-row>
   </v-form>
@@ -123,77 +145,72 @@
 export default {
   computed: {
     info() {
-      return this.$store.state.cars.price
-    }
+      return this.$store.state.cars.price;
+    },
   },
   data: () => ({
     valid: false,
     dialog: false,
-    brand: '',
-    model: '',
-    odo: '',
-    age: '',
-    fuel: '',
-    color: '#000000',
-    odoRules: [
-      (v) => !!v || "주행거리를 입력하세요."
-    ],
-    ageRules: [
-      (v) => !!v || "연식을 선택하세요."
-    ],
-    fuelRules: [
-      (v) => !!v || "연료 타입을 선택하세요."
-    ],
+    brand: "",
+    model: "",
+    odo: "",
+    age: "",
+    fuel: "",
+    color: "#000000",
+    odoRules: [(v) => !!v || "주행거리를 입력하세요."],
+    ageRules: [(v) => !!v || "연식을 선택하세요."],
+    fuelRules: [(v) => !!v || "연료 타입을 선택하세요."],
     models: {
-      "현대": ['그랜저', '쏘나타', '아반떼'],
-      "기아": ['K3', 'K5', 'K7'],
-      "르노삼성": ['SM3', 'SM5', 'SM6', 'SM7'],
-      "BMW": ['3시리즈', '5시리즈', '7시리즈'],
-      "벤츠": ['C클래스', 'E클래스', 'S클래스'],
-      "아우디": ['A4', 'A6', 'A7']
+      현대: ["그랜저", "쏘나타", "아반떼"],
+      기아: ["K3", "K5", "K7"],
+      르노삼성: ["SM3", "SM5", "SM6", "SM7"],
+      BMW: ["3시리즈", "5시리즈", "7시리즈"],
+      벤츠: ["C클래스", "E클래스", "S클래스"],
+      아우디: ["A4", "A6", "A7"],
     },
-    years: ['2022', '2021', '2020', '2019'],
-    fuels: ['가솔린', '디젤', 'LPG', '하이브리드', '전기'],
+    years: ["2022", "2021", "2020", "2019"],
+    fuels: ["가솔린", "디젤", "LPG", "하이브리드", "전기"],
     swatches: [
-      ['#000000', '#2196F3'],
-      ['#FFFFFF', '#795548'],
-      ['#9E9E9E', '#4CAF50'],
-      ['#F44336', '#FFEB3B'],
+      ["#000000", "#2196F3"],
+      ["#FFFFFF", "#795548"],
+      ["#9E9E9E", "#4CAF50"],
+      ["#F44336", "#FFEB3B"],
     ],
-    transparent: 'rgba(255, 255, 255, 0)',
+    transparent: "rgba(255, 255, 255, 0)",
   }),
   watch: {
     info(value, oldvalue) {
-      if(value) {
+      if (value) {
         this.$router.push({
-          path: '/predicted',
-        })
+          path: "/predicted",
+        });
       }
-    }
+    },
   },
   methods: {
     onSubmitForm() {
       let isValid = this.$refs.form.validate();
       if (isValid) {
-        this.$store.dispatch("cars/predictPrice", {
-          brand: this.brand,
-          model: this.model,
-          age: this.age,
-          odo: this.odo,
-          color: this.color,
-          fuel: this.fuel,
-        })
-        .then(() => {
-          console.log("데이터 전송 성공")
-        })
-        .catch(() => {
-          console.log("데이터 전송 실패")
-        })
+        this.$store
+          .dispatch("cars/predictPrice", {
+            brand: this.brand,
+            model: this.model,
+            age: this.age,
+            odo: this.odo,
+            color: this.color,
+            fuel: this.fuel,
+          })
+          .then(() => {
+            console.log("데이터 전송 성공");
+          })
+          .catch(() => {
+            console.log("데이터 전송 실패");
+          });
       } else {
-        console.log("양식이 유효하지 않습니다.")
+        console.log("양식이 유효하지 않습니다.");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -204,13 +221,28 @@ export default {
   color: #2196f3;
 }
 .v-card {
-  transition: opacity .4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
 }
 
-#card {
+.card {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.card-selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+#text {
+  margin-bottom: 15px;
+}
+
+#text-selected {
+  color: white;
 }
 
 
