@@ -17,8 +17,8 @@
           >
             <img
               :src="require(`@/static/images/logo/${_brand}.png`)"
-              width="25"
-              height="25"
+              width="42"
+              height="30"
             />
             &nbsp;
             {{ _brand }}
@@ -47,7 +47,7 @@
                     <v-card
                       :elevation="hover ? 12 : 2"
                       :class="{ 'on-hover': hover }"
-                      class="d-flex align-center"
+                      id="card"
                       @click="toggle"
                     >
                       <div>
@@ -84,6 +84,7 @@
           <v-col cols="12" sm="12" md="6">
             <h2 class="header">주행거리</h2>
             <v-text-field
+              class="input"
               :rules="odoRules"
               v-model="odo"
               label="주행거리를 입력하세요"
@@ -94,6 +95,7 @@
           <v-col cols="12" sm="12" md="6">
             <h2 class="header">연식</h2>
             <v-select
+              class="input"
               :rules="ageRules"
               v-model="age"
               :items="years"
@@ -124,6 +126,7 @@
           <v-col cols="12" sm="12" md="6">
             <h2 class="header">연료타입</h2>
             <v-select
+              class="input"
               :rules="fuelRules"
               v-model="fuel"
               :items="fuels"
@@ -131,7 +134,6 @@
               outlined
             ></v-select>
           </v-col>
-          
         </v-row>
         <v-divider class="divider"></v-divider>
       </v-col>
@@ -252,8 +254,12 @@ export default {
 }
 
 .divider {
-  margin-bottom:30px;
+  margin-bottom: 30px;
   margin-top: 30px;
+}
+
+.input {
+  max-width: 500px;
 }
 
 #text {
@@ -262,5 +268,9 @@ export default {
 
 #text-selected {
   color: white;
+}
+
+#card {
+  max-width: 400px;
 }
 </style>

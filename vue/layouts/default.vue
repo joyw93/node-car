@@ -3,9 +3,11 @@
     <v-card color="grey lighten-4" flat height="200px" tile>
       <v-toolbar class="fixed-bar" color="white" dark>
         <v-toolbar-title>
-          <nuxt-link class="nuxtlink" to="/">YongCar</nuxt-link>
+          <nuxt-link class="nuxtlink" to="/">
+            <h2>YongCar</h2>
+          </nuxt-link>
         </v-toolbar-title>
-        <nuxt-link id="board" class="nuxtlink" to="/board">게시판</nuxt-link>
+        <!-- <nuxt-link id="board" class="nuxtlink" to="/board">게시판</nuxt-link> -->
         <v-spacer />
         <v-toolbar-items v-if="!me">
           <login-form
@@ -27,9 +29,8 @@
       </v-toolbar>
       <Carousel />
       <nuxt />
-       <Footer />
+      <Footer />
     </v-card>
-    
   </v-app>
 </template>
 
@@ -48,7 +49,7 @@ export default {
     LoginForm,
     SelectInfo,
     Predicted,
-    Footer
+    Footer,
   },
   data() {
     return {};
@@ -59,7 +60,7 @@ export default {
     },
     price() {
       return this.$store.state.cars.price;
-    }
+    },
   },
   methods: {
     onLogout() {
@@ -73,6 +74,10 @@ export default {
 .nuxtlink {
   color: #2196f3;
   text-decoration: none;
+}
+
+h2 {
+ margin-left: 10px;
 }
 
 #board {
@@ -93,5 +98,4 @@ export default {
 #loginform {
   margin-right: 10px;
 }
-
 </style>
