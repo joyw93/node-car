@@ -36,6 +36,7 @@
 </template>
 
 <script>
+
 import Carousel from "~/components/Carousel.vue";
 import SignupForm from "~/components/SignupForm.vue";
 import LoginForm from "~/components/LoginForm.vue";

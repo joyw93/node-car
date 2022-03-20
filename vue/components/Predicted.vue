@@ -1,27 +1,40 @@
 <template>
   <v-row class="mt-5" justify="center">
     <v-col cols="4">
-      <h1>{{ info.brand }} {{ info.model }}</h1>
-      <h1>차량 정보입니다.</h1>
+      <div id="text1">조회하신</div>
+      <div id="text2">{{ info.brand }} {{ info.model }}</div>
+      <div id="text3">차량 정보입니다.</div>
     </v-col>
     <v-col cols="7">
-      <h1 class="font-weight-bold">
-        {{ info.brand }} {{ info.model }}
-        <span class="muted">조회 결과입니다.</span>
-      </h1>
-      <img
-        :src="require(`@/static/images/car/${info.brand}/${info.model}.jpg`)"
-        width="450"
-        height="300"
-      />
-      <p class="muted">{{ info.age }} | {{ info.odo }}km | {{ info.fuel }}</p>
-      <p>
-        <span>예측가격 &nbsp; </span>
-        <strong id="price">{{ price | comma }}만원</strong>
-      </p>
+      <v-row>
+        <v-col cols="6">
+          <div id="brand">{{ info.brand }}</div>
+          <div id="model">{{ info.model }}</div>
+          <p class="muted">
+            {{ info.age }} &nbsp;|&nbsp; {{ info.odo }}km &nbsp;|&nbsp; {{ info.fuel }}
+          </p>
+          <p>
+            <span>예측가격 &nbsp; </span>
+            <strong id="price">{{ price | comma }}만원</strong>
+          </p>
+          <span class="span">제원정보<v-icon>mdi-chevron-right</v-icon> </span>
+          &nbsp;
+          <span class="span">브랜드정보<v-icon>mdi-chevron-right</v-icon></span>
+        </v-col>
+        <v-col cols="5">
+          <img
+            :src="
+              require(`@/static/images/car/${info.brand}/${info.model}.jpg`)
+            "
+            width="400"
+            height="250"
+          />
+        </v-col>
+      </v-row>
     </v-col>
   </v-row>
 </template>
+
 <script>
 export default {
   data() {
@@ -45,7 +58,37 @@ export default {
 
 <style scoped>
 .muted {
+  margin-top: 20px;
   color: #757575;
+}
+
+.span {
+  color: #0d47a1;
+}
+
+#text1 {
+  font-size: 50px;
+  color: #2196f3;
+}
+
+#text2 {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+#text3 {
+  font-size: 50px;
+  color: #757575;
+}
+
+#brand {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+#model {
+  font-size: 25px;
+  font-weight: bold;
 }
 
 #price {
