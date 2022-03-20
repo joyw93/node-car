@@ -14,8 +14,8 @@
                 <img
                   class="carousel-image"
                   :src="require(`@/static/images/carousel/carousel1.svg`)"
-                  width=300
-                  height=250
+                  width="300"
+                  height="250"
                 />
               </v-col>
             </v-row>

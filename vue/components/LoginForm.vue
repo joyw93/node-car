@@ -2,7 +2,9 @@
   <div class="text-center">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn outlined color="primary" dark v-bind="attrs" v-on="on"> 로그인 </v-btn>
+        <v-btn outlined color="primary" dark v-bind="attrs" v-on="on">
+          로그인
+        </v-btn>
       </template>
 
       <v-card>
@@ -16,7 +18,6 @@
         </div>
         <v-container class="container">
           <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
-            
             <span>이메일</span>
             <v-text-field
               v-model="email"
@@ -58,8 +59,8 @@
 export default {
   computed: {
     me() {
-      return this.$store.state.users.me
-    }
+      return this.$store.state.users.me;
+    },
   },
   data() {
     return {
@@ -72,9 +73,7 @@ export default {
         (v) => !!v || "이메일은 필수입니다.",
         (v) => /.+@.+/.test(v) || "이메일이 유효하지 않습니다.",
       ],
-      passwordRules: [
-        (v) => !!v || "비밀번호는 필수입니다.",
-      ],
+      passwordRules: [(v) => !!v || "비밀번호는 필수입니다."],
     };
   },
   methods: {

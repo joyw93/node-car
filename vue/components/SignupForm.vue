@@ -105,8 +105,8 @@
 export default {
   computed: {
     me() {
-      return this.$store.state.users.me
-    }
+      return this.$store.state.users.me;
+    },
   },
   data() {
     return {

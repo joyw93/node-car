@@ -29,6 +29,7 @@
       </v-toolbar>
       <Carousel />
       <nuxt />
+      <FloatingButton />
       <Footer />
     </v-card>
   </v-app>
@@ -41,6 +42,7 @@ import LoginForm from "~/components/LoginForm.vue";
 import SelectInfo from "~/components/SelectInfo.vue";
 import Predicted from "~/components/Predicted.vue";
 import Footer from "~/components/Footer.vue";
+import FloatingButton from "~/components/FloatingButton.vue";
 
 export default {
   components: {
@@ -50,6 +52,7 @@ export default {
     SelectInfo,
     Predicted,
     Footer,
+    FloatingButton,
   },
   data() {
     return {};
@@ -77,7 +80,7 @@ export default {
 }
 
 h2 {
- margin-left: 10px;
+  margin-left: 10px;
 }
 
 #board {

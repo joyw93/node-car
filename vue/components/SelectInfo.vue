@@ -135,14 +135,21 @@
             ></v-select>
           </v-col>
         </v-row>
-        <v-divider class="divider"></v-divider>
       </v-col>
       <v-col cols="9">
-        <v-btn @click="dialog = false" type="submit" x-large color="primary">
-          결과 확인
+        <v-btn
+          id="submit-button"
+          @click="dialog = false"
+          type="submit"
+          x-large
+          color="primary"
+        >
+          시세 확인
         </v-btn>
       </v-col>
+      
     </v-row>
+    <v-divider class="divider"></v-divider>
   </v-form>
 </template>
 
@@ -190,6 +197,12 @@ export default {
           path: "/predicted",
         });
       }
+    },
+    odo(newValue) {
+      const result = newValue
+        .replace(/\D/g, "")
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.$nextTick(() => (this.odo = result));
     },
   },
   methods: {
@@ -254,8 +267,8 @@ export default {
 }
 
 .divider {
-  margin-bottom: 30px;
-  margin-top: 30px;
+  margin-bottom: 25px;
+  margin-top: 25px;
 }
 
 .input {
@@ -272,5 +285,9 @@ export default {
 
 #card {
   max-width: 400px;
+}
+
+#submit-button {
+  font-weight: bold;
 }
 </style>

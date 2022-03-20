@@ -14,8 +14,8 @@
                 <img
                   class="carousel-image"
                   :src="require(`@/static/images/carousel/carousel2.svg`)"
-                  width=300
-                  height=200
+                  width="300"
+                  height="200"
                 />
               </v-col>
             </v-row>
@@ -48,6 +48,6 @@ h3 {
 }
 
 .carousel-image {
-  margin-top:30px;
+  margin-top: 30px;
 }
 </style>
