@@ -1,14 +1,15 @@
 <template>
   <div>
-    <v-row class="mt-5" justify="center">
-      <v-col cols="12" sm="12" md="4" lg="4">
+    <v-divider></v-divider>
+    <v-row class="vrow" justify="center">
+      <v-col cols="12" sm="12" md="5" lg="5">
         <div id="text1">조회하신</div>
         <div id="text2">{{ info.brand }} {{ info.model }}</div>
         <div id="text3">차량 정보입니다.</div>
       </v-col>
-      <v-col cols="12" sm="12" md="8" lg="8">
+      <v-col cols="12" sm="12" md="7" lg="7">
         <v-row>
-          <v-col cols="12" sm="5" md="5" lg="5">
+          <v-col cols="12" sm="7" md="7" lg="6">
             <div id="brand">{{ info.brand }}</div>
             <div id="model">{{ info.model }}</div>
             <p class="muted">
@@ -19,27 +20,28 @@
               <span>예측가격 &nbsp; </span>
               <strong id="price">{{ price | comma }}만원</strong>
             </p>
-            <span class="span"
+            <a class="span" @click="specInfo"
               >제원정보<v-icon>mdi-chevron-right</v-icon>
-            </span>
+            </a>
             &nbsp;
-            <span class="span"
-              >브랜드정보<v-icon>mdi-chevron-right</v-icon></span
+            <a class="span" @click="brandInfo"
+              >브랜드정보<v-icon>mdi-chevron-right</v-icon></a
             >
           </v-col>
-          <v-col cols="12" sm="7" md="7" lg="7">
+          <v-col cols="12" sm="5" md="5" lg="6">
             <img
               :src="
                 require(`@/static/images/car/${info.brand}/${info.model}.jpg`)
               "
-              width="300"
-              height="250"
+              width="288"
+              height="189"
             />
           </v-col>
         </v-row>
       </v-col>
     </v-row>
-    <v-row class="mt-5" justify="center">
+    <v-divider></v-divider>
+    <v-row class="vrow" justify="center">
       <v-col cols="6" sm="6" md="6" lg="4">
         <Chart />
       </v-col>
@@ -61,6 +63,14 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    brandInfo() {
+      alert("준비중입니다.");
+    },
+    specInfo() {
+      alert("준비중입니다.");
+    }
+  },
   computed: {
     info() {
       return this.$store.state.cars.info;
@@ -78,6 +88,12 @@ export default {
 </script>
 
 <style scoped>
+.vrow {
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 100px;
+}
+
 .muted {
   margin-top: 20px;
   color: #757575;
@@ -87,18 +103,24 @@ export default {
   color: #0d47a1;
 }
 
+.v-divider {
+  margin-top: 80px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
 #text1 {
-  font-size: 48px;
+  font-size: 45px;
   color: #2196f3;
 }
 
 #text2 {
-  font-size: 48px;
+  font-size: 45px;
   font-weight: bold;
 }
 
 #text3 {
-  font-size: 48px;
+  font-size: 45px;
   color: #757575;
 }
 

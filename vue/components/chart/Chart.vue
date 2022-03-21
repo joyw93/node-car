@@ -6,7 +6,6 @@
 
 <script>
 import Chart from "chart.js";
-
 export default {
   data() {
     return {
@@ -33,9 +32,7 @@ export default {
             },
             {
               label: "주행거리",
-              data: [
-                300,200,100,50,40,30,20,10
-              ],
+              data: [300, 200, 100, 50, 40, 30, 20, 10],
               backgroundColor: "rgba(33, 150, 243,.5)",
               borderColor: "#2196F3",
               borderWidth: 3,

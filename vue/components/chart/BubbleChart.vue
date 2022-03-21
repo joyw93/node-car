@@ -6,7 +6,6 @@
 
 <script>
 import BubbleChart from "chart.js";
-
 export default {
   data() {
     return {
@@ -25,20 +24,48 @@ export default {
           ],
           datasets: [
             {
-              label: "잔존가치",
-              data: [500, 450, 300, 250, 120, 40, 20, 10],
-              backgroundColor: "rgba(54,73,93,.5)",
-              borderColor: "#36495d",
+              label: "적정가격",
+              data: [0, 100, 200, 300, 400, 500, 600, 700],
+              backgroundColor: "rgba(33, 150, 243,.0)",
+              borderColor: "#2196F3",
               borderWidth: 3,
             },
             {
-              label: "주행거리",
+              label: "매물가격",
+              type: "bubble",
               data: [
-                300,200,100,50,40,30,20,10
+                {
+                  x: 2015,
+                  y: 110,
+                  r: 10,
+                },
+                {
+                  x: 2016,
+                  y: 200,
+                  r: 10,
+                },
+                {
+                  x: 2017,
+                  y: 180,
+                  r: 10,
+                },
+                {
+                  x: 2018,
+                  y: 400,
+                  r: 10,
+                },
+                {
+                  x: 2019,
+                  y: 350,
+                  r: 10,
+                },
+                {
+                  x: 2020,
+                  y: 400,
+                  r: 10,
+                },
               ],
-              backgroundColor: "rgba(33, 150, 243,.5)",
-              borderColor: "#2196F3",
-              borderWidth: 3,
+              backgroundColor: "rgba(233, 30, 99,.5)",
             },
           ],
         },
