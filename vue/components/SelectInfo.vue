@@ -144,7 +144,7 @@
           x-large
           color="primary"
         >
-          시세 확인
+          시세확인
         </v-btn>
       </v-col>
       
@@ -288,6 +288,7 @@ export default {
 }
 
 #submit-button {
-  font-weight: bold;
+  margin-top: 20px;
+  font-size: 13px;
 }
 </style>
