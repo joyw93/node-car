@@ -284,6 +284,9 @@ export default {
 }
 
 #submit-button {
-  margin-top: 50px;
+
+  margin-top: 20px;
+  font-size: 13px;
+
 }
 </style>
