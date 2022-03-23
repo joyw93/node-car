@@ -1,13 +1,18 @@
 <template>
-  <SelectInfo />
+  <div>
+    <Carousel />
+    <SelectInfo />
+  </div>
 </template>
 
 <script>
 import SelectInfo from "~/components/SelectInfo.vue";
+import Carousel from "~/components/Carousel.vue";
 
 export default {
   components: {
-    SelectInfo
+    SelectInfo,
+    Carousel,
   },
   data() {
     return {
@@ -17,5 +22,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

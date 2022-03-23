@@ -1,20 +1,22 @@
 <template>
-  <Predicted />
+  <div>
+    <Carousel />
+    <Predicted />
+  </div>
 </template>
 
 <script>
-import Predicted from "~/components/Predicted.vue"
+import Predicted from "~/components/Predicted.vue";
+import Carousel from "~/components/Carousel.vue";
 export default {
-  
   components: {
-    Predicted
+    Predicted,
+    Carousel,
   },
   data() {
     return {};
   },
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

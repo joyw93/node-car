@@ -144,12 +144,11 @@
           x-large
           color="primary"
         >
-          시세 확인
+          시세확인
         </v-btn>
+        <v-divider class="divider"></v-divider>
       </v-col>
-      
     </v-row>
-    <v-divider class="divider"></v-divider>
   </v-form>
 </template>
 
@@ -268,7 +267,7 @@ export default {
 
 .divider {
   margin-bottom: 25px;
-  margin-top: 25px;
+  margin-top: 50px;
 }
 
 .input {
@@ -279,15 +278,12 @@ export default {
   margin-bottom: 15px;
 }
 
-#text-selected {
-  color: white;
-}
 
 #card {
   max-width: 400px;
 }
 
 #submit-button {
-  font-weight: bold;
+  margin-top: 50px;
 }
 </style>

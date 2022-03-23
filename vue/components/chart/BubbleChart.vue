@@ -1,5 +1,11 @@
 <template>
   <div>
+    <v-chip text-color="white" color="indigo" small class="mb-5">
+      적정가격
+    </v-chip>
+    <v-chip text-color="white" color="pink" small class="mb-5">
+      매물가격
+    </v-chip>
     <canvas id="bubbleChartData" width="600" height="300"></canvas>
   </div>
 </template>
@@ -70,6 +76,9 @@ export default {
           ],
         },
         options: {
+          legend: {
+            display: false,
+          },
           responsive: true,
           lineTension: 1,
           scales: {

@@ -1,13 +1,14 @@
 <template>
   <v-app>
-    <v-card color="grey lighten-4" flat height="200px" tile>
+    <v-card flat height="200px" tile>
       <v-toolbar class="fixed-bar" color="white" dark>
         <v-toolbar-title>
           <nuxt-link class="nuxtlink" to="/">
             <h2>YongCar</h2>
           </nuxt-link>
         </v-toolbar-title>
-        <!-- <nuxt-link id="board" class="nuxtlink" to="/board">게시판</nuxt-link> -->
+        <nuxt-link id="board" class="nuxtlink" to="/sell">내차팔기</nuxt-link>
+        <nuxt-link id="board" class="nuxtlink" to="/buy">내차사기</nuxt-link>
         <v-spacer />
         <v-toolbar-items v-if="!me">
           <login-form
@@ -27,7 +28,6 @@
           </div>
         </v-toolbar-items>
       </v-toolbar>
-      <Carousel />
       <nuxt />
       <FloatingButton />
       <Footer />
@@ -36,7 +36,6 @@
 </template>
 
 <script>
-
 import Carousel from "~/components/Carousel.vue";
 import SignupForm from "~/components/SignupForm.vue";
 import LoginForm from "~/components/LoginForm.vue";
@@ -70,6 +69,11 @@ export default {
     onLogout() {
       this.$store.dispatch("users/logout");
     },
+  },
+  head() {
+    return {
+      title: "YongCar",
+    };
   },
 };
 </script>

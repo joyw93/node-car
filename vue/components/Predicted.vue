@@ -43,21 +43,24 @@
     <v-divider></v-divider>
     <v-row class="vrow" justify="center">
       <v-col cols="6" sm="6" md="6" lg="4">
-        <Chart />
+        <ResidualChart />
       </v-col>
       <v-col cols="6" sm="6" md="6" lg="4">
         <BubbleChart />
       </v-col>
     </v-row>
+    <v-divider></v-divider>
   </div>
 </template>
 
 <script>
 import Chart from "~/components/chart/Chart.vue";
+import ResidualChart from "~/components/chart/ResidualChart.vue";
 import BubbleChart from "~/components/chart/BubbleChart.vue";
 export default {
   components: {
     Chart,
+    ResidualChart,
     BubbleChart,
   },
   data() {
@@ -69,7 +72,7 @@ export default {
     },
     specInfo() {
       alert("준비중입니다.");
-    }
+    },
   },
   computed: {
     info() {

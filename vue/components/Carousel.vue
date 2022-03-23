@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import item1 from "~/components/CarouselItem/item1";
-import item2 from "~/components/CarouselItem/item2";
+import item1 from "~/components/carousel-item/item1";
+import item2 from "~/components/carousel-item/item2";
 export default {
   components: {
     item1,
