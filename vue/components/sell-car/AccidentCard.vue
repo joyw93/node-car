@@ -7,7 +7,7 @@
       <v-item-group v-model="accident" mandatory>
         <v-row>
           <v-col cols="2">
-            <v-item value=false class="option" v-slot="{ active, toggle }">
+            <v-item value="false" class="option" v-slot="{ active, toggle }">
               <v-card
                 :class="{ 'card-selected': active }"
                 :color="active ? 'primary' : ''"
@@ -22,7 +22,7 @@
             </v-item>
           </v-col>
           <v-col cols="2">
-            <v-item value=true class="option" v-slot="{ active, toggle }">
+            <v-item value="true" class="option" v-slot="{ active, toggle }">
               <v-card
                 :class="{ 'card-selected': active }"
                 :color="active ? 'primary' : ''"
@@ -56,7 +56,7 @@
             </v-item>
           </v-col>
         </v-row>
-        <template v-if="accident">
+        <template v-if="accident == 'true'">
           <v-textarea
             hint="예) 골격사고, 뒤 팬더 교환, 전손, 침수 등"
             class="textarea"
@@ -72,7 +72,7 @@
       <v-item-group class="item-group" v-model="needFix" mandatory>
         <v-row>
           <v-col cols="2">
-            <v-item value=false class="option" v-slot="{ active, toggle }">
+            <v-item value="false" class="option" v-slot="{ active, toggle }">
               <v-card
                 :class="{ 'card-selected': active }"
                 :color="active ? 'primary' : ''"
@@ -87,7 +87,7 @@
             </v-item>
           </v-col>
           <v-col cols="2">
-            <v-item value=true class="option" v-slot="{ active, toggle }">
+            <v-item value="true" class="option" v-slot="{ active, toggle }">
               <v-card
                 :class="{ 'card-selected': active }"
                 :color="active ? 'primary' : ''"
@@ -122,9 +122,17 @@
           </v-col>
         </v-row>
       </v-item-group>
-      <v-row>
-        <v-col> </v-col>
-      </v-row>
+      <template v-if="needFix == 'true'">
+        <v-textarea
+          hint="예) 운전석 뒷문과 뒷휀더 스크래치가 있으며 뒷범퍼 주차기스있음."
+          class="textarea"
+          label="수리가 필요한 부위를 입력해 주세요"
+          auto-grow
+          outlined
+          rows="6"
+          row-height="25"
+        ></v-textarea>
+      </template>
     </v-card-text>
   </v-container>
 </template>
@@ -133,8 +141,8 @@
 export default {
   data() {
     return {
-      accident: false,
-      needFix: "",
+      accident: "false",
+      needFix: "false",
     };
   },
 };
@@ -199,6 +207,6 @@ h4 {
 }
 
 #need-fix-text {
-  margin-top: 50px;
+  margin-top: 30px;
 }
 </style>

@@ -5,7 +5,7 @@
       <v-row>
         <v-col cols="3">
           <v-item-group v-model="selected" mandatory>
-            <v-row v-for="n in 5" :key="n">
+            <v-row v-for="n in 6" :key="n">
               <v-col cols="12">
                 <v-item v-slot="{ active, toggle }">
                   <v-card
@@ -46,6 +46,9 @@
               <template v-if="selected == 4">
                 <FeatureCard />
               </template>
+              <template v-if="selected == 5">
+                <ImageCard />
+              </template>
             </v-responsive>
           </v-card>
         </v-col>
@@ -61,6 +64,7 @@ import RegionCard from "~/components/sell-car/RegionCard.vue";
 import AccidentCard from "~/components/sell-car/AccidentCard.vue";
 import FeatureCard from "../components/sell-car/FeatureCard.vue";
 import Carousel from "../components/Carousel.vue";
+import ImageCard from '../components/sell-car/ImageCard.vue';
 
 export default {
   data() {
@@ -71,6 +75,7 @@ export default {
         "사고.수리이력",
         "판매지역",
         "특이사항",
+        "차량사진",
       ],
       selected: "",
     };
@@ -82,6 +87,7 @@ export default {
     AccidentCard,
     FeatureCard,
     Carousel,
+    ImageCard,
   },
 };
 </script>
