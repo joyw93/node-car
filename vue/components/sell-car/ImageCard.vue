@@ -23,9 +23,11 @@
               hidden
               @change="onChangeImages"
             />
-            <v-icon x-large> mdi-plus </v-icon>
+            <template v-if="imageUrl">
+              <img :src="imageUrl" class="image" />
+            </template>
+            <template v-else> <v-icon x-large> mdi-plus </v-icon> </template>
           </v-card>
-          <img :src="imageUrl" style="width: 200px" />
         </v-col>
         <v-col cols="4">
           <v-card class="image-card" width="180" height="130">
@@ -56,14 +58,16 @@ export default {
       imageUrl: "",
     };
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     onClickImageUpload() {
       this.$refs.imageInput.click();
     },
     onChangeImages(e) {
-        
+      const image = e.target.files;
+      console.log(image);
+      const data = URL.createObjectURL(image[0]);
+      this.imageUrl = data;
     },
   },
 };
