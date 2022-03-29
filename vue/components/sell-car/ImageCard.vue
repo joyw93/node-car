@@ -14,17 +14,17 @@
             class="image-card"
             width="180"
             height="130"
-            @click="onClickImageUpload"
+            @click="onClickImageUpload(0)"
           >
             <input
-              ref="imageInput"
+              ref="imageInput0"
               type="file"
               multiple
               hidden
-              @change="onChangeImages"
+              @change="onChangeImages($event, 0)"
             />
-            <template v-if="imageUrl">
-              <img :src="imageUrl" class="image" />
+            <template v-if="imageUrls[0]">
+              <img :src="imageUrls[0]" class="image" />
             </template>
             <template v-else> <v-icon x-large> mdi-plus </v-icon> </template>
           </v-card>
@@ -34,42 +34,102 @@
             class="image-card"
             width="180"
             height="130"
-            @click="onClickImageUpload"
+            @click="onClickImageUpload(1)"
           >
             <input
-              ref="imageInput"
+              ref="imageInput1"
               type="file"
               multiple
               hidden
-              @change="onChangeImages"
+              @change="onChangeImages($event, 1)"
             />
-            <template v-if="imageUrl">
-              <img :src="imageUrl" class="image" />
+            <template v-if="imageUrls[1]">
+              <img :src="imageUrls[1]" class="image" />
             </template>
             <template v-else> <v-icon x-large> mdi-plus </v-icon> </template>
           </v-card>
         </v-col>
         <v-col cols="4">
-          <v-card class="image-card" width="180" height="130">
-            <v-icon x-large> mdi-plus </v-icon></v-card
+          <v-card
+            class="image-card"
+            width="180"
+            height="130"
+            @click="onClickImageUpload(2)"
           >
+            <input
+              ref="imageInput2"
+              type="file"
+              multiple
+              hidden
+              @change="onChangeImages($event, 2)"
+            />
+            <template v-if="imageUrls[2]">
+              <img :src="imageUrls[2]" class="image" />
+            </template>
+            <template v-else> <v-icon x-large> mdi-plus </v-icon> </template>
+          </v-card>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="4">
-          <v-card class="image-card" width="180" height="130">
-            <v-icon x-large> mdi-plus </v-icon></v-card
+          <v-card
+            class="image-card"
+            width="180"
+            height="130"
+            @click="onClickImageUpload(3)"
           >
+            <input
+              ref="imageInput3"
+              type="file"
+              multiple
+              hidden
+              @change="onChangeImages($event, 3)"
+            />
+            <template v-if="imageUrls[3]">
+              <img :src="imageUrls[3]" class="image" />
+            </template>
+            <template v-else> <v-icon x-large> mdi-plus </v-icon> </template>
+          </v-card>
         </v-col>
         <v-col cols="4">
-          <v-card class="image-card" width="180" height="130">
-            <v-icon x-large> mdi-plus </v-icon></v-card
+          <v-card
+            class="image-card"
+            width="180"
+            height="130"
+            @click="onClickImageUpload(4)"
           >
+            <input
+              ref="imageInput4"
+              type="file"
+              multiple
+              hidden
+              @change="onChangeImages($event, 4)"
+            />
+            <template v-if="imageUrls[4]">
+              <img :src="imageUrls[4]" class="image" />
+            </template>
+            <template v-else> <v-icon x-large> mdi-plus </v-icon> </template>
+          </v-card>
         </v-col>
         <v-col cols="4">
-          <v-card class="image-card" width="180" height="130">
-            <v-icon x-large> mdi-plus </v-icon></v-card
+          <v-card
+            class="image-card"
+            width="180"
+            height="130"
+            @click="onClickImageUpload(5)"
           >
+            <input
+              ref="imageInput5"
+              type="file"
+              multiple
+              hidden
+              @change="onChangeImages($event, 5)"
+            />
+            <template v-if="imageUrls[5]">
+              <img :src="imageUrls[5]" class="image" />
+            </template>
+            <template v-else> <v-icon x-large> mdi-plus </v-icon> </template>
+          </v-card>
         </v-col>
       </v-row>
     </v-card-text>
@@ -81,18 +141,26 @@ export default {
   data() {
     return {
       imageUrl: "",
-      imageUrls: []
+      imageUrls: [0, 0, 0, 0, 0, 0],
     };
   },
   computed: {},
   methods: {
-    onClickImageUpload() {
-      this.$refs.imageInput.click();
+    onClickImageUpload(index) {
+      const imageInputs = [
+        this.$refs.imageInput0,
+        this.$refs.imageInput1,
+        this.$refs.imageInput2,
+        this.$refs.imageInput3,
+        this.$refs.imageInput4,
+        this.$refs.imageInput5,
+      ];
+      imageInputs[index].click();
     },
-    onChangeImages(e) {
-      const image = e.target.files;
-      this.imageUrl = URL.createObjectURL(image[0]);
-      this.imageUrls.push(URL.createObjectURL(image[0]))
+    onChangeImages(event, index) {
+      const image = event.target.files;
+      const data = URL.createObjectURL(image[0]);
+      this.imageUrls.splice(index, 1, data);
     },
   },
 };
