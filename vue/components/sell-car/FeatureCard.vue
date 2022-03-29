@@ -16,7 +16,7 @@
         row-height="25"
       ></v-textarea>
       <h3>최고가 딜러의 추천을 받으시겠어요?</h3>
-      <v-radio-group v-model="ex7" column>
+      <v-radio-group column>
         <v-radio
           label="네, 연락주세요"
           color="primary"

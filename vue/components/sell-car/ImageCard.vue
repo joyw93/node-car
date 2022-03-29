@@ -158,9 +158,12 @@ export default {
       imageInputs[index].click();
     },
     onChangeImages(event, index) {
-      const image = event.target.files;
-      const data = URL.createObjectURL(image[0]);
-      this.imageUrls.splice(index, 1, data);
+      const files = event.target.files;
+      if (files['length']===1) {
+        const image = URL.createObjectURL(files[0]);
+        this.imageUrls.splice(index, 1, image);
+      }
+
     },
   },
 };

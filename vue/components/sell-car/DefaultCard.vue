@@ -7,7 +7,6 @@
           <h3 class="header">주행거리</h3>
           <v-text-field
             class="input"
-            :rules="odoRules"
             v-model="odo"
             label="주행거리를 입력하세요"
             solo
@@ -18,9 +17,7 @@
           <h3 class="header">연식</h3>
           <v-select
             class="input"
-            :rules="ageRules"
             v-model="age"
-            :items="years"
             label="연식을 선택하세요"
             solo
           ></v-select>
@@ -31,8 +28,7 @@
           <h3 class="header">연료타입</h3>
           <v-select
             class="input"
-            :rules="odoRules"
-            v-model="odo"
+            v-model="fuel"
             label="연료 타입을 선택하세요"
             solo
           ></v-select>
@@ -41,9 +37,7 @@
           <h3 class="header">색상</h3>
           <v-select
             class="input"
-            :rules="ageRules"
-            v-model="age"
-            :items="years"
+            v-model="color"
             label="색상을 선택하세요"
             solo
           ></v-select>
@@ -93,7 +87,10 @@ export default {
   data() {
     return {
       accident: false,
+      odo: "",
+      color: "",
       age: "",
+      fuel: "",
       
     }
   }
