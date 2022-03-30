@@ -2,12 +2,12 @@
   <v-container class="item-group">
     <v-card-text class="card-content">
       <h2><span>차량의 사진</span>을 등록해주세요</h2>
-      <h3>각각의 사진 영역에 맞는 사진을 등록해주세요.</h3>
-      <h3 id="text1">
+      <h4>각각의 사진 영역에 맞는 사진을 등록해주세요.</h4>
+      <h4 id="text1">
         번호판과 계기판 주행거리가 잘 보이는지 꼭 확인해주세요.
-      </h3>
-      <h2>※사진등록(최대 6장 / 1장당 5MB 이하)</h2>
-      <h3 id="text2">많은 사진을 등록할수록 정확한 견적에 용이합니다.</h3>
+      </h4>
+      <h3>※사진등록(최대 6장 / 1장당 5MB 이하)</h3>
+      <h4 id="text2">많은 사진을 등록할수록 정확한 견적에 용이합니다.</h4>
       <v-row>
         <v-col cols="4">
           <v-card
@@ -229,6 +229,10 @@ span {
   color: #2196f3;
 }
 
+h3 {
+  margin-bottom: 20px;
+}
+
 h2 {
   margin-bottom: 20px;
 }
@@ -240,10 +244,10 @@ h2 {
 }
 
 #text1 {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 #text2 {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 </style>

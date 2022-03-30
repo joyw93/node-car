@@ -81,7 +81,6 @@
           </v-col>
         </v-row>
       </v-item-group>
-      <v-btn @click="onSubmit" x-large id="next-button">다음단계</v-btn>
     </v-card-text>
   </v-container>
 </template>
@@ -105,24 +104,34 @@ export default {
       return this.$store.state.cars.odo;
     },
   },
-  methods: {
-    onSubmit() {
-      this.$store
-        .dispatch("cars/setDefaultInfo", {
-          age: this.age,
-          odo: this.odo,
-          color: this.color,
-          fuel: this.fuel,
-          isRent: this.isRent,
-        })
-        .then(() => {
-          console.log("데이터 전송 성공");
-        })
-        .catch(() => {
-          console.log("데이터 전송 실패");
-        });
+  watch: {
+    odo(newVal) {
+      this.$store.dispatch("cars/setOdo", {
+        odo: newVal,
+      });
+    },
+    age(newVal) {
+      this.$store.dispatch("cars/setAge", {
+        age: newVal,
+      });
+    },
+    fuel(newVal) {
+      this.$store.dispatch("cars/setFuel", {
+        fuel: newVal,
+      });
+    },
+    color(newVal) {
+      this.$store.dispatch("cars/setColor", {
+        color: newVal,
+      });
+    },
+    isRented(newVal) {
+      this.$store.dispatch("cars/setIsRented", {
+        isRented: newVal,
+      });
     },
   },
+  methods: {},
 };
 </script>
 
@@ -173,12 +182,6 @@ span {
 
 h2 {
   margin-bottom: 50px;
-}
-
-#next-button {
-  margin-top: 40px;
-  background-color: #364f7f;
-  color: white;
 }
 
 #divider {

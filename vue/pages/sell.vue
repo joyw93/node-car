@@ -31,26 +31,27 @@
         <v-col cols="9">
           <v-card>
             <v-responsive class="card" :aspect-ratio="16 / 16">
-              <template v-if="selected == 0">
+              <div v-show="selected == 0">
                 <DefaultCard />
-              </template>
-              <template v-else-if="selected == 1">
+              </div>
+              <div v-show="selected == 1">
                 <OptionCard />
-              </template>
-              <template v-else-if="selected == 2">
+              </div>
+              <div v-show="selected == 2">
                 <AccidentCard />
-              </template>
-              <template v-else-if="selected == 3">
+              </div>
+              <div v-show="selected == 3">
                 <RegionCard />
-              </template>
-              <template v-else-if="selected == 4">
+              </div>
+              <div v-show="selected == 4">
                 <FeatureCard />
-              </template>
-              <template v-else-if="selected == 5">
+              </div>
+              <div v-show="selected == 5">
                 <ImageCard />
-              </template>
+              </div>
             </v-responsive>
           </v-card>
+          <v-btn @click="onSubmit" x-large id="next-button">다음단계</v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -64,7 +65,7 @@ import RegionCard from "~/components/sell-car/RegionCard.vue";
 import AccidentCard from "~/components/sell-car/AccidentCard.vue";
 import FeatureCard from "../components/sell-car/FeatureCard.vue";
 import Carousel from "../components/Carousel.vue";
-import ImageCard from '../components/sell-car/ImageCard.vue';
+import ImageCard from "../components/sell-car/ImageCard.vue";
 
 export default {
   data() {
@@ -79,6 +80,32 @@ export default {
       ],
       selected: "",
     };
+  },
+  computed: {
+    odo() {
+      return this.$store.state.cars.odo;
+    },
+    age() {
+      return this.$store.state.cars.age;
+    },
+    fuel() {
+      return this.$store.state.cars.fuel;
+    },
+    color() {
+      return this.$store.state.cars.color;
+    },
+    isRented() {
+      return this.$store.state.cars.isRented;
+    },
+  },
+  methods: {
+    onSubmit() {
+      console.log(this.odo);
+      console.log(this.age);
+      console.log(this.fuel);
+      console.log(this.color);
+      console.log(this.isRented);
+    }
   },
   components: {
     DefaultCard,
@@ -115,5 +142,11 @@ AccidentCard
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#next-button {
+  margin-top: 40px;
+  background-color: #364f7f;
+  color: white;
 }
 </style>
