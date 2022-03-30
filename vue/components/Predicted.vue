@@ -76,10 +76,10 @@ export default {
   },
   computed: {
     info() {
-      return this.$store.state.cars.info;
+      return this.$store.state.predict.info;
     },
     price() {
-      return this.$store.state.cars.price;
+      return this.$store.state.predict.price;
     },
   },
   filters: {

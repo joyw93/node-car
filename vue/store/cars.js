@@ -1,35 +1,24 @@
 import axios from "axios";
-const mlServerUrl = "http://127.0.0.1:5000";
 export const state = () => ({
-  price: null,
-  info: null,
+  odo: null,
+  age: null,
+  fuel: null,
+  color: null,
+  isRented: null,
 });
 
 export const mutations = {
-  setPrice(state, payload) {
-    state.price = payload;
-  },
-  setInfo(state, payload) {
-    state.info = payload;
-  },
+    setDefaultInfo(state, payload) {
+    state.odo = payload.odo;
+    state.age = payload.age;
+    state.fuel = payload.fuel;
+    state.color = payload.color;
+    state.isRented = payload.isRented;
+  }
 };
 
 export const actions = {
-  predictPrice({ commit, state }, payload) {
-    axios
-      .post(`${mlServerUrl}/predict`, {
-        model: payload.model,
-        age: payload.age,
-        odo: payload.odo,
-        color: payload.color,
-        fuel: payload.fuel,
-      })
-      .then((res) => {
-        commit("setInfo", payload);
-        commit("setPrice", res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  setDefaultInfo({ commit, state }, payload) {
+    commit("setDefaultInfo", payload);
   },
 };

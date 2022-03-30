@@ -34,19 +34,19 @@
               <template v-if="selected == 0">
                 <DefaultCard />
               </template>
-              <template v-if="selected == 1">
+              <template v-else-if="selected == 1">
                 <OptionCard />
               </template>
-              <template v-if="selected == 2">
+              <template v-else-if="selected == 2">
                 <AccidentCard />
               </template>
-              <template v-if="selected == 3">
+              <template v-else-if="selected == 3">
                 <RegionCard />
               </template>
-              <template v-if="selected == 4">
+              <template v-else-if="selected == 4">
                 <FeatureCard />
               </template>
-              <template v-if="selected == 5">
+              <template v-else-if="selected == 5">
                 <ImageCard />
               </template>
             </v-responsive>
