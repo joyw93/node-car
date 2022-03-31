@@ -18,7 +18,6 @@
             <img
               :src="require(`@/static/images/logo/${_brand}.png`)"
               width="42"
-              height="30"
             />
             &nbsp;
             {{ _brand }}
@@ -57,7 +56,6 @@
                               require(`@/static/images/car/${brand}/${_model}.jpg`)
                             "
                             width="150"
-                            height="150"
                           />
                         </div>
                         <div
@@ -88,7 +86,7 @@
               :rules="odoRules"
               v-model="odo"
               label="주행거리를 입력하세요"
-              outlined
+              solo
               suffix="km"
             ></v-text-field>
           </v-col>
@@ -100,7 +98,7 @@
               v-model="age"
               :items="years"
               label="연식을 선택하세요"
-              outlined
+              solo
             ></v-select>
           </v-col>
         </v-row>
@@ -131,7 +129,7 @@
               v-model="fuel"
               :items="fuels"
               label="연료종류를 선택하세요"
-              outlined
+              solo
             ></v-select>
           </v-col>
         </v-row>

@@ -34,7 +34,6 @@
                 require(`@/static/images/car/${info.brand}/${info.model}.jpg`)
               "
               width="288"
-              height="189"
             />
           </v-col>
         </v-row>

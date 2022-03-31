@@ -26,6 +26,7 @@
           </v-col>
         </v-row>
       </v-item-group>
+      {{optionSelected}}
     </v-card-text>
   </v-container>
 </template>

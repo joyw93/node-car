@@ -97,15 +97,28 @@ export default {
     isRented() {
       return this.$store.state.cars.isRented;
     },
+    options() {
+      return this.$store.state.cars.options;
+    },
+    accident() {
+      return this.$store.state.cars.accident;
+    },
+    needFix() {
+      return this.$store.state.cars.needFix;
+    },
+    accidentDetail() {
+      return this.$store.state.cars.accidentDetail;
+    },
+    needFixDetail() {
+      return this.$store.state.cars.needFixDetail;
+    }
   },
   methods: {
     onSubmit() {
-      console.log(this.odo);
+      console.log(this.accident);
       console.log(this.age);
-      console.log(this.fuel);
-      console.log(this.color);
-      console.log(this.isRented);
-    }
+      
+    },
   },
   components: {
     DefaultCard,

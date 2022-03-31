@@ -38,7 +38,7 @@
           </v-col>
           <v-col cols="2">
             <v-item
-              value="undetermined"
+              value="undiscovered"
               class="option"
               v-slot="{ active, toggle }"
             >
@@ -58,10 +58,10 @@
         </v-row>
         <template v-if="accident == 'true'">
           <v-textarea
+            v-model="accidentDetail"
             hint="예) 골격사고, 뒤 팬더 교환, 전손, 침수 등"
             class="textarea"
             label="사고 유형을 입력해 주세요"
-            auto-grow
             outlined
             rows="6"
             row-height="25"
@@ -103,7 +103,7 @@
           </v-col>
           <v-col cols="2">
             <v-item
-              value="undetermined"
+              value="undiscovered"
               class="option"
               v-slot="{ active, toggle }"
             >
@@ -124,10 +124,10 @@
       </v-item-group>
       <template v-if="needFix == 'true'">
         <v-textarea
+          v-model="needFixDetail"
           hint="예) 운전석 뒷문과 뒷휀더 스크래치가 있으며 뒷범퍼 주차기스있음."
           class="textarea"
           label="수리가 필요한 부위를 입력해 주세요"
-          auto-grow
           outlined
           rows="6"
           row-height="25"
@@ -142,8 +142,32 @@ export default {
   data() {
     return {
       accident: "false",
+      accidentDetail: "",
       needFix: "false",
+      needFixDetail: "",
     };
+  },
+  watch: {
+    accident(newVal) {
+      this.$store.dispatch("cars/setAccident", {
+        accident: newVal,
+      });
+    },
+    needFix(newVal) {
+      this.$store.dispatch("cars/setNeedFix", {
+        needFix: newVal,
+      });
+    },
+    accidentDetail(newVal) {
+      this.$store.dispatch("cars/setAccidentDetail", {
+        accidentDetail: newVal,
+      });
+    },
+    needFixDetail(newVal) {
+      this.$store.dispatch("cars/setNeedFixDetail", {
+        needFixDetail: newVal,
+      });
+    },
   },
 };
 </script>

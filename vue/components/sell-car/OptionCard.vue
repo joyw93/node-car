@@ -56,6 +56,13 @@ export default {
       ],
     };
   },
+  watch: {
+    optionSelected(newVal) {
+      this.$store.dispatch("cars/setOptions", {
+        options: newVal,
+      });
+    },
+  },
 };
 </script>
 
