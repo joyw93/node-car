@@ -1,23 +1,23 @@
 <template>
   <v-container>
     <v-card-text class="card-content">
-      <h2><span>판매를 원하시는 지역</span>을 선택해주세요</h2>
-      <v-item-group class="item-group" v-model="optionSelected" multiple>
+      <h2><span>판매를 원하시는 지역</span>을 선택해주세요 (최대 2개)</h2>
+      <v-item-group class="item-group" v-model="regionSelected" multiple>
         <v-row>
-          <v-col v-for="(option, index) in options" :key="index" cols="3">
-            <v-item
-              :value="option"
-              id="option"
-              v-slot="{ active, toggle }"
-            >
+          <v-col v-for="(region, index) in regions" :key="index" cols="3">
+            <v-item :value="region" id="option" v-slot="{ active, toggle }">
               <v-card
                 :class="{ 'card-selected': active }"
                 :color="active ? 'primary' : ''"
                 height="100"
                 width="100"
-                @click="toggle"
+                @click="
+                  (regionSelected.length < 2 && !active) || active
+                    ? toggle()
+                    : null
+                "
               >
-                {{ option }}
+                {{ region }}
                 <v-scroll-y-transition>
                   <div v-if="active" class="card-selected"></div>
                 </v-scroll-y-transition>
@@ -26,7 +26,6 @@
           </v-col>
         </v-row>
       </v-item-group>
-      {{optionSelected}}
     </v-card-text>
   </v-container>
 </template>
@@ -35,8 +34,8 @@
 export default {
   data() {
     return {
-      optionSelected: [],
-      options: [
+      regionSelected: [],
+      regions: [
         "서울",
         "경기",
         "부산",
@@ -53,6 +52,13 @@ export default {
         "제주",
       ],
     };
+  },
+  watch: {
+    regionSelected(newVal) {
+      this.$store.dispatch("cars/setRegions", {
+        regions: newVal,
+      });
+    },
   },
 };
 </script>

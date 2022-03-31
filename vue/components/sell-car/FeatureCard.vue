@@ -7,6 +7,7 @@
         있습니다.
       </h4>
       <v-textarea
+        v-model="feature"
         hint="예) 최근 타이밍체인 교체 및 경정비 완료. 1인소유, 1인운행으로 깨끗하게 관리된 차량입니다."
         class="textarea"
         label="특징 및 장점 (최대 500자)"
@@ -16,12 +17,8 @@
         row-height="25"
       ></v-textarea>
       <h3>최고가 딜러의 추천을 받으시겠어요?</h3>
-      <v-radio-group column>
-        <v-radio
-          label="네, 연락주세요"
-          color="primary"
-          value="true"
-        ></v-radio>
+      <v-radio-group column v-model="isRecommend">
+        <v-radio label="네, 연락주세요" color="primary" value="true"></v-radio>
         <v-radio
           label="아니오, 직접 연락할게요."
           color="primary"
@@ -33,7 +30,26 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      feature: "",
+      isRecommend: "true",
+    };
+  },
+  watch: {
+    feature(newVal) {
+      this.$store.dispatch("cars/setFeature", {
+        feature: newVal
+      })
+    },
+    isRecommend(newVal) {
+      this.$store.dispatch("cars/setIsRecommend", {
+        isRecommend: newVal
+      })
+    }
+  }
+};
 </script>
 
 <style scoped>

@@ -110,7 +110,7 @@
             <div class="color-select">
               <v-color-picker
                 class="color-picker"
-                v-model="color"
+                v-model="swatch"
                 swatches-max-height="100"
                 :swatches="swatches"
                 show-swatches
@@ -165,20 +165,10 @@ export default {
     odo: "",
     age: "",
     fuel: "",
-    color: "#000000",
+    swatch: "#000000",
     odoRules: [(v) => !!v || "주행거리를 입력하세요."],
     ageRules: [(v) => !!v || "연식을 선택하세요."],
     fuelRules: [(v) => !!v || "연료 타입을 선택하세요."],
-    models: {
-      현대: ["그랜저", "쏘나타", "아반떼"],
-      기아: ["K3", "K5", "K7"],
-      르노삼성: ["SM3", "SM5", "SM6", "SM7"],
-      BMW: ["3시리즈", "5시리즈", "7시리즈"],
-      벤츠: ["C클래스", "E클래스", "S클래스"],
-      아우디: ["A4", "A6", "A7"],
-    },
-    years: ["2022", "2021", "2020", "2019"],
-    fuels: ["가솔린", "디젤", "LPG", "하이브리드", "전기"],
     swatches: [
       ["#000000", "#2196F3"],
       ["#FFFFFF", "#795548"],
@@ -187,8 +177,41 @@ export default {
     ],
     transparent: "rgba(255, 255, 255, 0)",
   }),
+  computed: {
+    models() {
+      return this.$store.state.static.models;
+    },
+    years() {
+      return this.$store.state.static.years;
+    },
+    fuels() {
+      return this.$store.state.static.fuels;
+    },
+    colors() {
+      return this.$store.state.static.colors;
+    },
+    color() {
+      if (this.swatch === "#000000") {
+        return "검정색";
+      } else if (this.swatch === "#FFFFFF") {
+        return "흰색";
+      } else if (this.swatch === "#9E9E9E") {
+        return "은색";
+      } else if (this.swatch === "#F44336") {
+        return "빨간색";
+      } else if (this.swatch === "#2196F3") {
+        return "파란색";
+      } else if (this.swatch === "#795548") {
+        return "갈색";
+      } else if (this.swatch === "#4CAF50") {
+        return "초록색";
+      } else if (this.swatch === "#FFEB3B") {
+        return "노란색";
+      }
+    },
+  },
   watch: {
-    info(value, oldvalue) {
+    info(value) {
       if (value) {
         this.$router.push({
           path: "/predicted",
@@ -276,15 +299,12 @@ export default {
   margin-bottom: 15px;
 }
 
-
 #card {
   max-width: 400px;
 }
 
 #submit-button {
-
   margin-top: 20px;
   font-size: 13px;
-
 }
 </style>

@@ -5,15 +5,15 @@
       <v-row>
         <v-col cols="3">
           <v-item-group v-model="selected" mandatory>
-            <v-row v-for="n in 6" :key="n">
+            <v-row v-for="n in 7" :key="n">
               <v-col cols="12">
                 <v-item v-slot="{ active, toggle }">
                   <v-card
                     id="side-card"
                     :color="active ? 'primary' : ''"
                     :class="{ 'card-selected': active }"
-                    width="200"
-                    height="80"
+                    width="160"
+                    height="70"
                     @click="toggle"
                   >
                     <div>
@@ -49,9 +49,11 @@
               <div v-show="selected == 5">
                 <ImageCard />
               </div>
+              <div v-show="selected == 6">
+                <ConfirmCard />
+              </div>
             </v-responsive>
           </v-card>
-          <v-btn @click="onSubmit" x-large id="next-button">다음단계</v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -66,6 +68,7 @@ import AccidentCard from "~/components/sell-car/AccidentCard.vue";
 import FeatureCard from "../components/sell-car/FeatureCard.vue";
 import Carousel from "../components/Carousel.vue";
 import ImageCard from "../components/sell-car/ImageCard.vue";
+import ConfirmCard from "../components/sell-car/ConfirmCard.vue";
 
 export default {
   data() {
@@ -77,11 +80,18 @@ export default {
         "판매지역",
         "특이사항",
         "차량사진",
+        "등록완료"
       ],
       selected: "",
     };
   },
   computed: {
+    brand() {
+      return this.$store.state.cars.brand;
+    },
+    model() {
+      return this.$store.state.cars.model;
+    },
     odo() {
       return this.$store.state.cars.odo;
     },
@@ -111,14 +121,22 @@ export default {
     },
     needFixDetail() {
       return this.$store.state.cars.needFixDetail;
-    }
+    },
+    regions() {
+      return this.$store.state.cars.regions;
+    },
+    feature() {
+      return this.$store.state.cars.feature;
+    },
+    isRecommend() {
+      return this.$store.state.cars.isRecommend;
+    },
+    images() {
+      return this.$store.state.cars.images;
+    },
   },
   methods: {
-    onSubmit() {
-      console.log(this.accident);
-      console.log(this.age);
-      
-    },
+    
   },
   components: {
     DefaultCard,
@@ -128,10 +146,11 @@ export default {
     FeatureCard,
     Carousel,
     ImageCard,
+    ConfirmCard
   },
 };
 </script>
-AccidentCard
+
 
 <style scoped>
 .card-selected {
@@ -157,9 +176,4 @@ AccidentCard
   align-items: center;
 }
 
-#next-button {
-  margin-top: 40px;
-  background-color: #364f7f;
-  color: white;
-}
 </style>

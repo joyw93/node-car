@@ -4,6 +4,28 @@
       <h2><span>차량기본정보</span>를 선택해주세요</h2>
       <v-row>
         <v-col cols="5">
+          <h3 class="header">제조사</h3>
+          <v-select
+            :items="Object.keys(models)"
+            class="input"
+            v-model="brand"
+            label="제조사를 선택하세요"
+            solo
+          ></v-select>
+        </v-col>
+        <v-col cols="5">
+          <h3 class="header">모델</h3>
+          <v-select
+            :items="brand ? models[brand] : ['제조사를 선택하세요']"
+            class="input"
+            v-model="model"
+            label="모델을 선택하세요"
+            solo
+          ></v-select>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="5">
           <h3 class="header">주행거리</h3>
           <v-text-field
             class="input"
@@ -89,22 +111,40 @@
 export default {
   data() {
     return {
+      brand: "",
+      model: "",
       isRented: false,
       odo: "",
       color: "",
       age: "",
       fuel: "",
-      years: ["2022", "2021", "2020", "2019"],
-      fuels: ["가솔린", "디젤", "LPG", "하이브리드", "전기"],
-      colors: ["검정", "흰색"],
     };
   },
   computed: {
-    info() {
-      return this.$store.state.cars.odo;
+    models() {
+      return this.$store.state.static.models;
+    },
+    years() {
+      return this.$store.state.static.years;
+    },
+    fuels() {
+      return this.$store.state.static.fuels;
+    },
+    colors() {
+      return this.$store.state.static.colors;
     },
   },
   watch: {
+    brand(newVal) {
+      this.$store.dispatch("cars/setBrand", {
+        brand: newVal,
+      });
+    },
+    model(newVal) {
+      this.$store.dispatch("cars/setModel", {
+        model: newVal,
+      });
+    },
     odo(newVal) {
       this.$store.dispatch("cars/setOdo", {
         odo: newVal,

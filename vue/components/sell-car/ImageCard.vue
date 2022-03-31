@@ -140,11 +140,17 @@
 export default {
   data() {
     return {
-      imageUrl: "",
       imageUrls: [0, 0, 0, 0, 0, 0],
     };
   },
   computed: {},
+  watch: {
+    imageUrls(newVal) {
+      this.$store.dispatch("cars/setImages", {
+        images: newVal,
+      })
+    }
+  },
   methods: {
     onClickImageUpload(index) {
       const imageInputs = [
@@ -159,11 +165,10 @@ export default {
     },
     onChangeImages(event, index) {
       const files = event.target.files;
-      if (files['length']===1) {
+      if (files["length"] === 1) {
         const image = URL.createObjectURL(files[0]);
         this.imageUrls.splice(index, 1, image);
       }
-
     },
   },
 };

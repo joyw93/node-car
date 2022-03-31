@@ -1,5 +1,7 @@
 import axios from "axios";
 export const state = () => ({
+  brand: null,
+  model: null,
   odo: null,
   age: null,
   fuel: null,
@@ -10,9 +12,19 @@ export const state = () => ({
   accidentDetail: null,
   needFix: "true",
   needFixDetail: null,
+  regions: null,
+  feature: null,
+  isRecommend: "true",
+  images: null,
 });
 
 export const mutations = {
+  setBrand(state, payload) {
+    state.brand = payload.brand;
+  },
+  setModel(state, payload) {
+    state.model = payload.model;
+  },
   setOdo(state, payload) {
     state.odo = payload.odo;
   },
@@ -42,12 +54,27 @@ export const mutations = {
   },
   setNeedFixDetail(state, payload) {
     state.needFixDetail = payload.needFixDetail;
-  }
+  },
+  setRegions(state, payload) {
+    state.regions = payload.regions;
+  },
+  setFeature(state, payload) {
+    state.feature = payload.feature;
+  },
+  setIsRecommend(state, payload) {
+    state.isRecommend = payload.isRecommend;
+  },
+  setImages(state, payload) {
+    state.images = payload.images;
+  },
 };
 
 export const actions = {
-  setDefaultInfo({ commit, state }, payload) {
-    commit("setDefaultInfo", payload);
+  setBrand({ commit, state }, payload) {
+    commit("setBrand", payload);
+  },
+  setModel({ commit, state }, payload) {
+    commit("setModel", payload);
   },
   setOdo({ commit, state }, payload) {
     commit("setOdo", payload);
@@ -78,5 +105,17 @@ export const actions = {
   },
   setNeedFixDetail({ commit, state }, payload) {
     commit("setNeedFixDetail", payload);
+  },
+  setRegions({ commit, state }, payload) {
+    commit("setRegions", payload);
+  },
+  setFeature({ commit, state }, payload) {
+    commit("setFeature", payload);
+  },
+  setIsRecommend({ commit, state }, payload) {
+    commit("setIsRecommend", payload);
+  },
+  setImages({ commit, state }, payload) {
+    commit("setImages", payload);
   },
 };
