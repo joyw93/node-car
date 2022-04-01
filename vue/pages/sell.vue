@@ -5,15 +5,15 @@
       <v-row>
         <v-col cols="3">
           <v-item-group v-model="selected" mandatory>
-            <v-row v-for="n in 7" :key="n">
+            <v-row v-for="n in 6" :key="n">
               <v-col cols="12">
                 <v-item v-slot="{ active, toggle }">
                   <v-card
                     id="side-card"
                     :color="active ? 'primary' : ''"
                     :class="{ 'card-selected': active }"
-                    width="160"
-                    height="70"
+                    width="200"
+                    height="60"
                     @click="toggle"
                   >
                     <div>
@@ -27,6 +27,37 @@
               </v-col>
             </v-row>
           </v-item-group>
+          <div class="text-center">
+            <v-dialog v-model="dialog" width="400">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="on"
+                  width="200"
+                  height="65"
+                  x-large
+                  id="submit-button"
+                  >등록하기</v-btn
+                >
+              </template>
+              <v-card>
+                <v-card-title class="text-h6 grey lighten-2">
+                  매물등록
+                </v-card-title>
+                <h2 class="modal-title">등록하시겠습니까?</h2>
+                <v-divider class="divider"></v-divider>
+                <v-card-actions class="modal-action">
+                  <v-spacer></v-spacer>
+                  <v-btn large id="cancel-button" @click="dialog = false">
+                    취소
+                  </v-btn>
+                  <v-btn large id="confirm-button" @click="register">
+                    확인
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </div>
         </v-col>
         <v-col cols="9">
           <v-card>
@@ -49,9 +80,6 @@
               <div v-show="selected == 5">
                 <ImageCard />
               </div>
-              <div v-show="selected == 6">
-                <ConfirmCard />
-              </div>
             </v-responsive>
           </v-card>
         </v-col>
@@ -68,7 +96,6 @@ import AccidentCard from "~/components/sell-car/AccidentCard.vue";
 import FeatureCard from "../components/sell-car/FeatureCard.vue";
 import Carousel from "../components/Carousel.vue";
 import ImageCard from "../components/sell-car/ImageCard.vue";
-import ConfirmCard from "../components/sell-car/ConfirmCard.vue";
 
 export default {
   data() {
@@ -80,9 +107,10 @@ export default {
         "판매지역",
         "특이사항",
         "차량사진",
-        "등록완료"
+        "등록완료",
       ],
       selected: "",
+      dialog: false,
     };
   },
   computed: {
@@ -136,7 +164,40 @@ export default {
     },
   },
   methods: {
-    
+    onSubmit() {
+      console.log(this.regions);
+    },
+    register() {
+      this.dialog = false;
+      if (!this.brand) {
+        alert("제조사를 선택하세요");
+      }
+      else if (!this.model) {
+        alert("모델을 선택하세요");
+      }
+      else if (!this.odo) {
+        alert("주행거리를 입력하세요");
+      }
+      else if (!this.age) {
+        alert("연식을 선택하세요");
+      }
+      else if (!this.fuel) {
+        alert("연료타입을 선택하세요");
+      }
+      else if (!this.color) {
+        alert("색상을 선택하세요");
+      }
+      else if (!this.isRented) {
+        alert("렌트이력 여부를 선택하세요");
+      }
+      else if (!this.regions) {
+        alert("판매 지역을 선택하세요");
+      }
+      else if (!this.feature) {
+        alert("차량 특징을 입력하세요");
+      }
+      
+    },
   },
   components: {
     DefaultCard,
@@ -146,11 +207,9 @@ export default {
     FeatureCard,
     Carousel,
     ImageCard,
-    ConfirmCard
   },
 };
 </script>
-
 
 <style scoped>
 .card-selected {
@@ -170,10 +229,42 @@ export default {
   margin-top: 30px;
 }
 
+.modal-title {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-action {
+  display: flex;
+  align-items: center;
+}
+.divider {
+  margin-top: 40px;
+  margin-bottom: 5px;
+}
+
 #side-card {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+#submit-button {
+  margin-top: 20px;
+  background-color: #364f7f;
+  color: white;
+}
+
+#confirm-button {
+  background-color: #364f7f;
+  color: white;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+#cancel-button {
+  background-color: #eeeeee;
+  margin-bottom: 10px;
+}
 </style>

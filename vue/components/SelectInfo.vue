@@ -18,6 +18,7 @@
             <img
               :src="require(`@/static/images/logo/${_brand}.png`)"
               width="42"
+              height="30"
             />
             &nbsp;
             {{ _brand }}
@@ -178,6 +179,9 @@ export default {
     transparent: "rgba(255, 255, 255, 0)",
   }),
   computed: {
+    info() {
+      return this.$store.state.predict.info;
+    },
     models() {
       return this.$store.state.static.models;
     },

@@ -15,7 +15,7 @@ export const state = () => ({
   regions: null,
   feature: null,
   isRecommend: "true",
-  images: null,
+  images: [0, 0, 0, 0, 0, 0],
 });
 
 export const mutations = {
@@ -65,7 +65,8 @@ export const mutations = {
     state.isRecommend = payload.isRecommend;
   },
   setImages(state, payload) {
-    state.images = payload.images;
+    const { image, index } = payload;
+    state.images.splice(index, 1, image);
   },
 };
 

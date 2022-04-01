@@ -69,7 +69,7 @@ export const actions = {
           withCredentials: true,
         }
       )
-      .then((data) => {
+      .then(() => {
         commit("setMe", null);
       })
       .catch((err) => {
