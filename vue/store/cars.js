@@ -15,7 +15,7 @@ export const state = () => ({
   regions: null,
   feature: null,
   isRecommend: "true",
-  images: [0, 0, 0, 0, 0, 0],
+  images: new Array(6),
 });
 
 export const mutations = {

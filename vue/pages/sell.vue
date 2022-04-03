@@ -29,14 +29,14 @@
           </v-item-group>
           <div class="text-center">
             <v-dialog v-model="dialog" width="400">
-              <template v-slot:activator="{ on, attrs }">
+              <template v-slot:activator="{ attrs }">
                 <v-btn
                   v-bind="attrs"
-                  v-on="on"
                   width="200"
                   height="65"
                   x-large
                   id="submit-button"
+                  @click="onSubmit"
                   >등록하기</v-btn
                 >
               </template>
@@ -165,38 +165,29 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.regions);
+      if (!this.brand) {
+        alert("제조사를 선택하세요");
+      } else if (!this.model) {
+        alert("모델을 선택하세요");
+      } else if (!this.odo) {
+        alert("주행거리를 입력하세요");
+      } else if (!this.age) {
+        alert("연식을 선택하세요");
+      } else if (!this.fuel) {
+        alert("연료타입을 선택하세요");
+      } else if (!this.color) {
+        alert("색상을 선택하세요");
+      } else if (!this.isRented) {
+        alert("렌트이력 여부를 선택하세요");
+      } else if (!this.regions) {
+        alert("판매 지역을 선택하세요");
+      } else if (!this.feature) {
+        alert("차량 특징을 입력하세요");
+      }
+      this.dialog = true;
     },
     register() {
       this.dialog = false;
-      if (!this.brand) {
-        alert("제조사를 선택하세요");
-      }
-      else if (!this.model) {
-        alert("모델을 선택하세요");
-      }
-      else if (!this.odo) {
-        alert("주행거리를 입력하세요");
-      }
-      else if (!this.age) {
-        alert("연식을 선택하세요");
-      }
-      else if (!this.fuel) {
-        alert("연료타입을 선택하세요");
-      }
-      else if (!this.color) {
-        alert("색상을 선택하세요");
-      }
-      else if (!this.isRented) {
-        alert("렌트이력 여부를 선택하세요");
-      }
-      else if (!this.regions) {
-        alert("판매 지역을 선택하세요");
-      }
-      else if (!this.feature) {
-        alert("차량 특징을 입력하세요");
-      }
-      
     },
   },
   components: {
