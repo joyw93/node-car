@@ -27,7 +27,7 @@
               </v-col>
             </v-row>
           </v-item-group>
-          <div class="text-center">
+          <div>
             <v-dialog v-model="dialog" width="400">
               <template v-slot:activator="{ attrs }">
                 <v-btn
@@ -96,6 +96,11 @@ import AccidentCard from "~/components/sell-car/AccidentCard.vue";
 import FeatureCard from "../components/sell-car/FeatureCard.vue";
 import Carousel from "../components/Carousel.vue";
 import ImageCard from "../components/sell-car/ImageCard.vue";
+import axios from "axios";
+const url =
+  process.env.NODE_ENV === "production"
+    ? "http://3.39.63.126:80"
+    : "http://localhost:3080";
 
 export default {
   data() {
@@ -183,10 +188,30 @@ export default {
         alert("판매 지역을 선택하세요");
       } else if (!this.feature) {
         alert("차량 특징을 입력하세요");
+      } else {
+        this.dialog = true;
       }
-      this.dialog = true;
     },
     register() {
+      const car = {
+        brand: this.brand,
+        model: this.model,
+        odo: this.odo,
+        age: this.age,
+        fuel: this.fuel,
+        color: this.color,
+        isRented: this.isRented,
+        options: this.options,
+        accident: this.accident,
+        accidentDetail: this.accidentDetail,
+        needFix: this.needFix,
+        needFixDetail: this.needFixDetail,
+        regions: this.regions,
+        feature: this.feature,
+        isRecommend: this.isRecommend,
+        images: this.images,
+      };
+      axios.post(`${url}/car/register`, car);
       this.dialog = false;
     },
   },

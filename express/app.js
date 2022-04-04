@@ -9,7 +9,8 @@ const passport = require("passport");
 
 dotenv.config();
 const authRouter = require("./routes/auth");
-const { sequelize, User } = require("./models");
+const carRouter = require("./routes/car");
+const { sequelize } = require("./models");
 const passportConfig = require("./passport");
 const url =
   process.env.NODE_ENV === "production"
@@ -58,6 +59,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/auth", authRouter);
+app.use("/car", carRouter);
 
 app.get("/", (req, res, next) => {
   console.log(req.isAuthenticated())
