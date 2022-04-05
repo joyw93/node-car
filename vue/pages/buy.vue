@@ -1,149 +1,42 @@
 <template>
   <div>
-    <v-row>
-      <v-col>
-        <v-card class="mx-auto" max-width="344">
-          <v-img
-            :src="require(`@/static/images/car/벤츠/E클래스.jpg`)"
-            height="200px"
-          ></v-img>
-
-          <v-card-title> BMW </v-card-title>
-
-          <v-card-subtitle> 5시리즈 </v-card-subtitle>
-
-          <v-card-actions>
-            <v-btn color="primary" text> 상세보기 </v-btn>
-
-            <v-spacer></v-spacer>
-
-            <v-btn icon @click="show = !show">
-              <v-icon>{{
-                show ? "mdi-chevron-up" : "mdi-chevron-down"
-              }}</v-icon>
-            </v-btn>
-          </v-card-actions>
-
-          <v-expand-transition>
-            <div v-show="show">
-              <v-divider></v-divider>
-
-              <v-card-text> BMW </v-card-text>
-            </div>
-          </v-expand-transition>
-        </v-card>
-        <v-card class="mx-auto" max-width="344">
-          <v-img
-            :src="require(`@/static/images/car/BMW/5시리즈.jpg`)"
-            height="200px"
-          ></v-img>
-
-          <v-card-title> BMW </v-card-title>
-
-          <v-card-subtitle> 5시리즈 </v-card-subtitle>
-
-          <v-card-actions>
-            <v-btn color="primary" text> 상세보기 </v-btn>
-
-            <v-spacer></v-spacer>
-
-            <v-btn icon @click="show = !show">
-              <v-icon>{{
-                show ? "mdi-chevron-up" : "mdi-chevron-down"
-              }}</v-icon>
-            </v-btn>
-          </v-card-actions>
-
-          <v-expand-transition>
-            <div v-show="show">
-              <v-divider></v-divider>
-
-              <v-card-text> BMW </v-card-text>
-            </div>
-          </v-expand-transition>
-        </v-card>
-      </v-col>
-      <v-col>
-        <v-card class="mx-auto" max-width="344">
-          <v-img
-            :src="require(`@/static/images/car/BMW/3시리즈.jpg`)"
-            height="200px"
-          ></v-img>
-
-          <v-card-title> BMW </v-card-title>
-
-          <v-card-subtitle> 5시리즈 </v-card-subtitle>
-
-          <v-card-actions>
-            <v-btn color="primary" text> 상세보기 </v-btn>
-
-            <v-spacer></v-spacer>
-
-            <v-btn icon @click="show = !show">
-              <v-icon>{{
-                show ? "mdi-chevron-up" : "mdi-chevron-down"
-              }}</v-icon>
-            </v-btn>
-          </v-card-actions>
-
-          <v-expand-transition>
-            <div v-show="show">
-              <v-divider></v-divider>
-
-              <v-card-text> BMW </v-card-text>
-            </div>
-          </v-expand-transition>
-        </v-card>
-        <v-card class="mx-auto" max-width="344">
-          <v-img
-            :src="require(`@/static/images/car/BMW/7시리즈.jpg`)"
-            height="200px"
-          ></v-img>
-
-          <v-card-title> BMW </v-card-title>
-
-          <v-card-subtitle> 5시리즈 </v-card-subtitle>
-
-          <v-card-actions>
-            <v-btn color="primary" text> 상세보기 </v-btn>
-
-            <v-spacer></v-spacer>
-
-            <v-btn icon @click="show = !show">
-              <v-icon>{{
-                show ? "mdi-chevron-up" : "mdi-chevron-down"
-              }}</v-icon>
-            </v-btn>
-          </v-card-actions>
-
-          <v-expand-transition>
-            <div v-show="show">
-              <v-divider></v-divider>
-
-              <v-card-text> BMW </v-card-text>
-            </div>
-          </v-expand-transition>
-        </v-card>
-      </v-col>
-    </v-row>
+    <Carousel />
+    <div id="wrap">
+      <div id="side"><SideNavigation /></div>
+      <div id="main"><MainComponent /></div>
+    </div>
   </div>
 </template>
 
 <script>
-import Card from "~/components/car-list/Card.vue";
+import SideNavigation from "~/components/buy-car/SideNavigation.vue";
+import MainComponent from "~/components/buy-car/MainComponent.vue";
+import Carousel from "~/components/Carousel.vue";
+
 export default {
   components: {
-    Card,
+    SideNavigation,
+    MainComponent,
+    Carousel,
   },
 };
 </script>
 
 <style scoped>
-.v-card {
-  margin-top: 30px;
+#wrap {
+  display: flex;
 }
 
-.v-col {
-  margin-top: 10px;
+#side {
+  height: 100%;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 280px;
+  flex: none;
+}
+
+#main {
+  margin-left: 50px;
+  margin-right: 50px;
 }
 </style>
