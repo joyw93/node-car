@@ -6,6 +6,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const passport = require("passport");
+const helmet = require("helmet");
+const hpp = require("hpp");
 
 dotenv.config();
 const authRouter = require("./routes/auth");
@@ -31,9 +33,12 @@ sequelize
   app.use(express.static(path.join(__dirname, 'public')));
 if (process.env.NODE_ENV === "production") {
   app.use(morgan("combined"));
+  app.use(helmet({ contentSecurityPolicy: false }));
+  app.use(hpp());
 } else {
   app.use(morgan("dev"));
 }
+
 
 app.use(
   cors({
