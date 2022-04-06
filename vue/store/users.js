@@ -71,6 +71,7 @@ export const actions = {
         }
       )
       .then(() => {
+        console.log("로그아웃되었습니다.")
         commit("setMe", null);
       })
       .catch((err) => {
