@@ -21,7 +21,7 @@ const app = express();
 passportConfig();
 app.set("port", process.env.PORT || 3080);
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log("데이터베이스 연결 성공");
   })
@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(
   cors({
-    origin: 'http://localhost:800',
+    origin: url,
     credentials: true,
   })
 );
