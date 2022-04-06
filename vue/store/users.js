@@ -21,6 +21,7 @@ export const mutations = {
 export const actions = {
   //비동기
   signUp({ commit, state }, payload) {
+    console.log(url);
     axios
       .post(
         `${url}/auth/signup`,

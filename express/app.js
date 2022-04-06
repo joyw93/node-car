@@ -81,5 +81,5 @@ app.use((err, req, res, next) => {
 
 app.listen(app.get("port"), () => {
   console.log(process.env.PORT);
-  console.log("http://127.0.0.1:3080");
+  console.log(url);
 });
