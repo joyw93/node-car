@@ -22,6 +22,7 @@ const url =
 const app = express();
 passportConfig();
 app.set("port", process.env.PORT || 3080);
+app.set("view engine", "html");
 sequelize
   .sync({ force: false })
   .then(() => {
@@ -61,11 +62,15 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next) => {
+  console.log(req.user);
+  next();
+});
+
 app.use("/auth", authRouter);
 app.use("/car", carRouter);
 
 app.get("/", (req, res, next) => {
-  console.log(req.isAuthenticated());
   res.send("hi express");
 });
 

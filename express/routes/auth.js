@@ -6,10 +6,6 @@ const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
 const router = express.Router();
 
-router.get("/", isLoggedIn, async (req, res, next) => {
-  const user = req.user;
-  res.json(user);
-});
 
 router.post("/signup", async (req, res, next) => {
   const { email, name, password } = req.body;
@@ -31,7 +27,7 @@ router.post("/signup", async (req, res, next) => {
   }
 });
 
-router.post("/login", isNotLoggedIn, (req, res, next) => {
+router.post("/login", (req, res, next) => {
   passport.authenticate("local", (authError, user, info) => {
     if (authError) {
       console.error(authError);
@@ -52,6 +48,7 @@ router.post("/login", isNotLoggedIn, (req, res, next) => {
 
 router.post("/logout", (req, res, next) => {
   console.log("로그아웃 시도");
+  console.log(req.user);
   req.logout();
   req.session.destroy(); // 선택사항
   return res.status(200).send("로그아웃 되었습니다.");
