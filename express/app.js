@@ -30,7 +30,7 @@ sequelize
   .catch((err) => {
     console.log(err);
   });
-  app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 if (process.env.NODE_ENV === "production") {
   app.use(morgan("combined"));
   app.use(helmet({ contentSecurityPolicy: false }));
@@ -38,11 +38,9 @@ if (process.env.NODE_ENV === "production") {
 } else {
   app.use(morgan("dev"));
 }
-
-
 app.use(
   cors({
-    origin: url,
+    origin: 'http://15.164.45.134:80',
     credentials: true,
   })
 );
@@ -67,7 +65,7 @@ app.use("/auth", authRouter);
 app.use("/car", carRouter);
 
 app.get("/", (req, res, next) => {
-  console.log(req.isAuthenticated())
+  console.log(req.isAuthenticated());
   res.send("hi express");
 });
 
