@@ -32,7 +32,7 @@ router.post("/signup", async (req, res, next) => {
 });
 
 router.post("/login", isNotLoggedIn, (req, res, next) => {
-  passport.authenticate('local', (authError, user, info) => {
+  passport.authenticate("local", (authError, user, info) => {
     if (authError) {
       console.error(authError);
       return next(authError);
@@ -51,11 +51,10 @@ router.post("/login", isNotLoggedIn, (req, res, next) => {
 });
 
 router.post("/logout", (req, res, next) => {
-  if (req.isAuthenticated()) {
-    req.logout();
-    req.session.destroy(); // 선택사항
-    return res.status(200).send("로그아웃 되었습니다.");
-  }
+  console.log("로그아웃 시도");
+  req.logout();
+  req.session.destroy(); // 선택사항
+  return res.status(200).send("로그아웃 되었습니다.");
 });
 
 module.exports = router;

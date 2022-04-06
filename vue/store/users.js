@@ -55,6 +55,7 @@ export const actions = {
         }
       )
       .then((res) => {
+        console.log(res.data);
         commit("setMe", res.data);
       })
       .catch((err) => {
