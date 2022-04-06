@@ -22,7 +22,6 @@ const url =
 const app = express();
 passportConfig();
 app.set("port", process.env.PORT || 3080);
-app.set("view engine", "html");
 sequelize
   .sync({ force: false })
   .then(() => {
