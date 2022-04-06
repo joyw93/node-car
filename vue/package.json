@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env PORT=800 NODE_ENV=development nuxt",
     "build": "nuxt build",
-    "start": "cross-env PORT=80 NODE_ENV=production node server"
+    "start": "cross-env PORT=80 NODE_ENV=production"
   },
   "author": "",
   "license": "ISC",
