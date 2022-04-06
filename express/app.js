@@ -16,8 +16,8 @@ const { sequelize } = require("./models");
 const passportConfig = require("./passport");
 const url =
   process.env.NODE_ENV === "production"
-    ? "http://15.164.45.134:80"
-    : "http://localhost:800";
+    ? "http://15.164.45.134"
+    : "http://127.0.0.1:800";
 
 const app = express();
 passportConfig();
@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === "production") {
 }
 app.use(
   cors({
-    origin: 'http://15.164.45.134:80',
+    origin: url,
     credentials: true,
   })
 );
