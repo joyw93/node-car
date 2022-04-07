@@ -55,6 +55,7 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false,
+      domain: '.nodecar.co.kr',
     },
   })
 );
