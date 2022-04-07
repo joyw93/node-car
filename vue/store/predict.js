@@ -1,5 +1,5 @@
 import axios from "axios";
-const mlServerUrl = "http://43.200.0.181";
+const mlServerUrl = "http://43.200.0.181:5000";
 export const state = () => ({
   price: null,
   info: null,
