@@ -4,6 +4,7 @@ const User = require("../models/user");
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
+    console.log("시리얼라이즈유저 호출됨")
     done(null, user.id);
   });
 
