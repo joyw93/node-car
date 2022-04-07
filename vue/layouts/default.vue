@@ -4,7 +4,7 @@
       <v-toolbar class="fixed-bar" color="white" dark>
         <v-toolbar-title>
           <nuxt-link class="nuxtlink" to="/">
-            <h2>YongCar</h2>
+            <h2>NodeCar</h2>
           </nuxt-link>
         </v-toolbar-title>
         <nuxt-link id="board" class="nuxtlink" to="/sell">내차팔기</nuxt-link>
@@ -72,7 +72,7 @@ export default {
   },
   head() {
     return {
-      title: "YongCar",
+      title: "NodeCar",
     };
   },
 };

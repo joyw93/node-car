@@ -1,6 +1,6 @@
 module.exports = {
   head: {
-    title: "COCODING",
+    title: "NodeCar",
   },
   buildModules: ["@nuxtjs/vuetify"],
   plugins: [],
