@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env PORT=800 NODE_ENV=development nuxt",
     "build": "nuxt build",
-    "start": "cross-env PORT=80 NODE_ENV=production node server"
+    "start": "cross-env PORT=80 NODE_ENV=production pm2 start server.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +20,7 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "nuxt": "^2.15.8",
+    "pm2": "^5.2.0",
     "v-mask": "^2.3.0",
     "vue": "^2.6.14",
     "vue-chartjs": "^3.5.1",
