@@ -6,7 +6,6 @@ const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
 const router = express.Router();
 
-
 router.post("/signup", async (req, res, next) => {
   const { email, name, password } = req.body;
   try {
