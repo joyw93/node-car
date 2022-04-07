@@ -99,7 +99,7 @@ import ImageCard from "../components/sell-car/ImageCard.vue";
 import axios from "axios";
 const url =
   process.env.NODE_ENV === "production"
-    ? "http://3.39.63.126:80"
+    ? "http://api.nodecar.co.kr"
     : "http://localhost:3080";
 
 export default {

@@ -46,8 +46,6 @@ router.post("/login", (req, res, next) => {
 });
 
 router.post("/logout", (req, res, next) => {
-  console.log("로그아웃 시도");
-  console.log(req.user);
   req.logout();
   req.session.destroy(); // 선택사항
   return res.status(200).send("로그아웃 되었습니다.");

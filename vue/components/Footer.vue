@@ -28,7 +28,7 @@
       <v-divider></v-divider>
 
       <v-card-text class="white--text" id="card-bottom">
-        Copyright ⓒ&nbsp;{{ new Date().getFullYear() }} — <strong>YONGCAR</strong>
+        Copyright ⓒ&nbsp;{{ new Date().getFullYear() }} — <strong>NODECAR</strong>
       </v-card-text>
     </v-card>
   </v-footer>
