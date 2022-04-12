@@ -1,5 +1,8 @@
 import axios from "axios";
-const mlServerUrl = "http://43.200.0.181:5000";
+const mlServerUrl =
+  process.env.NODE_ENV === "production"
+    ? "http://43.200.0.181:5000"
+    : "http://127.0.0.1:5000";
 export const state = () => ({
   price: null,
   info: null,
@@ -25,8 +28,8 @@ export const actions = {
         fuel: payload.fuel,
       })
       .then((res) => {
-        commit("setInfo", payload);
         commit("setPrice", res.data);
+        commit("setInfo", payload);
       })
       .catch((err) => {
         console.error(err);

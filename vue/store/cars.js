@@ -71,52 +71,52 @@ export const mutations = {
 };
 
 export const actions = {
-  setBrand({ commit, state }, payload) {
+  setBrand({ commit }, payload) {
     commit("setBrand", payload);
   },
-  setModel({ commit, state }, payload) {
+  setModel({ commit }, payload) {
     commit("setModel", payload);
   },
-  setOdo({ commit, state }, payload) {
+  setOdo({ commit }, payload) {
     commit("setOdo", payload);
   },
-  setAge({ commit, state }, payload) {
+  setAge({ commit }, payload) {
     commit("setAge", payload);
   },
-  setFuel({ commit, state }, payload) {
+  setFuel({ commit }, payload) {
     commit("setFuel", payload);
   },
-  setColor({ commit, state }, payload) {
+  setColor({ commit }, payload) {
     commit("setColor", payload);
   },
-  setIsRented({ commit, state }, payload) {
+  setIsRented({ commit }, payload) {
     commit("setIsRented", payload);
   },
-  setOptions({ commit, state }, payload) {
+  setOptions({ commit }, payload) {
     commit("setOptions", payload);
   },
-  setAccident({ commit, state }, payload) {
+  setAccident({ commit }, payload) {
     commit("setAccident", payload);
   },
-  setAccidentDetail({ commit, state }, payload) {
+  setAccidentDetail({ commit }, payload) {
     commit("setAccidentDetail", payload);
   },
-  setNeedFix({ commit, state }, payload) {
+  setNeedFix({ commit }, payload) {
     commit("setNeedFix", payload);
   },
-  setNeedFixDetail({ commit, state }, payload) {
+  setNeedFixDetail({ commit }, payload) {
     commit("setNeedFixDetail", payload);
   },
-  setRegions({ commit, state }, payload) {
+  setRegions({ commit }, payload) {
     commit("setRegions", payload);
   },
-  setFeature({ commit, state }, payload) {
+  setFeature({ commit }, payload) {
     commit("setFeature", payload);
   },
-  setIsRecommend({ commit, state }, payload) {
+  setIsRecommend({ commit }, payload) {
     commit("setIsRecommend", payload);
   },
-  setImages({ commit, state }, payload) {
+  setImages({ commit }, payload) {
     commit("setImages", payload);
   },
 };

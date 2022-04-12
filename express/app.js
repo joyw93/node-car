@@ -88,5 +88,5 @@ app.use((err, req, res, next) => {
 
 app.listen(app.get("port"), () => {
   console.log(process.env.PORT);
-  console.log(url);
+  console.log('http://localhost:3080');
 });

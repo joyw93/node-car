@@ -22,7 +22,7 @@
       </v-card-text>
 
       <v-card-text class="white--text pt-0" id="card-middle">
-        <h1>YONGCAR</h1>
+        <h1>NODECAR</h1>
       </v-card-text>
 
       <v-divider></v-divider>
