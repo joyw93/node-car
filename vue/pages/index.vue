@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import SelectInfo from "~/components/SelectInfo.vue";
-import Carousel from "~/components/Carousel.vue";
+import SelectInfo from "~/components/predict/SelectInfo.vue";
+import Carousel from "~/components/base/Carousel.vue";
 
 export default {
   components: {

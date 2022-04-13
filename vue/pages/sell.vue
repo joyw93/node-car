@@ -89,13 +89,13 @@
 </template>
 
 <script>
-import DefaultCard from "~/components/sell-car/DefaultCard.vue";
-import OptionCard from "~/components/sell-car/OptionCard.vue";
-import RegionCard from "~/components/sell-car/RegionCard.vue";
-import AccidentCard from "~/components/sell-car/AccidentCard.vue";
-import FeatureCard from "../components/sell-car/FeatureCard.vue";
-import Carousel from "../components/Carousel.vue";
-import ImageCard from "../components/sell-car/ImageCard.vue";
+import DefaultCard from "~/components/sell/DefaultCard.vue";
+import OptionCard from "~/components/sell/OptionCard.vue";
+import RegionCard from "~/components/sell/RegionCard.vue";
+import AccidentCard from "~/components/sell/AccidentCard.vue";
+import FeatureCard from "~/components/sell/FeatureCard.vue";
+import Carousel from "~/components/base/Carousel.vue";
+import ImageCard from "~/components/sell/ImageCard.vue";
 import axios from "axios";
 const url =
   process.env.NODE_ENV === "production"

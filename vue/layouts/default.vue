@@ -36,13 +36,13 @@
 </template>
 
 <script>
-import Carousel from "~/components/Carousel.vue";
-import SignupForm from "~/components/SignupForm.vue";
-import LoginForm from "~/components/LoginForm.vue";
-import SelectInfo from "~/components/SelectInfo.vue";
-import Predicted from "~/components/Predicted.vue";
-import Footer from "~/components/Footer.vue";
-import FloatingButton from "~/components/FloatingButton.vue";
+import Carousel from "~/components/base/Carousel.vue";
+import SignupForm from "~/components/base/SignupForm.vue";
+import LoginForm from "~/components/base/LoginForm.vue";
+import SelectInfo from "~/components/predict/SelectInfo.vue";
+import Predicted from "~/components/predicted/Result.vue";
+import Footer from "~/components/base/Footer.vue";
+import FloatingButton from "~/components/base/FloatingButton.vue";
 
 export default {
   components: {

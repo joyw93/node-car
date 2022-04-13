@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import SideNavigation from "~/components/buy-car/SideNavigation.vue";
-import MainComponent from "~/components/buy-car/MainComponent.vue";
-import Carousel from "~/components/Carousel.vue";
+import SideNavigation from "~/components/buy/SideNavigation.vue";
+import MainComponent from "~/components/buy/Content.vue";
+import Carousel from "~/components/base/Carousel.vue";
 
 export default {
   components: {

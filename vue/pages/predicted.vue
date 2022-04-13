@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Predicted from "~/components/Predicted.vue";
-import Carousel from "~/components/Carousel.vue";
+import Predicted from "~/components/predicted/Result.vue";
+import Carousel from "~/components/base/Carousel.vue";
 export default {
   components: {
     Predicted,

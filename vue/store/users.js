@@ -1,5 +1,5 @@
 import axios from "axios";
-const url =
+const serverUrl =
   process.env.NODE_ENV === "production"
     ? "http://api.nodecar.co.kr"
     : "http://127.0.0.1:3080";
@@ -21,10 +21,9 @@ export const mutations = {
 export const actions = {
   //비동기
   signUp({ commit, state }, payload) {
-    console.log(url);
     axios
       .post(
-        `${url}/auth/signup`,
+        `${serverUrl}/auth/signup`,
         {
           name: payload.name,
           email: payload.email,
@@ -45,7 +44,7 @@ export const actions = {
   login({ commit }, payload) {
     axios
       .post(
-        `${url}/auth/login`,
+        `${serverUrl}/auth/login`,
         {
           email: payload.email,
           password: payload.password,
@@ -65,7 +64,7 @@ export const actions = {
   logout({ commit }) {
     axios
       .post(
-        `${url}/auth/logout`,
+        `${serverUrl}/auth/logout`,
         {},
         {
           withCredentials: true,

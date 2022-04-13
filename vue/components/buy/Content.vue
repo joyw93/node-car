@@ -28,7 +28,7 @@
           </v-card-actions>
 
           <v-expand-transition>
-            <div v-show="show">
+            <div>
               <v-divider></v-divider>
             </div>
           </v-expand-transition>
