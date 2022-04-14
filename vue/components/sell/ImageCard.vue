@@ -143,7 +143,7 @@ export default {
   },
   computed: {
     imageUrls() {
-      return this.$store.state.cars.images;
+      return this.$store.state.register_car.images;
     },
   },
   watch: {},
@@ -163,7 +163,7 @@ export default {
       const files = event.target.files;
       if (files["length"] === 1) {
         const image = URL.createObjectURL(files[0]);
-        this.$store.dispatch("cars/setImages", {
+        this.$store.dispatch("register_car/setImages", {
           index,
           image,
         });

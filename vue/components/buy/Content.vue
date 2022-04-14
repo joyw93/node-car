@@ -44,6 +44,11 @@ export default {
         return {
             imgUrls: ["기아K5",  "아우디S5", "BMW5시리즈"]
         }
+    },
+    computed: {
+      allCars() {
+        return this.$store.state.load_cars.allCars;
+      }
     }
 };
 </script>

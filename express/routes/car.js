@@ -15,4 +15,9 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
+router.post("/loadAllData", async (req, res, next) => {
+  const car = await Car.findAll({})
+  res.send(car)
+});
+
 module.exports = router;

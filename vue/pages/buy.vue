@@ -5,6 +5,7 @@
       <div id="side"><SideNavigation /></div>
       <div id="main"><MainComponent /></div>
     </div>
+    {{allCars}}
   </div>
 </template>
 
@@ -18,6 +19,10 @@ export default {
     SideNavigation,
     MainComponent,
     Carousel,
+  },
+  
+  fetch({ store }) {
+    store.dispatch("load_cars/loadAllCars");
   },
 };
 </script>

@@ -55,7 +55,7 @@ export default {
   },
   watch: {
     regionSelected(newVal) {
-      this.$store.dispatch("cars/setRegions", {
+      this.$store.dispatch("register_car/setRegions", {
         regions: newVal,
       });
     },

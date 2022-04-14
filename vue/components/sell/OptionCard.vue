@@ -58,7 +58,7 @@ export default {
   },
   watch: {
     optionSelected(newVal) {
-      this.$store.dispatch("cars/setOptions", {
+      this.$store.dispatch("register_car/setOptions", {
         options: newVal,
       });
     },

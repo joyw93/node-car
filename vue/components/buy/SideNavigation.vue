@@ -8,12 +8,12 @@
       </v-tabs>
       <v-divider></v-divider>
       <div id="head"><h1>32,403대</h1></div>
-      <v-divider></v-divider>
+      <v-divider class="divider"></v-divider>
       <div id="brand">
         <v-expansion-panels>
           <v-expansion-panel>
-            <v-expansion-panel-header> 차종 </v-expansion-panel-header>
-            <v-expansion-panel-content>
+            <v-expansion-panel-header> 제조사 </v-expansion-panel-header>
+            <v-expansion-panel-content> 
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -23,8 +23,7 @@
         <v-expansion-panels>
           <v-expansion-panel>
             <v-expansion-panel-header> 모델 </v-expansion-panel-header>
-            <v-expansion-panel-content>
-            </v-expansion-panel-content>
+            <v-expansion-panel-content> </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
       </div>
@@ -33,8 +32,7 @@
         <v-expansion-panels>
           <v-expansion-panel>
             <v-expansion-panel-header> 주행거리 </v-expansion-panel-header>
-            <v-expansion-panel-content>
-            </v-expansion-panel-content>
+            <v-expansion-panel-content> </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
       </div>
@@ -43,8 +41,7 @@
         <v-expansion-panels>
           <v-expansion-panel>
             <v-expansion-panel-header> 연식 </v-expansion-panel-header>
-            <v-expansion-panel-content>
-            </v-expansion-panel-content>
+            <v-expansion-panel-content> </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
       </div>
@@ -53,8 +50,7 @@
         <v-expansion-panels>
           <v-expansion-panel>
             <v-expansion-panel-header> 연료타입 </v-expansion-panel-header>
-            <v-expansion-panel-content>
-            </v-expansion-panel-content>
+            <v-expansion-panel-content> </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
       </div>
@@ -63,8 +59,7 @@
         <v-expansion-panels>
           <v-expansion-panel>
             <v-expansion-panel-header> 색상 </v-expansion-panel-header>
-            <v-expansion-panel-content>
-            </v-expansion-panel-content>
+            <v-expansion-panel-content> </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
       </div>
@@ -90,7 +85,6 @@ h1 {
   justify-content: center;
   align-items: center;
 }
-
 
 
 #head {

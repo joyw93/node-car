@@ -97,7 +97,7 @@ import FeatureCard from "~/components/sell/FeatureCard.vue";
 import Carousel from "~/components/base/Carousel.vue";
 import ImageCard from "~/components/sell/ImageCard.vue";
 import axios from "axios";
-const url =
+const serverUrl =
   process.env.NODE_ENV === "production"
     ? "http://api.nodecar.co.kr"
     : "http://localhost:3080";
@@ -120,52 +120,52 @@ export default {
   },
   computed: {
     brand() {
-      return this.$store.state.cars.brand;
+      return this.$store.state.register_car.brand;
     },
     model() {
-      return this.$store.state.cars.model;
+      return this.$store.state.register_car.model;
     },
     odo() {
-      return this.$store.state.cars.odo;
+      return this.$store.state.register_car.odo;
     },
     age() {
-      return this.$store.state.cars.age;
+      return this.$store.state.register_car.age;
     },
     fuel() {
-      return this.$store.state.cars.fuel;
+      return this.$store.state.register_car.fuel;
     },
     color() {
-      return this.$store.state.cars.color;
+      return this.$store.state.register_car.color;
     },
     isRented() {
-      return this.$store.state.cars.isRented;
+      return this.$store.state.register_car.isRented;
     },
     options() {
-      return this.$store.state.cars.options;
+      return this.$store.state.register_car.options;
     },
     accident() {
-      return this.$store.state.cars.accident;
+      return this.$store.state.register_car.accident;
     },
     needFix() {
-      return this.$store.state.cars.needFix;
+      return this.$store.state.register_car.needFix;
     },
     accidentDetail() {
-      return this.$store.state.cars.accidentDetail;
+      return this.$store.state.register_car.accidentDetail;
     },
     needFixDetail() {
-      return this.$store.state.cars.needFixDetail;
+      return this.$store.state.register_car.needFixDetail;
     },
     regions() {
-      return this.$store.state.cars.regions;
+      return this.$store.state.register_car.regions;
     },
     feature() {
-      return this.$store.state.cars.feature;
+      return this.$store.state.register_car.feature;
     },
     isRecommend() {
-      return this.$store.state.cars.isRecommend;
+      return this.$store.state.register_car.isRecommend;
     },
     images() {
-      return this.$store.state.cars.images;
+      return this.$store.state.register_car.images;
     },
   },
   methods: {
@@ -211,7 +211,7 @@ export default {
         isRecommend: this.isRecommend,
         images: this.images,
       };
-      axios.post(`${url}/car/register`, car);
+      axios.post(`${serverUrl}/car/register`, car);
       this.dialog = false;
     },
   },

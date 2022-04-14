@@ -39,12 +39,12 @@ export default {
   },
   watch: {
     feature(newVal) {
-      this.$store.dispatch("cars/setFeature", {
+      this.$store.dispatch("register_car/setFeature", {
         feature: newVal
       })
     },
     isRecommend(newVal) {
-      this.$store.dispatch("cars/setIsRecommend", {
+      this.$store.dispatch("register_car/setIsRecommend", {
         isRecommend: newVal
       })
     }

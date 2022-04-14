@@ -149,22 +149,22 @@ export default {
   },
   watch: {
     accident(newVal) {
-      this.$store.dispatch("cars/setAccident", {
+      this.$store.dispatch("register_car/setAccident", {
         accident: newVal,
       });
     },
     needFix(newVal) {
-      this.$store.dispatch("cars/setNeedFix", {
+      this.$store.dispatch("register_car/setNeedFix", {
         needFix: newVal,
       });
     },
     accidentDetail(newVal) {
-      this.$store.dispatch("cars/setAccidentDetail", {
+      this.$store.dispatch("register_car/setAccidentDetail", {
         accidentDetail: newVal,
       });
     },
     needFixDetail(newVal) {
-      this.$store.dispatch("cars/setNeedFixDetail", {
+      this.$store.dispatch("register_car/setNeedFixDetail", {
         needFixDetail: newVal,
       });
     },

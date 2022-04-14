@@ -136,37 +136,37 @@ export default {
   },
   watch: {
     brand(newVal) {
-      this.$store.dispatch("cars/setBrand", {
+      this.$store.dispatch("register_car/setBrand", {
         brand: newVal,
       });
     },
     model(newVal) {
-      this.$store.dispatch("cars/setModel", {
+      this.$store.dispatch("register_car/setModel", {
         model: newVal,
       });
     },
     odo(newVal) {
-      this.$store.dispatch("cars/setOdo", {
+      this.$store.dispatch("register_car/setOdo", {
         odo: newVal,
       });
     },
     age(newVal) {
-      this.$store.dispatch("cars/setAge", {
+      this.$store.dispatch("register_car/setAge", {
         age: newVal,
       });
     },
     fuel(newVal) {
-      this.$store.dispatch("cars/setFuel", {
+      this.$store.dispatch("register_car/setFuel", {
         fuel: newVal,
       });
     },
     color(newVal) {
-      this.$store.dispatch("cars/setColor", {
+      this.$store.dispatch("register_car/setColor", {
         color: newVal,
       });
     },
     isRented(newVal) {
-      this.$store.dispatch("cars/setIsRented", {
+      this.$store.dispatch("register_car/setIsRented", {
         isRented: newVal,
       });
     },

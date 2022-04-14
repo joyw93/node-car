@@ -155,7 +155,7 @@
 export default {
   computed: {
     info() {
-      return this.$store.state.predict.price;
+      return this.$store.state.predict_car.price;
     },
   },
   data: () => ({
@@ -180,7 +180,7 @@ export default {
   }),
   computed: {
     price() {
-      return this.$store.state.predictedCar.price;
+      return this.$store.state.predict_car.price;
     },
     models() {
       return this.$store.state.static.models;
@@ -238,7 +238,7 @@ export default {
       }
       if (isValid && isModelSelected) {
         this.$store
-          .dispatch("predictedCar/predictPrice", {
+          .dispatch("predict_car/predictPrice", {
             brand: this.brand,
             model: this.model,
             age: this.age,

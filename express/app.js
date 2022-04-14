@@ -21,6 +21,7 @@ const url =
 
 const app = express();
 passportConfig();
+
 app.set("port", process.env.PORT || 3080);
 sequelize
   .sync({ force: false })
@@ -55,7 +56,7 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false,
-      domain: '.nodecar.co.kr',
+      domain: ".nodecar.co.kr",
     },
   })
 );
@@ -83,10 +84,10 @@ app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
   res.status(err.status || 500);
-  res.render("error");
+  res.send("error");
 });
 
 app.listen(app.get("port"), () => {
   console.log(process.env.PORT);
-  console.log('http://localhost:3080');
+  console.log("http://localhost:3080");
 });
