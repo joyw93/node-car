@@ -32,8 +32,9 @@
             <v-row>
               <v-col
                 cols="12"
-                md="4"
-                sm="6"
+                lg="3"
+                md="3"
+                sm="4"
                 xs="8"
                 v-for="_model in models[brand]"
                 :key="_model"
@@ -141,10 +142,19 @@
           @click="dialog = false"
           type="submit"
           x-large
+          block
           color="primary"
         >
-          시세확인
+          <div v-if="isLoading">
+            <v-progress-circular
+              class="progress"
+              indeterminate
+              color="white"
+            ></v-progress-circular>
+          </div>
+          <div v-else>시세확인</div>
         </v-btn>
+
         <v-divider class="divider"></v-divider>
       </v-col>
     </v-row>
@@ -159,6 +169,7 @@ export default {
     },
   },
   data: () => ({
+    isLoading: false,
     valid: false,
     dialog: false,
     brand: "",
@@ -217,6 +228,7 @@ export default {
   watch: {
     price(value) {
       if (value) {
+        this.isLoading = false;
         this.$router.push({
           path: "/predicted",
         });
@@ -237,6 +249,7 @@ export default {
         alert("차량 모델을 선택하세요");
       }
       if (isValid && isModelSelected) {
+        this.isLoading = true;
         this.$store
           .dispatch("predict_car/predictPrice", {
             brand: this.brand,
@@ -297,6 +310,9 @@ export default {
 
 .input {
   max-width: 500px;
+}
+
+.progress {
 }
 
 #text {

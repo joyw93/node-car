@@ -5,7 +5,6 @@
       <div id="side"><SideNavigation /></div>
       <div id="main"><MainComponent /></div>
     </div>
-    {{allCars}}
   </div>
 </template>
 
