@@ -167,6 +167,9 @@ export default {
     images() {
       return this.$store.state.register_car.images;
     },
+    imageFormData() {
+      return this.$store.state.register_car.imageFormData;
+    }
   },
   methods: {
     onSubmit() {
@@ -211,6 +214,7 @@ export default {
         isRecommend: this.isRecommend,
         images: this.images,
       };
+      axios.post(`${serverUrl}/car/imageUpload`, this.imageFormData);
       axios.post(`${serverUrl}/car/register`, car);
       this.dialog = false;
     },

@@ -1,7 +1,31 @@
 const express = require("express");
+const path = require("path");
+const multer = require("multer");
 const Car = require("../models/car");
+const AWS = require("aws-sdk");
+const multerS3 = require("multer-s3");
 
 const router = express.Router();
+
+AWS.config.update({
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.S3_SECRET_KEY,
+  region: "ap-northeast-2",
+});
+
+const upload = multer({
+  storage: multerS3({
+    s3: new AWS.S3(),
+    bucket: process.env.BUCKET_NAME,
+    key(req, file, cb) {
+      cb(
+        null,
+        `nodecar/images/${Date.now()}${path.basename(file.originalname)}`
+      );
+    },
+  }),
+  limit: { fileSize: 20 * 1024 * 1024 },
+});
 
 router.post("/register", async (req, res, next) => {
   const car = req.body;
@@ -15,9 +39,13 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
+router.post("/imageUpload", upload.array("image"), async (req, res, next) => {
+  res.json(req.files);
+});
+
 router.post("/loadAllData", async (req, res, next) => {
-  const car = await Car.findAll({})
-  res.send(car)
+  const car = await Car.findAll({});
+  res.send(car);
 });
 
 module.exports = router;

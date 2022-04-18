@@ -15,7 +15,9 @@ export const state = () => ({
   regions: null,
   feature: null,
   isRecommend: "true",
-  images: new Array(6),
+  images: [0, 0, 0, 0, 0, 0],
+  tempImageList: [0, 0, 0, 0, 0, 0],
+  imageFormData: null,
 });
 
 export const mutations = {
@@ -65,8 +67,18 @@ export const mutations = {
     state.isRecommend = payload.isRecommend;
   },
   setImages(state, payload) {
-    const { image, index } = payload;
+    const { image, index, file } = payload;
+    const imageData = new FormData();
     state.images.splice(index, 1, image);
+    state.tempImageList.splice(index, 1, file);
+    if (state.imageFormData === null) {
+      state.imageFormData = imageData.append("image", file);
+    } else {
+      for(let img of state.tempImageList){
+        imageData.append('image', img)
+      }
+      state.imageFormData = imageData;
+    }
   },
 };
 

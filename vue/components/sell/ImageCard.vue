@@ -161,11 +161,13 @@ export default {
     },
     onChangeImages(event, index) {
       const files = event.target.files;
+      const file = files[0];
       if (files["length"] === 1) {
-        const image = URL.createObjectURL(files[0]);
+        const image = URL.createObjectURL(file);
         this.$store.dispatch("register_car/setImages", {
           index,
           image,
+          file,
         });
       }
     },
