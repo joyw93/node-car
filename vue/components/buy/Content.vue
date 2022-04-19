@@ -1,18 +1,19 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-for="img in imgUrls" :key="img">
-        <v-card max-width="320">
-          <v-img
-            :src="require(`@/static/images/car-forsale/${img}.jpg`)"
-            height="200px"
-          ></v-img>
+      <v-col v-for="car in allCars" :key="car" md="4" lg="3" sm="6" cols="12">
+        <v-card
+          max-width="300"
+          @click="showDetail(car.id)"
+          
+        >
+          <v-img :src="car.images.split(',')[0]" height="200px"></v-img>
 
-          <v-card-title> 기아 K5 </v-card-title>
+          <v-card-title>{{ car.brand }} {{ car.model }} </v-card-title>
 
           <v-card-subtitle>
-            <P>2015년 09월 (16년식)</P>
-            <P>128,174km | 경기</P>
+            <P>{{ car.age }}년식</P>
+            <P>{{ car.odo }}km | {{ car.regions }}</P>
           </v-card-subtitle>
 
           <v-card-actions>
@@ -40,16 +41,23 @@
 
 <script>
 export default {
-    data() {
-        return {
-            imgUrls: ["기아K5",  "아우디S5", "BMW5시리즈"]
-        }
+  data() {
+    return {
+      imgUrls: ["기아K5", "아우디S5", "BMW5시리즈"],
+    };
+  },
+  methods: {
+    showDetail(id) {
+      this.$router.push({
+        path: `/buy/${id}`,
+      });
     },
-    computed: {
-      allCars() {
-        return this.$store.state.load_cars.allCars;
-      }
-    }
+  },
+  computed: {
+    allCars() {
+      return this.$store.state.load_cars.allCars;
+    },
+  },
 };
 </script>
 

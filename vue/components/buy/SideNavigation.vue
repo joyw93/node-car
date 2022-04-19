@@ -46,7 +46,7 @@
                   label="최소"
                   outlined
                 ></v-select>
-                
+
                 <v-select
                   class="select-max"
                   dense
@@ -87,12 +87,8 @@
               연료타입
             </v-expansion-panel-header>
             <v-divider></v-divider>
-            <v-expansion-panel-content> 
-              <div
-                class="element"
-                v-for="fuel in fuels"
-                :key="fuel"
-              >
+            <v-expansion-panel-content>
+              <div class="element" v-for="fuel in fuels" :key="fuel">
                 {{ fuel }}
               </div>
             </v-expansion-panel-content>
@@ -102,12 +98,8 @@
               색상
             </v-expansion-panel-header>
             <v-divider></v-divider>
-            <v-expansion-panel-content> 
-              <div
-                class="element"
-                v-for="color in colors"
-                :key="color"
-              >
+            <v-expansion-panel-content>
+              <div class="element" v-for="color in colors" :key="color">
                 {{ color }}
               </div>
             </v-expansion-panel-content>
@@ -134,7 +126,10 @@ export default {
     },
     colors() {
       return this.$store.state.static.colors;
-    }
+    },
+    allCars() {
+      return this.$store.state.load_cars.allCars;
+    },
   },
 };
 </script>
@@ -172,11 +167,9 @@ h1 {
 }
 
 .tilde {
-
 }
 
 .content {
-  
   margin-top: 20px;
 }
 

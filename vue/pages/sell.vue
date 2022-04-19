@@ -217,7 +217,12 @@ export default {
         .post(`${serverUrl}/car/imageUpload`, this.imageFormData)
         .then((res) => {
           car.images = res.data;
-          axios.post(`${serverUrl}/car/register`, car);
+          axios
+            .post(`${serverUrl}/car/register`, car)
+            .then((res) => {})
+            .catch((err) => {
+              console.error(err);
+            });
         })
         .catch((err) => {
           console.error(err);
