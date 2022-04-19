@@ -169,7 +169,7 @@ export default {
     },
     imageFormData() {
       return this.$store.state.register_car.imageFormData;
-    }
+    },
   },
   methods: {
     onSubmit() {
@@ -212,10 +212,17 @@ export default {
         regions: this.regions,
         feature: this.feature,
         isRecommend: this.isRecommend,
-        images: this.images,
       };
-      axios.post(`${serverUrl}/car/imageUpload`, this.imageFormData);
-      axios.post(`${serverUrl}/car/register`, car);
+      axios
+        .post(`${serverUrl}/car/imageUpload`, this.imageFormData)
+        .then((res) => {
+          car.images = res.data;
+          axios.post(`${serverUrl}/car/register`, car);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
       this.dialog = false;
     },
   },

@@ -71,14 +71,10 @@ export const mutations = {
     const imageData = new FormData();
     state.images.splice(index, 1, image);
     state.tempImageList.splice(index, 1, file);
-    if (state.imageFormData === null) {
-      state.imageFormData = imageData.append("image", file);
-    } else {
-      for(let img of state.tempImageList){
-        imageData.append('image', img)
-      }
-      state.imageFormData = imageData;
-    }
+    state.tempImageList.forEach((file) => {
+      imageData.append("image", file);
+    });
+    state.imageFormData = imageData;
   },
 };
 

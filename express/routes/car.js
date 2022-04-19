@@ -4,6 +4,7 @@ const multer = require("multer");
 const Car = require("../models/car");
 const AWS = require("aws-sdk");
 const multerS3 = require("multer-s3");
+const { isLoggedIn } = require("./middlewares");
 
 const router = express.Router();
 
@@ -32,6 +33,7 @@ router.post("/register", async (req, res, next) => {
   car.options = car.options.join();
   car.regions = car.regions.join();
   car.images = car.images.join();
+ 
   try {
     await Car.create(car);
   } catch (err) {
@@ -40,7 +42,7 @@ router.post("/register", async (req, res, next) => {
 });
 
 router.post("/imageUpload", upload.array("image"), async (req, res, next) => {
-  res.json(req.files);
+  res.json(req.files.map((v) => v.location));
 });
 
 router.post("/loadAllData", async (req, res, next) => {

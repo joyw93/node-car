@@ -145,6 +145,12 @@ export default {
     imageUrls() {
       return this.$store.state.register_car.images;
     },
+    tempImageList() {
+      return this.$store.state.register_car.tempImageList;
+    },
+    imageFormData() {
+      return this.$store.state.register_car.imageFormData;
+    },
   },
   watch: {},
   methods: {
