@@ -212,17 +212,12 @@ export default {
         regions: this.regions,
         feature: this.feature,
         isRecommend: this.isRecommend,
+        images: null,
       };
-      axios
-        .post(`${serverUrl}/car/imageUpload`, this.imageFormData)
+      axios.post(`${serverUrl}/car/imageUpload`, this.imageFormData)
         .then((res) => {
           car.images = res.data;
-          axios
-            .post(`${serverUrl}/car/register`, car)
-            .then((res) => {})
-            .catch((err) => {
-              console.error(err);
-            });
+          axios.post(`${serverUrl}/car/register`, car);
         })
         .catch((err) => {
           console.error(err);
