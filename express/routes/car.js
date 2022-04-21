@@ -33,7 +33,7 @@ router.post("/register", async (req, res, next) => {
   car.options = car.options.join();
   car.regions = car.regions.join();
   car.images = car.images.join();
- 
+
   try {
     await Car.create(car);
   } catch (err) {
@@ -45,9 +45,15 @@ router.post("/imageUpload", upload.array("image"), async (req, res, next) => {
   res.json(req.files.map((v) => v.location));
 });
 
-router.post("/loadAllData", async (req, res, next) => {
-  const car = await Car.findAll({});
+router.post("/loadCar", async (req, res, next) => {
+  const carId = req.body.id;
+  const car = await Car.findOne({ where: { id: carId } });
   res.send(car);
+});
+
+router.post("/loadAllData", async (req, res, next) => {
+  const cars = await Car.findAll({});
+  res.send(cars);
 });
 
 module.exports = router;

@@ -3,11 +3,11 @@
     <v-row>
       <v-col v-for="car in allCars" :key="car" md="4" lg="3" sm="6" cols="12">
         <v-card
-          max-width="300"
+          max-width="350"
           @click="showDetail(car.id)"
           
         >
-          <v-img :src="car.images.split(',')[0]" height="200px"></v-img>
+          <v-img :src="car.images.split(',')[0]" width="350"></v-img>
 
           <v-card-title>{{ car.brand }} {{ car.model }} </v-card-title>
 
@@ -43,13 +43,13 @@
 export default {
   data() {
     return {
-      imgUrls: ["기아K5", "아우디S5", "BMW5시리즈"],
+      
     };
   },
   methods: {
     showDetail(id) {
       this.$router.push({
-        path: `/buy/${id}`,
+        path: `/car/${id}`,
       });
     },
   },

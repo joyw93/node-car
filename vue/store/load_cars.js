@@ -4,12 +4,16 @@ const serverUrl =
     ? "http://api.nodecar.co.kr"
     : "http://127.0.0.1:3080";
 export const state = () => ({
-    allCars: null
+  allCars: null,
+  car: null,
 });
 
 export const mutations = {
   loadAllCars(state, payload) {
-      state.allCars = payload
+    state.allCars = payload;
+  },
+  loadCar(state, payload) {
+    state.car = payload;
   },
 };
 
@@ -19,6 +23,17 @@ export const actions = {
       .post(`${serverUrl}/car/loadAllData`, {})
       .then((res) => {
         commit("loadAllCars", res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  loadCar({ commit }, payload) {
+    axios
+      .post(`${serverUrl}/car/loadCar`, { id: payload })
+      .then((res) => {
+        commit("loadCar", res.data);
       })
       .catch((err) => {
         console.log(err);
