@@ -51,9 +51,9 @@ router.post("/loadCar", async (req, res, next) => {
   res.send(car);
 });
 
-router.post("/loadAllData", async (req, res, next) => {
-  const cars = await Car.findAll({});
-  res.send(cars);
+router.post("/loadAllCars", async (req, res, next) => {
+  const allCars = await Car.findAll({});
+  res.send(allCars);
 });
 
 module.exports = router;

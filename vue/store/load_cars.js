@@ -20,7 +20,7 @@ export const mutations = {
 export const actions = {
   loadAllCars({ commit, state }, payload) {
     axios
-      .post(`${serverUrl}/car/loadAllData`, {})
+      .post(`${serverUrl}/car/loadAllCars`, {})
       .then((res) => {
         commit("loadAllCars", res.data);
       })
