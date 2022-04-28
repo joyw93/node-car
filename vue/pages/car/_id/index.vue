@@ -27,7 +27,7 @@
       </v-col>
     </v-row>
     <v-divider />
-    <h1>NODECAR 국민시세</h1>
+    
     <v-row>
       <v-col>
         시세정보
@@ -45,6 +45,7 @@
 </template>
 
 <script>
+
 export default {
   computed: {
     car() {
