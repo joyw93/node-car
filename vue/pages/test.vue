@@ -44,9 +44,9 @@ import PriceRange from "./car/_id/chart/PriceRange.vue";
 
 export default {
   computed: {
-    car() {
-      return this.$store.state.load_cars.car;
-    },
+    // car() {
+    //   return this.$store.state.load_cars.car;
+    // },
   },
   components: {
     PriceRange,
