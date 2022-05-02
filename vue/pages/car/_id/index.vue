@@ -1,59 +1,102 @@
 <template>
   <v-container>
+    <div class="header">
+      <span>홈</span>
+      <v-icon>mdi-chevron-right</v-icon>
+      <span>내차사기</span>
+    </div>
     <v-row>
-      <v-col>
-        <v-img :src="car.images.split(',')[0]" width="350"></v-img>
+      <v-col cols="12" sm="7" md="6" lg="6">
+        <v-img
+          :src="require(`@/static/images/car-forsale/아우디S5.jpg`)"
+          width="500"
+        ></v-img>
       </v-col>
-      <v-col cols="12" sm="7" md="7" lg="6">
-        <div id="brand">
-          {{ car.brand }}<span id="model">{{ car.model }}</span>
+      <v-col cols="12" sm="7" md="6" lg="6">
+        <div id="brand">아우디<span id="model">A6 <span :style="{color:'#78909C'}">(140하 9566)</span></span></div>
+        <p :style="{ float: 'right' }">
+          <span :style="{ marginRight: '20px' }">판매가격 &nbsp; </span>
+          <strong id="price">4,321만원</strong>
+        </p>
+        <v-divider />
+        <div>
+          <span class="watched">
+            <v-icon :style="{ fontSize: '20px' }">mdi-eye</v-icon>
+            <span>&nbsp;2,965</span>
+            <v-icon :style="{ marginLeft: '18px', fontSize: '18px' }"
+              >mdi-heart</v-icon
+            >
+            <span>&nbsp;3</span>
+          </span>
+          <span class="detail">
+            2019년식 &nbsp;|&nbsp; 3,400km &nbsp;|&nbsp; 가솔린 &nbsp;|&nbsp;
+            울산 &nbsp;|&nbsp; 흰색
+          </span>
         </div>
 
-        <p class="muted">
-          {{ car.age }}년식 &nbsp;|&nbsp; {{ car.odo }}km &nbsp;|&nbsp;
-          {{ car.fuel }}
-        </p>
-        <p>
-          <span>판매가격 &nbsp; </span>
-          <strong id="price">1,234만원</strong>
-        </p>
-        <a class="span" @click="specInfo"
-          >제원정보<v-icon>mdi-chevron-right</v-icon>
-        </a>
-        &nbsp;
-        <a class="span" @click="brandInfo"
-          >브랜드정보<v-icon>mdi-chevron-right</v-icon></a
-        >
+        <div class="history" :style="{ marginTop: '120px' }">
+          <span class="history-icon"
+            ><v-icon size="50" color="primary"
+              >mdi-file-find-outline</v-icon
+            ></span
+          >
+          <span class="history-icon"
+            ><v-icon size="50" color="primary">mdi-hammer-wrench</v-icon></span
+          >
+          <span class="history-icon"
+            ><v-icon size="50" color="primary">mdi-car-hatchback</v-icon></span
+          >
+          <span class="history-icon" id="history-text">많음</span>
+        </div>
+        <div class="history">
+          <span class="history-icon">성능점검</span>
+          <span class="history-icon">보험이력</span>
+          <span class="history-icon">기본정보</span>
+          <span class="history-icon">주행거리</span>
+        </div>
       </v-col>
     </v-row>
     <v-divider />
-    
+    <div id="report-title">시세 리포트</div>
     <v-row>
-      <v-col>
-        시세정보
+      <v-col cols="12" sm="8" md="4" lg="4">
+        <h3>시세정보</h3>
+        <div id="price-text">시세안전구간</div>
+        <h2 id="price-range">4,463~4,807만원</h2>
+        <PriceRange />
       </v-col>
-      <v-col>
-        신차 가격대비 잔존율
+      <v-col cols="12" sm="8" md="4" lg="4">
+        <h3>신차 가격대비 잔존율</h3>
+        <PriceRemain />
       </v-col>
-      <v-col>
-        시세예측 그래프
+      <v-col cols="12" sm="8" md="4" lg="4">
+        <div>
+          <h3 :style="{ display: 'inline-block' }">시세예측 그래프</h3>
+          <span :style="{ float: 'right' }">[단위 : 만원]</span>
+        </div>
+        <div id="predict-text">판매가 기준 감가 예측 그래프입니다.</div>
+        <PricePredict />
       </v-col>
     </v-row>
-    
+
     <v-divider />
   </v-container>
 </template>
 
 <script>
-
+import PriceRange from "./chart/PriceRange.vue";
+import PriceRemain from "./chart/PriceRemain.vue";
+import PricePredict from "./chart/PricePredict.vue";
 export default {
   computed: {
-    car() {
-      return this.$store.state.load_cars.car;
-    },
+    // car() {
+    //   return this.$store.state.load_cars.car;
+    // },
   },
-  fetch({ store, params }) {
-    return store.dispatch("load_cars/loadCar", params.id);
+  components: {
+    PriceRange,
+    PriceRemain,
+    PricePredict,
   },
 };
 </script>
@@ -66,7 +109,14 @@ export default {
   margin-bottom: 100px;
 }
 
-.muted {
+.watched {
+  float: left;
+  margin-top: 20px;
+  color: #757575;
+}
+
+.detail {
+  float: right;
   margin-top: 20px;
   color: #757575;
 }
@@ -77,36 +127,75 @@ export default {
 
 .v-divider {
   margin-top: 80px;
-  
 }
 
-#text1 {
-  font-size: 45px;
-  color: #2196f3;
+.header {
+  font-size: 14px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
-#text2 {
-  font-size: 45px;
-  font-weight: bold;
+.history {
+  display: flex;
+  margin-top: 20px;
 }
 
-#text3 {
-  font-size: 45px;
-  color: #757575;
+.history-icon {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #brand {
-  font-size: 17px;
+  
+  font-size: 35px;
   font-weight: bold;
 }
 
 #model {
-  font-size: 25px;
+  font-size: 35px;
   font-weight: bold;
+  margin-left: 10px;
 }
 
 #price {
   font-size: 40px;
   color: #2196f3;
+}
+
+#report-title {
+  font-size: 25px;
+  display: inline-block;
+  margin-top: 70px;
+  margin-bottom: 70px;
+  background: linear-gradient(to top, #ffecb3 50%, transparent 40%);
+}
+
+#price-text {
+  margin-top: 15px;
+  text-align: center;
+}
+
+#price-range {
+  text-align: center;
+  font-size: 30px;
+  color: #2196f3;
+}
+
+#predict-text {
+  color: #90a4ae;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+#history-text {
+  font-weight: bold;
+  color: #2196f3;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

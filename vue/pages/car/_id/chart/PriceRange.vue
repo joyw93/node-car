@@ -12,7 +12,7 @@
               >mdi-help-circle</v-icon
             >
           </template>
-          <div :style="{padding:'10px'}">
+          <div :style="{ padding: '10px' }">
             <div>시세안심지수란?</div>
             <div>인공지능이 산출한 중고차</div>
             <div>시세 가격에 근접할수록</div>
@@ -34,6 +34,7 @@
       <span class="price-item">4,327</span>
       <span class="price-item">5,335</span>
     </div>
+    <div id="text-under">시세는 인공지능시스템으로 산출됩니다.</div>
   </div>
 </template>
 
@@ -98,5 +99,13 @@ export default {};
 }
 #tooltip-range {
   color: #bdbdbd;
+}
+
+#text-under {
+  font-size: 14px;
+  margin-top: 50px;
+  text-align: center;
+  font-weight: bold;
+  color: #90a4ae;
 }
 </style>

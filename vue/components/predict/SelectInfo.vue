@@ -32,8 +32,8 @@
             <v-row>
               <v-col
                 cols="12"
-                lg="3"
-                md="3"
+                lg="2"
+                md="2"
                 sm="4"
                 xs="8"
                 v-for="_model in models[brand]"
@@ -57,7 +57,7 @@
                             :src="
                               require(`@/static/images/car/${brand}/${_model}.jpg`)
                             "
-                            width="150"
+                            width="120"
                           />
                         </div>
                         <div

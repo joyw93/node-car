@@ -28,6 +28,7 @@ export default {
 
 <style scoped>
 #wrap {
+  margin-top:80px;
   display: flex;
 }
 
