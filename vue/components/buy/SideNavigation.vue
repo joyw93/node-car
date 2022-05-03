@@ -16,13 +16,21 @@
               제조사
             </v-expansion-panel-header>
             <v-divider />
-            <v-expansion-panel-content>
+            <v-expansion-panel-content
+              :style="{
+                overflow: 'scroll',
+                height: '250px',
+                overflowX: 'hidden',
+              }"
+            >
               <div
                 class="element"
-                v-for="brand in Object.keys(models)"
-                :key="brand"
+                :class="{ 'element-selected': brand == _brand }"
+                v-for="_brand in Object.keys(models)"
+                :key="_brand"
+                @click="brandSelect(_brand)"
               >
-                {{ brand }}
+                {{ _brand }}
               </div>
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -30,7 +38,26 @@
             <v-expansion-panel-header class="panel-header">
               모델
             </v-expansion-panel-header>
-            <v-expansion-panel-content> </v-expansion-panel-content>
+            <v-divider />
+            <v-expansion-panel-content
+              :style="{
+                overflow: 'scroll',
+                maxHeight: '250px',
+                overflowX: 'hidden',
+              }"
+            >
+              <div v-if="!models[brand]" :style="{marginTop:'20px'}">제조사를 선택하세요.</div>
+              <div
+                v-else
+                class="element"
+                :class="{ 'element-selected': model == _model }"
+                v-for="_model in models[brand]"
+                :key="_model"
+                @click="modelSelect(_model)"
+              >
+                {{ _model }}
+              </div>
+            </v-expansion-panel-content>
           </v-expansion-panel>
           <v-expansion-panel>
             <v-expansion-panel-header class="panel-header">
@@ -71,7 +98,6 @@
                   label="최소"
                   outlined
                 ></v-select>
-
                 <v-select
                   class="select-max"
                   dense
@@ -88,8 +114,14 @@
             </v-expansion-panel-header>
             <v-divider></v-divider>
             <v-expansion-panel-content>
-              <div class="element" v-for="fuel in fuels" :key="fuel">
-                {{ fuel }}
+              <div
+                class="element"
+                :class="{ 'element-selected': fuel == _fuel }"
+                v-for="_fuel in fuels"
+                :key="_fuel"
+                @click="fuelSelect(_fuel)"
+              >
+                {{ _fuel }}
               </div>
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -99,8 +131,14 @@
             </v-expansion-panel-header>
             <v-divider></v-divider>
             <v-expansion-panel-content>
-              <div class="element" v-for="color in colors" :key="color">
-                {{ color }}
+              <div
+                class="element"
+                :class="{ 'element-selected': color == _color }"
+                v-for="_color in colors"
+                :key="_color"
+                @click="colorSelect(_color)"
+              >
+                {{ _color }}
               </div>
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -114,6 +152,10 @@
 export default {
   data() {
     return {
+      brand: "",
+      model: "",
+      fuel: "",
+      color: "",
       items: ["1,000km", "2,000km", "3,000km", "4,000km"],
     };
   },
@@ -129,6 +171,20 @@ export default {
     },
     allCars() {
       return this.$store.state.load_cars.allCars;
+    },
+  },
+  methods: {
+    brandSelect(brand) {
+      this.brand = brand;
+    },
+    modelSelect(model) {
+      this.model = model;
+    },
+    fuelSelect(fuel) {
+      this.fuel = fuel;
+    },
+    colorSelect(color) {
+      this.color = color;
     },
   },
 };
@@ -152,10 +208,22 @@ h1 {
 .element {
   color: #757575;
   margin-top: 10px;
+  cursor: pointer;
+}
+
+.element-selected {
+  color: #2196f3;
+  margin-top: 10px;
+  cursor: pointer;
 }
 
 .panel-header {
   color: #000000;
+}
+
+.panel-content {
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .select-min {
@@ -164,9 +232,6 @@ h1 {
 
 .select-max {
   float: right;
-}
-
-.tilde {
 }
 
 .content {

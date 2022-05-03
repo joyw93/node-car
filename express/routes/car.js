@@ -21,7 +21,7 @@ const upload = multer({
     key(req, file, cb) {
       cb(
         null,
-        `nodecar/images/${Date.now()}${path.basename(file.originalname)}`
+        `nodecar/images/${Date.now()}_${path.basename(file.originalname)}`
       );
     },
   }),

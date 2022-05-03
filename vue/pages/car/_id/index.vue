@@ -13,7 +13,11 @@
         ></v-img>
       </v-col>
       <v-col cols="12" sm="7" md="6" lg="6">
-        <div id="brand">아우디<span id="model">A6 <span :style="{color:'#78909C'}">(140하 9566)</span></span></div>
+        <div id="brand">
+          아우디<span id="model"
+            >A6 <span :style="{ color: '#78909C' }">(140하 9566)</span></span
+          >
+        </div>
         <p :style="{ float: 'right' }">
           <span :style="{ marginRight: '20px' }">판매가격 &nbsp; </span>
           <strong id="price">4,321만원</strong>
@@ -148,7 +152,6 @@ export default {
 }
 
 #brand {
-  
   font-size: 35px;
   font-weight: bold;
 }

@@ -1,9 +1,19 @@
 <template>
   <div>
-    <Carousel />
-    <div id="wrap">
-      <div id="side"><SideNavigation /></div>
-      <div id="main"><MainComponent /></div>
+    <div>
+      <Carousel />
+      <div id="wrap">
+        <div id="side"><SideNavigation /></div>
+        <div id="main"><MainComponent /></div>
+      </div>
+    </div>
+    <div class="pagination">
+      <v-pagination
+        v-model="page"
+        :length="4"
+        prev-icon="mdi-menu-left"
+        next-icon="mdi-menu-right"
+      ></v-pagination>
     </div>
   </div>
 </template>
@@ -19,16 +29,24 @@ export default {
     MainComponent,
     Carousel,
   },
-  
+
   fetch({ store }) {
     store.dispatch("load_cars/loadAllCars");
+  },
+
+  data() {
+    return {
+      page: 1,
+    };
   },
 };
 </script>
 
 <style scoped>
+
+
 #wrap {
-  margin-top:80px;
+  margin-top: 80px;
   display: flex;
 }
 

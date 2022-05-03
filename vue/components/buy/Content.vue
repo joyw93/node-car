@@ -2,29 +2,20 @@
   <v-container>
     <v-row>
       <v-col v-for="car in allCars" :key="car" md="4" lg="3" sm="6" cols="12">
-        <v-card class="card" max-width="350" @click="showDetail(car.id)">
+        <v-card class="card" min-width="200" max-width="350" @click="showDetail(car.id)">
           <v-img :src="car.images.split(',')[0]" width="350"></v-img>
           <v-chip class="badge" small label color="#3F51B5" text-color="white">
             실차주
           </v-chip>
           <v-card-title>{{ car.brand }} {{ car.model }} </v-card-title>
-
           <v-card-subtitle>
             <P>{{ car.age }}년식</P>
             <P>{{ car.odo }}km | {{ car.regions }}</P>
           </v-card-subtitle>
-
           <v-card-actions>
             <v-btn color="primary" text> 2,039만원 </v-btn>
-
             <v-spacer></v-spacer>
           </v-card-actions>
-
-          <v-expand-transition>
-            <div>
-              <v-divider></v-divider>
-            </div>
-          </v-expand-transition>
         </v-card>
       </v-col>
     </v-row>
@@ -34,7 +25,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+
+    };
   },
   methods: {
     showDetail(id) {

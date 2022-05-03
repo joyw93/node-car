@@ -168,27 +168,29 @@ export default {
       return this.$store.state.predict_car.price;
     },
   },
-  data: () => ({
-    isLoading: false,
-    valid: false,
-    dialog: false,
-    brand: "",
-    model: "",
-    odo: "",
-    age: "",
-    fuel: "",
-    swatch: "#000000",
-    odoRules: [(v) => !!v || "주행거리를 입력하세요."],
-    ageRules: [(v) => !!v || "연식을 선택하세요."],
-    fuelRules: [(v) => !!v || "연료 타입을 선택하세요."],
-    swatches: [
-      ["#000000", "#2196F3"],
-      ["#FFFFFF", "#795548"],
-      ["#9E9E9E", "#4CAF50"],
-      ["#F44336", "#FFEB3B"],
-    ],
-    transparent: "rgba(255, 255, 255, 0)",
-  }),
+  data() {
+    return {
+      isLoading: false,
+      valid: false,
+      dialog: false,
+      brand: "",
+      model: "",
+      odo: "",
+      age: "",
+      fuel: "",
+      swatch: "#000000",
+      odoRules: [(v) => !!v || "주행거리를 입력하세요."],
+      ageRules: [(v) => !!v || "연식을 선택하세요."],
+      fuelRules: [(v) => !!v || "연료 타입을 선택하세요."],
+      swatches: [
+        ["#000000", "#2196F3"],
+        ["#FFFFFF", "#795548"],
+        ["#9E9E9E", "#4CAF50"],
+        ["#F44336", "#FFEB3B"],
+      ],
+      transparent: "rgba(255, 255, 255, 0)",
+    };
+  },
   computed: {
     price() {
       return this.$store.state.predict_car.price;
