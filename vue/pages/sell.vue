@@ -97,10 +97,7 @@ import FeatureCard from "~/components/sell/FeatureCard.vue";
 import Carousel from "~/components/base/Carousel.vue";
 import ImageCard from "~/components/sell/ImageCard.vue";
 import axios from "axios";
-const serverUrl =
-  process.env.NODE_ENV === "production"
-    ? "http://api.nodecar.co.kr"
-    : "http://localhost:3080";
+const serverUrl = process.env.serverUrl;
 
 export default {
   data() {
@@ -214,7 +211,8 @@ export default {
         isRecommend: this.isRecommend,
         images: null,
       };
-      axios.post(`${serverUrl}/car/imageUpload`, this.imageFormData)
+      axios
+        .post(`${serverUrl}/car/imageUpload`, this.imageFormData)
         .then((res) => {
           car.images = res.data;
           axios.post(`${serverUrl}/car/register`, car);

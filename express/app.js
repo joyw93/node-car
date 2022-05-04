@@ -14,7 +14,7 @@ const authRouter = require("./routes/auth");
 const carRouter = require("./routes/car");
 const { sequelize } = require("./models");
 const passportConfig = require("./passport");
-const url =
+const frontUrl =
   process.env.NODE_ENV === "production"
     ? "http://nodecar.co.kr"
     : "http://127.0.0.1:800";
@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === "production") {
 }
 app.use(
   cors({
-    origin: url,
+    origin: frontUrl,
     credentials: true,
   })
 );

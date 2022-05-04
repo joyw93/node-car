@@ -2,7 +2,7 @@ module.exports = {
   head: {
     title: "NodeCar",
   },
-  buildModules: ["@nuxtjs/vuetify"],
+  buildModules: ["@nuxtjs/vuetify", "@nuxtjs/dotenv"],
   plugins: [],
   modules: ["@nuxtjs/axios"],
   vuetify: {},

@@ -314,8 +314,6 @@ export default {
   max-width: 500px;
 }
 
-.progress {
-}
 
 #text {
   margin-bottom: 15px;

@@ -1,8 +1,5 @@
 import axios from "axios";
-const mlServerUrl =
-  process.env.NODE_ENV === "production"
-    ? "http://43.200.0.181:5000"
-    : "http://127.0.0.1:5000";
+const mlServerUrl = process.env.mlServerUrl
 export const state = () => ({
   price: null,
   info: null,

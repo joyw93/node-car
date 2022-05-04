@@ -1,8 +1,5 @@
 import axios from "axios";
-const serverUrl =
-  process.env.NODE_ENV === "production"
-    ? "http://api.nodecar.co.kr"
-    : "http://127.0.0.1:3080";
+const serverUrl = process.env.serverUrl;
 export const state = () => ({
   allCars: null,
   car: null,

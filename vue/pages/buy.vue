@@ -7,14 +7,7 @@
         <div id="main"><MainComponent /></div>
       </div>
     </div>
-    <div class="pagination">
-      <v-pagination
-        v-model="page"
-        :length="4"
-        prev-icon="mdi-menu-left"
-        next-icon="mdi-menu-right"
-      ></v-pagination>
-    </div>
+
   </div>
 </template>
 
