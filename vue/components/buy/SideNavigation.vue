@@ -46,7 +46,9 @@
                 overflowX: 'hidden',
               }"
             >
-              <div v-if="!models[brand]" :style="{marginTop:'20px'}">제조사를 선택하세요.</div>
+              <div v-if="!models[brand]" :style="{ marginTop: '20px' }">
+                제조사를 선택하세요.
+              </div>
               <div
                 v-else
                 class="element"
@@ -152,10 +154,10 @@
 export default {
   data() {
     return {
-      brand: "",
-      model: "",
-      fuel: "",
-      color: "",
+      brand: null,
+      model: null,
+      fuel: null,
+      color: null,
       items: ["1,000km", "2,000km", "3,000km", "4,000km"],
     };
   },
@@ -169,22 +171,48 @@ export default {
     colors() {
       return this.$store.state.static.colors;
     },
-    allCars() {
-      return this.$store.state.load_cars.allCars;
-    },
   },
   methods: {
     brandSelect(brand) {
-      this.brand = brand;
+      this.model = null;
+      if (this.brand === null) this.brand = brand;
+      else this.brand === brand ? (this.brand = null) : (this.brand = brand);
+      this.$store.dispatch("buy_car/loadCars", {
+        brand: this.brand,
+        model: this.model,
+        fuel: this.fuel,
+        color: this.color,
+      });
     },
     modelSelect(model) {
-      this.model = model;
+      if (this.model === null) this.model = model;
+      else this.model === model ? (this.model = null) : (this.model = model);
+      this.$store.dispatch("buy_car/loadCars", {
+        brand: this.brand,
+        model: this.model,
+        fuel: this.fuel,
+        color: this.color,
+      });
     },
     fuelSelect(fuel) {
-      this.fuel = fuel;
+      if (this.fuel === null) this.fuel = fuel;
+      else this.fuel === fuel ? (this.fuel = null) : (this.fuel = fuel);
+      this.$store.dispatch("buy_car/loadCars", {
+        brand: this.brand,
+        model: this.model,
+        fuel: this.fuel,
+        color: this.color,
+      });
     },
     colorSelect(color) {
-      this.color = color;
+      if (this.color === null) this.color = color;
+      else this.color === color ? (this.color = null) : (this.color = color);
+      this.$store.dispatch("buy_car/loadCars", {
+        brand: this.brand,
+        model: this.model,
+        fuel: this.fuel,
+        color: this.color,
+      });
     },
   },
 };

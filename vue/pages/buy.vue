@@ -24,7 +24,7 @@ export default {
   },
 
   fetch({ store }) {
-    store.dispatch("load_cars/loadAllCars");
+    store.dispatch("buy_car/loadAllCars");
   },
 
   data() {

@@ -1,8 +1,13 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-for="car in allCars" :key="car" md="4" lg="3" sm="6" cols="12">
-        <v-card class="card" min-width="200" max-width="350" @click="showDetail(car.id)">
+      <v-col v-for="car in Cars" :key="car.id" md="4" lg="3" sm="6" cols="12">
+        <v-card
+          class="card"
+          min-width="200"
+          max-width="350"
+          @click="showDetail(car.id)"
+        >
           <v-img :src="car.images.split(',')[0]" width="350"></v-img>
           <v-chip class="badge" small label color="#3F51B5" text-color="white">
             실차주
@@ -25,9 +30,7 @@
 <script>
 export default {
   data() {
-    return {
-
-    };
+    return {};
   },
   methods: {
     showDetail(id) {
@@ -37,8 +40,8 @@ export default {
     },
   },
   computed: {
-    allCars() {
-      return this.$store.state.load_cars.allCars;
+    Cars() {
+      return this.$store.state.buy_car.cars;
     },
   },
 };
@@ -50,7 +53,7 @@ export default {
 }
 
 .badge {
-  margin-top:10px;
+  margin-top: 10px;
   margin-left: 10px;
   height: 20px;
 }

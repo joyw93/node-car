@@ -4,6 +4,7 @@ const multer = require("multer");
 const Car = require("../models/car");
 const AWS = require("aws-sdk");
 const multerS3 = require("multer-s3");
+const { Op } = require("sequelize");
 const { isLoggedIn } = require("./middlewares");
 
 const router = express.Router();
@@ -52,8 +53,22 @@ router.post("/loadCar", async (req, res, next) => {
 });
 
 router.post("/loadAllCars", async (req, res, next) => {
-  const allCars = await Car.findAll({});
-  res.send(allCars);
+  const cars = await Car.findAll({});
+  res.send(cars);
+});
+
+router.post("/loadCars", async (req, res, next) => {
+  const tag = req.body.tag;
+  const condition = {};
+  tag.brand == null ? null : (condition.brand = tag.brand);
+  tag.model == null ? null : (condition.model = tag.model);
+  tag.fuel == null ? null : (condition.fuel = tag.fuel);
+  tag.color == null ? null : (condition.color = tag.color);
+  const cars = await Car.findAll({
+    where: condition,
+  });
+  console.log(req.body.tag);
+  res.send(cars);
 });
 
 module.exports = router;

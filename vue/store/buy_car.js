@@ -1,13 +1,13 @@
 import axios from "axios";
 const serverUrl = process.env.serverUrl;
 export const state = () => ({
-  allCars: null,
+  cars: null,
   car: null,
 });
 
 export const mutations = {
-  loadAllCars(state, payload) {
-    state.allCars = payload;
+  loadCars(state, payload) {
+    state.cars = payload;
   },
   loadCar(state, payload) {
     state.car = payload;
@@ -15,11 +15,22 @@ export const mutations = {
 };
 
 export const actions = {
-  loadAllCars({ commit, state }, payload) {
+  loadCars({ commit }, payload) {
     axios
-      .post(`${serverUrl}/car/loadAllCars`, {})
+      .post(`${serverUrl}/car/loadCars`, { tag: payload })
       .then((res) => {
-        commit("loadAllCars", res.data);
+        commit("loadCars", res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  
+  loadAllCars({ commit }, payload) {
+    axios
+      .post(`${serverUrl}/car/loadAllCars`)
+      .then((res) => {
+        commit("loadCars", res.data);
       })
       .catch((err) => {
         console.log(err);

@@ -1,5 +1,5 @@
 import axios from "axios";
-const mlServerUrl = process.env.mlServerUrl
+const mlServerUrl = process.env.mlServerUrl;
 export const state = () => ({
   price: null,
   info: null,
@@ -15,7 +15,7 @@ export const mutations = {
 };
 
 export const actions = {
-  predictPrice({ commit, state }, payload) {
+  predictPrice({ commit }, payload) {
     axios
       .post(`${mlServerUrl}/predict`, {
         model: payload.model,
