@@ -228,8 +228,8 @@ export default {
     },
   },
   watch: {
-    price(value) {
-      if (value) {
+    price(newValue) {
+      if (newValue) {
         this.isLoading = false;
         this.$router.push({
           path: "/predicted",

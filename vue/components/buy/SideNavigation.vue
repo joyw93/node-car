@@ -71,7 +71,7 @@
                 <v-select
                   dense
                   class="select-min"
-                  :items="items"
+                  :items="odos"
                   label="최소"
                   outlined
                 ></v-select>
@@ -79,7 +79,7 @@
                 <v-select
                   class="select-max"
                   dense
-                  :items="items"
+                  :items="odos"
                   label="최대"
                   outlined
                 ></v-select>
@@ -96,14 +96,14 @@
                 <v-select
                   dense
                   class="select-min"
-                  :items="items"
+                  :items="years"
                   label="최소"
                   outlined
                 ></v-select>
                 <v-select
                   class="select-max"
                   dense
-                  :items="items"
+                  :items="years"
                   label="최대"
                   outlined
                 ></v-select>
@@ -171,48 +171,106 @@ export default {
     colors() {
       return this.$store.state.static.colors;
     },
+    odos() {
+      return this.$store.state.static.odos;
+    },
+    years() {
+      return this.$store.state.static.years;
+    },
+    tags() {
+      return this.$store.state.buy_car.tags;
+    },
   },
   methods: {
     brandSelect(brand) {
       this.model = null;
       if (this.brand === null) this.brand = brand;
       else this.brand === brand ? (this.brand = null) : (this.brand = brand);
-      this.$store.dispatch("buy_car/loadCars", {
-        brand: this.brand,
-        model: this.model,
-        fuel: this.fuel,
-        color: this.color,
-      });
     },
     modelSelect(model) {
       if (this.model === null) this.model = model;
       else this.model === model ? (this.model = null) : (this.model = model);
-      this.$store.dispatch("buy_car/loadCars", {
-        brand: this.brand,
-        model: this.model,
-        fuel: this.fuel,
-        color: this.color,
-      });
+      
     },
     fuelSelect(fuel) {
       if (this.fuel === null) this.fuel = fuel;
       else this.fuel === fuel ? (this.fuel = null) : (this.fuel = fuel);
-      this.$store.dispatch("buy_car/loadCars", {
-        brand: this.brand,
-        model: this.model,
-        fuel: this.fuel,
-        color: this.color,
-      });
+     
     },
     colorSelect(color) {
       if (this.color === null) this.color = color;
       else this.color === color ? (this.color = null) : (this.color = color);
+      
+    },
+  },
+  watch: {
+    brand(newVal, oldVal) {
       this.$store.dispatch("buy_car/loadCars", {
         brand: this.brand,
         model: this.model,
         fuel: this.fuel,
         color: this.color,
       });
+      if (oldVal === null) this.$store.dispatch("buy_car/addTag", newVal);
+      else {
+        if (newVal === null) {
+          this.$store.dispatch("buy_car/removeTag", oldVal);
+        } else {
+          this.$store.dispatch("buy_car/removeTag", oldVal);
+          this.$store.dispatch("buy_car/addTag", newVal);
+        }
+      }
+    },
+    model(newVal, oldVal) {
+      this.$store.dispatch("buy_car/loadCars", {
+        brand: this.brand,
+        model: this.model,
+        fuel: this.fuel,
+        color: this.color,
+      });
+      if (oldVal === null) this.$store.dispatch("buy_car/addTag", newVal);
+      else {
+        if (newVal === null) {
+          this.$store.dispatch("buy_car/removeTag", oldVal);
+        } else {
+          this.$store.dispatch("buy_car/removeTag", oldVal);
+          this.$store.dispatch("buy_car/addTag", newVal);
+        }
+      }
+    },
+    fuel(newVal, oldVal) {
+      this.$store.dispatch("buy_car/loadCars", {
+        brand: this.brand,
+        model: this.model,
+        fuel: this.fuel,
+        color: this.color,
+      });
+      if (oldVal === null) this.$store.dispatch("buy_car/addTag", newVal);
+      else {
+        if (newVal === null) {
+          this.$store.dispatch("buy_car/removeTag", oldVal);
+        } else {
+          this.$store.dispatch("buy_car/removeTag", oldVal);
+          this.$store.dispatch("buy_car/addTag", newVal);
+        }
+      }
+    },
+    color(newVal, oldVal) {
+      this.$store.dispatch("buy_car/loadCars", {
+        brand: this.brand,
+        model: this.model,
+        fuel: this.fuel,
+        color: this.color,
+      });
+      if (oldVal === null) this.$store.dispatch("buy_car/addTag", newVal);
+      else {
+        if (newVal === null) {
+          this.$store.dispatch("buy_car/removeTag", oldVal);
+        } else {
+          this.$store.dispatch("buy_car/removeTag", oldVal);
+          this.$store.dispatch("buy_car/addTag", newVal);
+        }
+      }
     },
   },
 };
