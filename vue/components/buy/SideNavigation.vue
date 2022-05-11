@@ -147,6 +147,7 @@
         </v-expansion-panels>
       </div>
     </v-card>
+    {{ tags }}
   </div>
 </template>
 
@@ -158,9 +159,9 @@ export default {
       model: null,
       fuel: null,
       color: null,
-      items: ["1,000km", "2,000km", "3,000km", "4,000km"],
     };
   },
+
   computed: {
     models() {
       return this.$store.state.static.models;
@@ -181,6 +182,19 @@ export default {
       return this.$store.state.buy_car.tags;
     },
   },
+  created() {
+    this.$nuxt.$on("updateFiltCond", (tag) => {
+      if (Object.keys(this.models).includes(tag)) {
+        this.brandSelect(tag);
+      } else if (tag in this.models) {
+        this.modelSelect(tag);
+      } else if (this.fuels.includes(tag)) {
+        this.fuelSelect(tag);
+      } else if (this.colors.includes(tag)) {
+        this.colorSelect(tag);
+      }
+    });
+  },
   methods: {
     brandSelect(brand) {
       this.model = null;
@@ -190,87 +204,51 @@ export default {
     modelSelect(model) {
       if (this.model === null) this.model = model;
       else this.model === model ? (this.model = null) : (this.model = model);
-      
     },
     fuelSelect(fuel) {
       if (this.fuel === null) this.fuel = fuel;
       else this.fuel === fuel ? (this.fuel = null) : (this.fuel = fuel);
-     
     },
     colorSelect(color) {
       if (this.color === null) this.color = color;
       else this.color === color ? (this.color = null) : (this.color = color);
-      
+    },
+    reloadCars() {
+      this.$store.dispatch("buy_car/loadCars", {
+        brand: this.brand,
+        model: this.model,
+        fuel: this.fuel,
+        color: this.color,
+      });
+    },
+    updateTags(newVal, oldVal) {
+      if (oldVal === null) this.$store.dispatch("buy_car/addTag", newVal);
+      else {
+        if (newVal === null) {
+          this.$store.dispatch("buy_car/removeTag", oldVal);
+        } else {
+          this.$store.dispatch("buy_car/removeTag", oldVal);
+          this.$store.dispatch("buy_car/addTag", newVal);
+        }
+      }
     },
   },
   watch: {
     brand(newVal, oldVal) {
-      this.$store.dispatch("buy_car/loadCars", {
-        brand: this.brand,
-        model: this.model,
-        fuel: this.fuel,
-        color: this.color,
-      });
-      if (oldVal === null) this.$store.dispatch("buy_car/addTag", newVal);
-      else {
-        if (newVal === null) {
-          this.$store.dispatch("buy_car/removeTag", oldVal);
-        } else {
-          this.$store.dispatch("buy_car/removeTag", oldVal);
-          this.$store.dispatch("buy_car/addTag", newVal);
-        }
-      }
+      this.reloadCars();
+      this.updateTags(newVal, oldVal);
     },
     model(newVal, oldVal) {
-      this.$store.dispatch("buy_car/loadCars", {
-        brand: this.brand,
-        model: this.model,
-        fuel: this.fuel,
-        color: this.color,
-      });
-      if (oldVal === null) this.$store.dispatch("buy_car/addTag", newVal);
-      else {
-        if (newVal === null) {
-          this.$store.dispatch("buy_car/removeTag", oldVal);
-        } else {
-          this.$store.dispatch("buy_car/removeTag", oldVal);
-          this.$store.dispatch("buy_car/addTag", newVal);
-        }
-      }
+      this.reloadCars();
+      this.updateTags(newVal, oldVal);
     },
     fuel(newVal, oldVal) {
-      this.$store.dispatch("buy_car/loadCars", {
-        brand: this.brand,
-        model: this.model,
-        fuel: this.fuel,
-        color: this.color,
-      });
-      if (oldVal === null) this.$store.dispatch("buy_car/addTag", newVal);
-      else {
-        if (newVal === null) {
-          this.$store.dispatch("buy_car/removeTag", oldVal);
-        } else {
-          this.$store.dispatch("buy_car/removeTag", oldVal);
-          this.$store.dispatch("buy_car/addTag", newVal);
-        }
-      }
+      this.reloadCars();
+      this.updateTags(newVal, oldVal);
     },
     color(newVal, oldVal) {
-      this.$store.dispatch("buy_car/loadCars", {
-        brand: this.brand,
-        model: this.model,
-        fuel: this.fuel,
-        color: this.color,
-      });
-      if (oldVal === null) this.$store.dispatch("buy_car/addTag", newVal);
-      else {
-        if (newVal === null) {
-          this.$store.dispatch("buy_car/removeTag", oldVal);
-        } else {
-          this.$store.dispatch("buy_car/removeTag", oldVal);
-          this.$store.dispatch("buy_car/addTag", newVal);
-        }
-      }
+      this.reloadCars();
+      this.updateTags(newVal, oldVal);
     },
   },
 };

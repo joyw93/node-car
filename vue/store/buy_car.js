@@ -15,12 +15,11 @@ export const mutations = {
     state.car = payload;
   },
   addTag(state, payload) {
-    state.tags.push(payload)
+    state.tags.push(payload);
   },
-
   removeTag(state, payload) {
     state.tags.splice(state.tags.indexOf(payload), 1);
-  }
+  },
 };
 
 export const actions = {
@@ -57,11 +56,11 @@ export const actions = {
       });
   },
 
-  addTag({commit}, payload) {
-    commit("addTag", payload)
+  addTag({ commit }, payload) {
+    commit("addTag", payload);
   },
 
-  removeTag({commit}, payload) {
-    commit("removeTag", payload)
-  }
+  removeTag({ commit }, payload) {
+    commit("removeTag", payload);
+  },
 };
