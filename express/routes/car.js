@@ -67,6 +67,7 @@ router.post("/loadCars", async (req, res, next) => {
   const cars = await Car.findAll({
     where: condition,
   });
+
   console.log(req.body.tag);
   res.send(cars);
 });

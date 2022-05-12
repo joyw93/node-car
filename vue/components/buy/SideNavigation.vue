@@ -69,6 +69,7 @@
             <v-expansion-panel-content>
               <div class="content">
                 <v-select
+                  v-model="odoMinSelect"
                   dense
                   class="select-min"
                   :items="odos"
@@ -77,6 +78,7 @@
                 ></v-select>
 
                 <v-select
+                  v-model="odoMaxSelect"
                   class="select-max"
                   dense
                   :items="odos"
@@ -147,7 +149,6 @@
         </v-expansion-panels>
       </div>
     </v-card>
-    {{ tags }}
   </div>
 </template>
 
@@ -159,6 +160,10 @@ export default {
       model: null,
       fuel: null,
       color: null,
+      odoMin: null,
+      odoMax: null,
+      ageMin: null,
+      ageMax: null,
     };
   },
 
@@ -184,15 +189,11 @@ export default {
   },
   created() {
     this.$nuxt.$on("updateFiltCond", (tag) => {
-      if (Object.keys(this.models).includes(tag)) {
-        this.brandSelect(tag);
-      } else if (tag in this.models) {
+      if (Object.keys(this.models).includes(tag)) this.brandSelect(tag);
+      if (this.brand !== null && this.models[this.brand].includes(tag))
         this.modelSelect(tag);
-      } else if (this.fuels.includes(tag)) {
-        this.fuelSelect(tag);
-      } else if (this.colors.includes(tag)) {
-        this.colorSelect(tag);
-      }
+      if (this.fuels.includes(tag)) this.fuelSelect(tag);
+      if (this.colors.includes(tag)) this.colorSelect(tag);
     });
   },
   methods: {
@@ -212,6 +213,11 @@ export default {
     colorSelect(color) {
       if (this.color === null) this.color = color;
       else this.color === color ? (this.color = null) : (this.color = color);
+    },
+    odoMinSelect(odoMin) {
+      if (this.odoMin === null) this.odoMin = odoMin;
+      else
+        this.odoMin === odoMin ? (this.odoMin = null) : (this.odoMin = odoMin);
     },
     reloadCars() {
       this.$store.dispatch("buy_car/loadCars", {
@@ -247,6 +253,14 @@ export default {
       this.updateTags(newVal, oldVal);
     },
     color(newVal, oldVal) {
+      this.reloadCars();
+      this.updateTags(newVal, oldVal);
+    },
+    odoMin(newVal, oldVal) {
+      this.reloadCars();
+      this.updateTags(newVal, oldVal);
+    },
+    odoMax(newVal, oldVal) {
       this.reloadCars();
       this.updateTags(newVal, oldVal);
     },
