@@ -69,16 +69,15 @@
             <v-expansion-panel-content>
               <div class="content">
                 <v-select
-                  v-model="odoMinSelect"
+                  v-model="odoMin"
                   dense
                   class="select-min"
                   :items="odos"
                   label="최소"
                   outlined
                 ></v-select>
-
                 <v-select
-                  v-model="odoMaxSelect"
+                  v-model="odoMax"
                   class="select-max"
                   dense
                   :items="odos"
@@ -213,11 +212,6 @@ export default {
     colorSelect(color) {
       if (this.color === null) this.color = color;
       else this.color === color ? (this.color = null) : (this.color = color);
-    },
-    odoMinSelect(odoMin) {
-      if (this.odoMin === null) this.odoMin = odoMin;
-      else
-        this.odoMin === odoMin ? (this.odoMin = null) : (this.odoMin = odoMin);
     },
     reloadCars() {
       this.$store.dispatch("buy_car/loadCars", {
