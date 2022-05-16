@@ -24,8 +24,8 @@ export default {
   },
   methods: {
     remove(tag) {
-      //this.$store.dispatch("buy_car/removeTag", tag);
       this.$nuxt.$emit("updateFiltCond", tag);
+      console.log(tag)
     },
   },
   computed: {

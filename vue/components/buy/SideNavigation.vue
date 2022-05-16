@@ -72,7 +72,7 @@
                   v-model="odoMin"
                   dense
                   class="select-min"
-                  :items="odos"
+                  :items="odoMins"
                   label="최소"
                   outlined
                 ></v-select>
@@ -80,7 +80,7 @@
                   v-model="odoMax"
                   class="select-max"
                   dense
-                  :items="odos"
+                  :items="odoMaxs"
                   label="최대"
                   outlined
                 ></v-select>
@@ -95,16 +95,18 @@
             <v-expansion-panel-content>
               <div class="content">
                 <v-select
+                  v-model="ageMin"
                   dense
                   class="select-min"
-                  :items="years"
+                  :items="ageMins"
                   label="최소"
                   outlined
                 ></v-select>
                 <v-select
+                  v-model="ageMax"
                   class="select-max"
                   dense
-                  :items="years"
+                  :items="ageMaxs"
                   label="최대"
                   outlined
                 ></v-select>
@@ -179,11 +181,73 @@ export default {
     odos() {
       return this.$store.state.static.odos;
     },
-    years() {
+    ages() {
       return this.$store.state.static.years;
     },
     tags() {
       return this.$store.state.buy_car.tags;
+    },
+    odoMins() {
+      let odos = [...this.odos];
+      if (this.odoMax) {
+        const odoMaxIndex = odos.indexOf(this.odoMax);
+        odos = odos.filter((odo, index) => index < odoMaxIndex);
+      } else {
+        odos = odos.filter((odo, index) => index < odos.length - 1);
+      }
+      return odos;
+    },
+    odoMaxs() {
+      let odos = [...this.odos];
+      if (this.odoMin) {
+        const odoMinIndex = odos.indexOf(this.odoMin);
+        odos = odos.filter((odo, index) => index > odoMinIndex);
+      } else {
+        odos = odos.filter((odo, index) => index > 0);
+      }
+      return odos;
+    },
+    odoRange() {
+      if (this.odoMin === null && this.odoMax === null) {
+        return null;
+      } else {
+        const odoMin = this.odoMin
+          ? this.odoMin
+          : this.odos[0];
+        const odoMax = this.odoMax ? this.odoMax : this.odos[this.odos.length - 1];
+        return `${odoMin} ~ ${odoMax}`;
+      }
+    },
+    ageMins() {
+      let ages = [...this.ages];
+      if (this.ageMax) {
+        const ageMaxIndex = ages.indexOf(this.ageMax);
+        ages = ages.filter((age, index) => index > ageMaxIndex);
+      } else {
+        ages = ages.filter((age, index) => index > 0);
+      }
+      return ages;
+    },
+    ageMaxs() {
+      let ages = [...this.ages];
+      if (this.ageMin) {
+        const ageMinIndex = ages.indexOf(this.ageMin);
+        ages = ages.filter((age, index) => index < ageMinIndex);
+      } else {
+        ages = ages.filter((age, index) => index < ages.length - 1);
+      }
+      return ages;
+    },
+    ageRange() {
+      if (this.ageMin === null && this.ageMax === null) {
+        return null;
+      } else {
+        const ageMin = this.ageMin
+          ? this.ageMin
+          : this.ages[this.ages.length - 1];
+        const ageMax = this.ageMax ? this.ageMax : this.ages[0];
+        return `${ageMin} ~ ${ageMax}`;
+      }
     },
   },
   created() {
@@ -193,6 +257,8 @@ export default {
         this.modelSelect(tag);
       if (this.fuels.includes(tag)) this.fuelSelect(tag);
       if (this.colors.includes(tag)) this.colorSelect(tag);
+      if (tag.includes("km")) this.odoSelect(tag);
+      if (tag.includes("년")) this.ageSelect(tag);
     });
   },
   methods: {
@@ -213,12 +279,32 @@ export default {
       if (this.color === null) this.color = color;
       else this.color === color ? (this.color = null) : (this.color = color);
     },
+    odoSelect(odo) {
+      this.odoMin = null;
+      this.odoMax = null;
+    },
+    ageSelect(age) {
+      this.ageMin = null;
+      this.ageMax = null;
+    },
     reloadCars() {
       this.$store.dispatch("buy_car/loadCars", {
         brand: this.brand,
         model: this.model,
         fuel: this.fuel,
         color: this.color,
+        odoMin: this.odoMin
+          ? this.cvtOdoType(this.odoMin)
+          : this.cvtOdoType(this.odos[0]),
+        odoMax: this.odoMax
+          ? this.cvtOdoType(this.odoMax)
+          : this.cvtOdoType(this.odos[this.odos.length - 1]),
+        ageMin: this.ageMin
+          ? this.cvtAgeType(this.ageMin)
+          : this.cvtAgeType(this.ages[this.ages.length - 1]),
+        ageMax: this.ageMax
+          ? this.cvtAgeType(this.ageMax)
+          : this.cvtAgeType(this.ages[0]),
       });
     },
     updateTags(newVal, oldVal) {
@@ -231,6 +317,14 @@ export default {
           this.$store.dispatch("buy_car/addTag", newVal);
         }
       }
+    },
+    cvtOdoType(odoString) {
+      if (odoString) return odoString.replace("km", "").replace(",", "");
+      else return odoString;
+    },
+    cvtAgeType(ageString) {
+      if (ageString) return ageString.replace("년", "");
+      else return ageString;
     },
   },
   watch: {
@@ -250,11 +344,11 @@ export default {
       this.reloadCars();
       this.updateTags(newVal, oldVal);
     },
-    odoMin(newVal, oldVal) {
+    odoRange(newVal, oldVal) {
       this.reloadCars();
       this.updateTags(newVal, oldVal);
     },
-    odoMax(newVal, oldVal) {
+    ageRange(newVal, oldVal) {
       this.reloadCars();
       this.updateTags(newVal, oldVal);
     },

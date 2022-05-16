@@ -60,14 +60,19 @@ router.post("/loadAllCars", async (req, res, next) => {
 router.post("/loadCars", async (req, res, next) => {
   const tag = req.body.tag;
   const condition = {};
-  tag.brand == null ? null : (condition.brand = tag.brand);
-  tag.model == null ? null : (condition.model = tag.model);
-  tag.fuel == null ? null : (condition.fuel = tag.fuel);
-  tag.color == null ? null : (condition.color = tag.color);
+  !tag.brand ? null : (condition.brand = tag.brand);
+  !tag.model ? null : (condition.model = tag.model);
+  !tag.fuel ? null : (condition.fuel = tag.fuel);
+  !tag.color ? null : (condition.color = tag.color);
+  condition.odo = {
+    [Op.and]: [{ [Op.gte]: tag.odoMin }, { [Op.lte]: tag.odoMax }],
+  };
+  condition.age = {
+    [Op.and]: [{ [Op.gte]: tag.ageMin }, { [Op.lte]: tag.ageMax }],
+  };
   const cars = await Car.findAll({
     where: condition,
   });
-
   console.log(req.body.tag);
   res.send(cars);
 });
