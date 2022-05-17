@@ -2,9 +2,9 @@ import axios from "axios";
 const serverUrl = process.env.serverUrl;
 
 export const state = () => ({
+  car: null,
   cars: null,
   tags: [],
-  car: null,
 });
 
 export const mutations = {
@@ -47,7 +47,7 @@ export const actions = {
 
   loadCar({ commit }, payload) {
     axios
-      .post(`${serverUrl}/car/loadCar`, { id: payload })
+      .post(`${serverUrl}/car/loadCar`, { id: payload.id })
       .then((res) => {
         commit("loadCar", res.data);
       })

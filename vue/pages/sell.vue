@@ -98,6 +98,7 @@ import Carousel from "~/components/base/Carousel.vue";
 import ImageCard from "~/components/sell/ImageCard.vue";
 import axios from "axios";
 const serverUrl = process.env.serverUrl;
+const mlServerUrl = process.env.mlServerUrl;
 
 export default {
   data() {
@@ -127,6 +128,9 @@ export default {
     },
     age() {
       return this.$store.state.register_car.age;
+    },
+    price() {
+      return this.$store.state.register_car.price;
     },
     fuel() {
       return this.$store.state.register_car.fuel;
@@ -210,12 +214,30 @@ export default {
         feature: this.feature,
         isRecommend: this.isRecommend,
         images: null,
+        price: this.price,
+        predictedPrice: null,
       };
       axios
         .post(`${serverUrl}/car/imageUpload`, this.imageFormData)
         .then((res) => {
           car.images = res.data;
-          axios.post(`${serverUrl}/car/register`, car);
+        })
+        .then(() => {
+          axios
+            .post(`${mlServerUrl}/predict`, {
+              model: this.model,
+              age: this.age,
+              odo: this.odo,
+              color: this.color,
+              fuel: this.fuel,
+            })
+            .then((res) => {
+              car.predictedPrice = res.data;
+              axios.post(`${serverUrl}/car/register`, car);
+            })
+            .catch((err) => {
+              console.error(err);
+            });
         })
         .catch((err) => {
           console.error(err);

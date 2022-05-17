@@ -67,6 +67,14 @@ module.exports = class Car extends Sequelize.Model {
         images: {
             type: Sequelize.STRING(500),
             allowNull: false,
+        },
+        price: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
+        predictedPrice: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
         }
       },
       {

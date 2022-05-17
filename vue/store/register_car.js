@@ -5,6 +5,7 @@ export const state = () => ({
   age: null,
   fuel: null,
   color: null,
+  price:null,
   isRented: null,
   options: null,
   accident: "true",
@@ -31,6 +32,9 @@ export const mutations = {
   },
   setAge(state, payload) {
     state.age = payload.age;
+  },
+  setPrice(state, payload) {
+    state.price = payload.price;
   },
   setFuel(state, payload) {
     state.fuel = payload.fuel;
@@ -89,6 +93,9 @@ export const actions = {
   },
   setAge({ commit }, payload) {
     commit("setAge", payload);
+  },
+  setPrice({ commit }, payload) {
+    commit("setPrice", payload);
   },
   setFuel({ commit }, payload) {
     commit("setFuel", payload);

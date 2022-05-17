@@ -68,41 +68,59 @@
           ></v-select>
         </v-col>
       </v-row>
-      <h3 class="header">리스/렌트 이력</h3>
-      <v-item-group class="item-group" v-model="isRented" mandatory>
-        <v-row>
-          <v-col cols="2">
-            <v-item value="false" class="option" v-slot="{ active, toggle }">
-              <v-card
-                :class="{ 'card-selected': active }"
-                :color="active ? 'primary' : ''"
-                height="45"
-                width="90"
-                @click="toggle"
-                >없음
-                <v-scroll-y-transition>
-                  <div v-if="active" class="card-selected"></div>
-                </v-scroll-y-transition>
-              </v-card>
-            </v-item>
-          </v-col>
-          <v-col cols="2">
-            <v-item value="true" class="option" v-slot="{ active, toggle }">
-              <v-card
-                :class="{ 'card-selected': active }"
-                :color="active ? 'primary' : ''"
-                height="45"
-                width="90"
-                @click="toggle"
-                >있음
-                <v-scroll-y-transition>
-                  <div v-if="active" class="card-selected"></div>
-                </v-scroll-y-transition>
-              </v-card>
-            </v-item>
-          </v-col>
-        </v-row>
-      </v-item-group>
+      <v-row>
+        <v-col cols="5">
+          <h3 class="header">리스/렌트 이력</h3>
+          <v-item-group class="item-group" v-model="isRented" mandatory>
+            <v-row>
+              <v-col cols="6">
+                <v-item
+                  value="false"
+                  class="option"
+                  v-slot="{ active, toggle }"
+                >
+                  <v-card
+                    :class="{ 'card-selected': active }"
+                    :color="active ? 'primary' : ''"
+                    height="45"
+                    width="90"
+                    @click="toggle"
+                    >없음
+                    <v-scroll-y-transition>
+                      <div v-if="active" class="card-selected"></div>
+                    </v-scroll-y-transition>
+                  </v-card>
+                </v-item>
+              </v-col>
+              <v-col cols="6">
+                <v-item value="true" class="option" v-slot="{ active, toggle }">
+                  <v-card
+                    :class="{ 'card-selected': active }"
+                    :color="active ? 'primary' : ''"
+                    height="45"
+                    width="90"
+                    @click="toggle"
+                    >있음
+                    <v-scroll-y-transition>
+                      <div v-if="active" class="card-selected"></div>
+                    </v-scroll-y-transition>
+                  </v-card>
+                </v-item>
+              </v-col>
+            </v-row>
+          </v-item-group>
+        </v-col>
+        <v-col cols="5">
+          <h3 class="header">차량가격</h3>
+          <v-text-field
+            class="input"
+            v-model="price"
+            label="가격을 입력하세요"
+            solo
+            suffix="만원"
+          ></v-text-field>
+        </v-col>
+      </v-row>
     </v-card-text>
   </v-container>
 </template>
@@ -111,13 +129,14 @@
 export default {
   data() {
     return {
-      brand: "",
-      model: "",
+      brand: null,
+      model: null,
       isRented: false,
-      odo: "",
-      color: "",
-      age: "",
-      fuel: "",
+      price: null,
+      odo: null,
+      color: null,
+      age: null,
+      fuel: null,
     };
   },
   computed: {
@@ -153,6 +172,11 @@ export default {
     age(newVal) {
       this.$store.dispatch("register_car/setAge", {
         age: newVal,
+      });
+    },
+    price(newVal) {
+      this.$store.dispatch("register_car/setPrice", {
+        price: newVal,
       });
     },
     fuel(newVal) {

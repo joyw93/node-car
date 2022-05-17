@@ -8,15 +8,14 @@
     <v-row>
       <v-col cols="12" sm="7" md="6" lg="6">
         <v-img
-          :src="require(`@/static/images/car-forsale/아우디S5.jpg`)"
+          :src="car.images.split(',')[0]"
           width="500"
         ></v-img>
       </v-col>
       <v-col cols="12" sm="7" md="6" lg="6">
         <div id="brand">
-          아우디<span id="model"
-            >A6 <span :style="{ color: '#78909C' }">(140하 9566)</span></span
-          >
+          {{car.brand}}<span id="model"
+            >{{car.model}}</span>
         </div>
         <p :style="{ float: 'right' }">
           <span :style="{ marginRight: '20px' }">판매가격 &nbsp; </span>
@@ -33,8 +32,8 @@
             <span>&nbsp;3</span>
           </span>
           <span class="detail">
-            2019년식 &nbsp;|&nbsp; 3,400km &nbsp;|&nbsp; 가솔린 &nbsp;|&nbsp;
-            울산 &nbsp;|&nbsp; 흰색
+           {{car.age}}년식 &nbsp;|&nbsp; {{car.odo}} &nbsp;|&nbsp; {{car.fuel}} &nbsp;|&nbsp;
+            {{car.regions}} &nbsp;|&nbsp; {{car.color}}
           </span>
         </div>
 
@@ -93,10 +92,14 @@ import PriceRemain from "./chart/PriceRemain.vue";
 import PricePredict from "./chart/PricePredict.vue";
 export default {
   computed: {
-    // car() {
-    //   return this.$store.state.load_cars.car;
-    // },
+    car() {
+      return this.$store.state.buy_car.car;
+    },
   },
+  fetch({ store, params }) {
+    store.dispatch("buy_car/loadCar", { id: params.id });
+  },
+
   components: {
     PriceRange,
     PriceRemain,

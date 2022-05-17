@@ -34,6 +34,7 @@ router.post("/register", async (req, res, next) => {
   car.options = car.options.join();
   car.regions = car.regions.join();
   car.images = car.images.join();
+  car.age = car.age.replace("년", "");
 
   try {
     await Car.create(car);
