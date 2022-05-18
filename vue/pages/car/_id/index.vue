@@ -7,19 +7,20 @@
     </div>
     <v-row>
       <v-col cols="12" sm="7" md="6" lg="6">
-        <v-img
-          :src="car.images.split(',')[0]"
-          width="500"
-        ></v-img>
+        <v-img :src="car.images.split(',')[0]" width="500"></v-img>
       </v-col>
       <v-col cols="12" sm="7" md="6" lg="6">
+        <img
+          :src="require(`@/static/images/logo/${car.brand}.png`)"
+          width="42"
+          height="30"
+        />
         <div id="brand">
-          {{car.brand}}<span id="model"
-            >{{car.model}}</span>
+          {{ car.brand }}<span id="model">{{ car.model }}</span>
         </div>
         <p :style="{ float: 'right' }">
           <span :style="{ marginRight: '20px' }">판매가격 &nbsp; </span>
-          <strong id="price">4,321만원</strong>
+          <strong id="price">{{ car.price | comma }}만원</strong>
         </p>
         <v-divider />
         <div>
@@ -32,22 +33,24 @@
             <span>&nbsp;3</span>
           </span>
           <span class="detail">
-           {{car.age}}년식 &nbsp;|&nbsp; {{car.odo}} &nbsp;|&nbsp; {{car.fuel}} &nbsp;|&nbsp;
-            {{car.regions}} &nbsp;|&nbsp; {{car.color}}
+            {{ car.age }}년식 &nbsp;|&nbsp; {{ car.odo | comma }} km
+            &nbsp;|&nbsp; {{ car.fuel }} &nbsp;|&nbsp;
+            {{ car.regions }} &nbsp;|&nbsp;
+            {{ car.color }}
           </span>
         </div>
 
         <div class="history" :style="{ marginTop: '120px' }">
           <span class="history-icon"
-            ><v-icon size="50" color="primary"
+            ><v-icon size="40" color="primary"
               >mdi-file-find-outline</v-icon
             ></span
           >
           <span class="history-icon"
-            ><v-icon size="50" color="primary">mdi-hammer-wrench</v-icon></span
+            ><v-icon size="40" color="primary">mdi-hammer-wrench</v-icon></span
           >
           <span class="history-icon"
-            ><v-icon size="50" color="primary">mdi-car-hatchback</v-icon></span
+            ><v-icon size="40" color="primary">mdi-car-hatchback</v-icon></span
           >
           <span class="history-icon" id="history-text">많음</span>
         </div>
@@ -65,12 +68,14 @@
       <v-col cols="12" sm="8" md="4" lg="4">
         <h3>시세정보</h3>
         <div id="price-text">시세안전구간</div>
-        <h2 id="price-range">4,463~4,807만원</h2>
-        <PriceRange />
+        <h2 id="price-range">
+          {{ priceMin | comma }} ~ {{ priceMax | comma }}만원
+        </h2>
+        <PriceRange :price="predictedPrice" />
       </v-col>
       <v-col cols="12" sm="8" md="4" lg="4">
         <h3>신차 가격대비 잔존율</h3>
-        <PriceRemain />
+        <PriceRemain :price="predictedPrice" />
       </v-col>
       <v-col cols="12" sm="8" md="4" lg="4">
         <div>
@@ -78,10 +83,9 @@
           <span :style="{ float: 'right' }">[단위 : 만원]</span>
         </div>
         <div id="predict-text">판매가 기준 감가 예측 그래프입니다.</div>
-        <PricePredict />
+        <PricePredict :price="predictedPrice" />
       </v-col>
     </v-row>
-
     <v-divider />
   </v-container>
 </template>
@@ -91,13 +95,27 @@ import PriceRange from "./chart/PriceRange.vue";
 import PriceRemain from "./chart/PriceRemain.vue";
 import PricePredict from "./chart/PricePredict.vue";
 export default {
-  computed: {
-    car() {
-      return this.$store.state.buy_car.car;
+  filters: {
+    comma(val) {
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
   fetch({ store, params }) {
     store.dispatch("buy_car/loadCar", { id: params.id });
+  },
+  computed: {
+    car() {
+      return this.$store.state.buy_car.car;
+    },
+    predictedPrice() {
+      return this.car.predictedPrice;
+    },
+    priceMin() {
+      return parseInt(this.predictedPrice * 0.95);
+    },
+    priceMax() {
+      return parseInt(this.predictedPrice * 1.05);
+    },
   },
 
   components: {
@@ -199,7 +217,7 @@ export default {
 #history-text {
   font-weight: bold;
   color: #2196f3;
-  font-size: 30px;
+  font-size: 26px;
   display: flex;
   justify-content: center;
   align-items: center;

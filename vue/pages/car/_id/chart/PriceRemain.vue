@@ -16,6 +16,9 @@
 <script>
 import ResidualChart from "chart.js";
 export default {
+  props: {
+    price: Number,
+  },
   data() {
     return {
       residualChartData: {
@@ -25,7 +28,7 @@ export default {
           datasets: [
             {
               label: "가격",
-              data: [8603, 5890],
+              data: [parseInt(this.price*1.8), parseInt(this.price)],
               backgroundColor: [
                 "rgba(13, 71, 161, 0.8)",
                 "rgba(233, 30, 99, 0.8)",

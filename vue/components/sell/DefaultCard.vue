@@ -73,7 +73,7 @@
           <h3 class="header">리스/렌트 이력</h3>
           <v-item-group class="item-group" v-model="isRented" mandatory>
             <v-row>
-              <v-col cols="6">
+              <v-col cols="5">
                 <v-item
                   value="false"
                   class="option"
@@ -92,7 +92,7 @@
                   </v-card>
                 </v-item>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="5">
                 <v-item value="true" class="option" v-slot="{ active, toggle }">
                   <v-card
                     :class="{ 'card-selected': active }"

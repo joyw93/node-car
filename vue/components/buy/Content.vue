@@ -15,10 +15,10 @@
           <v-card-title>{{ car.brand }} {{ car.model }} </v-card-title>
           <v-card-subtitle>
             <P>{{ car.age }}년식</P>
-            <P>{{ car.odo }}km | {{ car.regions }}</P>
+            <P>{{ car.odo | comma }}km | {{ car.regions }}</P>
           </v-card-subtitle>
           <v-card-actions>
-            <v-btn color="primary" text> 2,039만원 </v-btn>
+            <v-btn color="primary" text> {{car.price | comma }}만원 </v-btn>
             <v-spacer></v-spacer>
           </v-card-actions>
         </v-card>
@@ -32,6 +32,11 @@ export default {
   data() {
     return {};
   },
+  filters:{
+    comma(val) {
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  },
   methods: {
     showDetail(id) {
       this.$router.push({
@@ -43,6 +48,9 @@ export default {
     Cars() {
       return this.$store.state.buy_car.cars;
     },
+    price() {
+      return this.car.price
+    }
   },
 };
 </script>

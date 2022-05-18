@@ -217,33 +217,33 @@ export default {
         price: this.price,
         predictedPrice: null,
       };
-      axios
-        .post(`${serverUrl}/car/imageUpload`, this.imageFormData)
+      this.dialog = false;
+      axios.post(`${serverUrl}/car/imageUpload`, this.imageFormData)
         .then((res) => {
           car.images = res.data;
         })
+        .catch((err)=>{
+          console.error(err)
+        })
         .then(() => {
-          axios
-            .post(`${mlServerUrl}/predict`, {
-              model: this.model,
-              age: this.age,
-              odo: this.odo,
-              color: this.color,
-              fuel: this.fuel,
-            })
-            .then((res) => {
-              car.predictedPrice = res.data;
-              axios.post(`${serverUrl}/car/register`, car);
-            })
-            .catch((err) => {
-              console.error(err);
-            });
+          return axios.post(`${mlServerUrl}/predict`, {
+            model: this.model,
+            age: this.age,
+            odo: this.odo,
+            color: this.color,
+            fuel: this.fuel,
+          });
+        })
+        .catch((err)=>{
+          console.error(err)
+        })
+        .then((res) => {
+          car.predictedPrice = res.data;
+          axios.post(`${serverUrl}/car/register`, car);
         })
         .catch((err) => {
           console.error(err);
         });
-
-      this.dialog = false;
     },
   },
   components: {

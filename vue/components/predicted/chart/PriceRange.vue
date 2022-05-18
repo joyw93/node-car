@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="badge">
+    <!-- <div class="badge">
       <span id="badge"
         >시세안심지수&nbsp;<span
           :style="{ fontSize: '17px', fontWeight: 'bolder', color: '#1565C0' }"
@@ -20,7 +20,7 @@
           </div>
         </v-tooltip>
       </span>
-    </div>
+    </div> -->
     <div class="container">
       <span class="head"></span>
       <span class="body"></span>
@@ -101,7 +101,7 @@ export default {
   justify-content: center;
   align-items: center;
   border: 1px solid #bdbdbd;
-  height: 45px;
+  height: 40px;
   padding-left: 30px;
   padding-right: 30px;
   border-radius: 30px;

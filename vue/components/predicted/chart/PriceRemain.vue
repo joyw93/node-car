@@ -1,37 +1,40 @@
 <template>
   <div>
-    <v-chip text-color="white" color="indigo" small class="mb-5">
-      잔존가치
-    </v-chip>
-    <canvas id="residual-chart" width="600" height="300"></canvas>
+    <div class="badge">
+      <span id="badge"
+        >2년 2개월 /&nbsp;<span
+          :style="{ fontSize: '22px', fontWeight: 'bolder', color: '#1565C0' }"
+          >32%감가</span
+        >
+      </span>
+    </div>
+    <canvas id="residual-chart"></canvas>
+    <div id="text-under">최초 실구매가로 산출된 신차가격</div>
   </div>
 </template>
 
 <script>
 import ResidualChart from "chart.js";
 export default {
+  props: {
+    price: Number,
+  },
   data() {
     return {
       residualChartData: {
         type: "bar",
         data: {
-          labels: [
-            "2015",
-            "2016",
-            "2017",
-            "2018",
-            "2019",
-            "2020",
-            "2021",
-            "2022",
-          ],
+          labels: ["신차가격", "중고차가격"],
           datasets: [
             {
               label: "가격",
-              data: [500, 450, 300, 250, 120, 40, 20, 10],
-              backgroundColor: "rgba(33, 150, 243,.5)",
-              borderColor: "#2196F3",
-              borderWidth: 3,
+              data: [parseInt(this.price*1.8), parseInt(this.price)],
+              backgroundColor: [
+                "rgba(13, 71, 161, 0.8)",
+                "rgba(233, 30, 99, 0.8)",
+              ],
+              borderColor: ["#0D47A1", "#E91E63"],
+              borderWidth: 1,
             },
           ],
         },
@@ -52,6 +55,7 @@ export default {
           scales: {
             xAxes: [
               {
+                barPercentage: 0.3,
                 display: true,
                 scaleLabel: {
                   display: true,
@@ -66,7 +70,8 @@ export default {
               {
                 display: true,
                 ticks: {
-                  suggestedMin: 5,
+                  suggestedMin: 5000,
+                  stepSize: 1000,
                 },
                 scaleLabel: {
                   display: false,
@@ -85,3 +90,33 @@ export default {
   },
 };
 </script>
+<style scoped>
+.badge {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#badge {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #bdbdbd;
+  height: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 30px;
+}
+
+#residual-chart {
+  margin-top: 20px;
+}
+
+#text-under {
+  font-size: 14px;
+  text-align: center;
+}
+</style>
