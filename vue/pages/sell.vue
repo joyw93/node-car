@@ -261,7 +261,9 @@ export default {
         })
         .then((res) => {
           car.predictedPrice = res.data;
-          axios.post(`${serverUrl}/car/register`, car);
+          axios.post(`${serverUrl}/car/register`, car, {
+            withCredentials: true,
+          });
         })
         .catch((err) => {
           console.error(err);
