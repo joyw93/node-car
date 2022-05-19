@@ -6,7 +6,6 @@ module.exports = () => {
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });
-
   passport.deserializeUser(async (id, done) => {
     console.log("deserializeUser 호출됨");
     try {
@@ -17,6 +16,5 @@ module.exports = () => {
       done(err);
     }
   });
-
   local();
 };

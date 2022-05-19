@@ -24,7 +24,7 @@ passportConfig();
 
 app.set("port", process.env.PORT || 3080);
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log("데이터베이스 연결 성공");
   })
@@ -56,7 +56,7 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false,
-      domain: ".nodecar.co.kr",
+      domain: process.env.NODE_ENV === "production" ? ".nodecar.co.kr" : "127.0.0.1",
     },
   })
 );
