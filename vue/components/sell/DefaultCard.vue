@@ -165,8 +165,12 @@ export default {
       });
     },
     odo(newVal) {
+      const convertedVal = newVal
+        .replace(/\D/g, "")
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.$nextTick(() => (this.odo = convertedVal));
       this.$store.dispatch("register_car/setOdo", {
-        odo: newVal,
+        odo: newVal.replace(',', ''),
       });
     },
     age(newVal) {
@@ -175,8 +179,12 @@ export default {
       });
     },
     price(newVal) {
+      const convertedVal = newVal
+        .replace(/\D/g, "")
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.$nextTick(() => (this.price = convertedVal));
       this.$store.dispatch("register_car/setPrice", {
-        price: newVal,
+        price: newVal.replace(',',''),
       });
     },
     fuel(newVal) {

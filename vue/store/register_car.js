@@ -5,7 +5,7 @@ export const state = () => ({
   age: null,
   fuel: null,
   color: null,
-  price:null,
+  price: null,
   isRented: null,
   options: null,
   accident: "true",
@@ -79,6 +79,27 @@ export const mutations = {
     });
     state.imageFormData = imageData;
   },
+  clearState(state) {
+    state.brand = null;
+    state.model = null;
+    state.odo = null;
+    state.age = null;
+    state.fuel = null;
+    state.color = null;
+    state.price = null;
+    state.isRented = null;
+    state.options = null;
+    state.accident = "true";
+    state.accidentDetail = null;
+    state.needFix = "true";
+    state.needFixDetail = null;
+    state.regions = null;
+    state.feature = null;
+    state.isRecommen = "true";
+    state.images = [0, 0, 0, 0, 0, 0];
+    state.tempImageList = [0, 0, 0, 0, 0, 0];
+    state.imageFormData = null;
+  },
 };
 
 export const actions = {
@@ -132,5 +153,8 @@ export const actions = {
   },
   setImages({ commit }, payload) {
     commit("setImages", payload);
+  },
+  clearState({ commit }) {
+    commit("clearState");
   },
 };

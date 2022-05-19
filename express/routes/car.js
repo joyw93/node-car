@@ -54,7 +54,9 @@ router.post("/loadCar", async (req, res, next) => {
 });
 
 router.post("/loadAllCars", async (req, res, next) => {
-  const cars = await Car.findAll({});
+  const cars = await Car.findAll({
+    order: [["createdAt", "DESC"]],
+  });
   res.send(cars);
 });
 
@@ -73,6 +75,7 @@ router.post("/loadCars", async (req, res, next) => {
   };
   const cars = await Car.findAll({
     where: condition,
+    order: [["createdAt", "DESC"]],
   });
   console.log(req.body.tag);
   res.send(cars);

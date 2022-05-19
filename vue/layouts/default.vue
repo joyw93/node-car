@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-card flat height="200px" tile>
-      <v-toolbar class="fixed-bar" color="white" dark>
+      <v-toolbar class="fixed-bar" color="white">
         <v-toolbar-title>
           <nuxt-link class="nuxtlink" to="/">
             <h2>NodeCar</h2>

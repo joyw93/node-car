@@ -260,6 +260,6 @@ h2 {
 }
 
 #text2 {
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 </style>

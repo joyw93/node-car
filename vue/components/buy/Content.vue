@@ -18,7 +18,7 @@
             <P>{{ car.odo | comma }}km | {{ car.regions }}</P>
           </v-card-subtitle>
           <v-card-actions>
-            <v-btn color="primary" text> {{car.price | comma }}만원 </v-btn>
+            <v-btn color="primary" text> {{ car.price | comma }}만원 </v-btn>
             <v-spacer></v-spacer>
           </v-card-actions>
         </v-card>
@@ -32,13 +32,14 @@ export default {
   data() {
     return {};
   },
-  filters:{
+  filters: {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+    },
   },
   methods: {
     showDetail(id) {
+      this.$store.dispatch("buy_car/loadCar", { id: id });
       this.$router.push({
         path: `/car/${id}`,
       });
@@ -49,8 +50,8 @@ export default {
       return this.$store.state.buy_car.cars;
     },
     price() {
-      return this.car.price
-    }
+      return this.car.price;
+    },
   },
 };
 </script>

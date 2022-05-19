@@ -85,6 +85,19 @@
         </v-col>
       </v-row>
     </v-container>
+    <v-snackbar v-model="completeSnackbar" :timeout="timeout">
+      등록성공
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="blue"
+          text
+          v-bind="attrs"
+          @click="completeSnackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -114,9 +127,14 @@ export default {
       ],
       selected: "",
       dialog: false,
+      timeout: 2000,
+      completeSnackbar: false,
     };
   },
   computed: {
+    me() {
+      return this.$store.state.users.me;
+    },
     brand() {
       return this.$store.state.register_car.brand;
     },
@@ -174,7 +192,9 @@ export default {
   },
   methods: {
     onSubmit() {
-      if (!this.brand) {
+      if (!this.me) {
+        alert("로그인이 필요합니다.");
+      } else if (!this.brand) {
         alert("제조사를 선택하세요");
       } else if (!this.model) {
         alert("모델을 선택하세요");
@@ -198,6 +218,7 @@ export default {
     },
     register() {
       const car = {
+        userId: this.me.id,
         brand: this.brand,
         model: this.model,
         odo: this.odo,
@@ -218,12 +239,13 @@ export default {
         predictedPrice: null,
       };
       this.dialog = false;
-      axios.post(`${serverUrl}/car/imageUpload`, this.imageFormData)
+      axios
+        .post(`${serverUrl}/car/imageUpload`, this.imageFormData)
         .then((res) => {
           car.images = res.data;
         })
-        .catch((err)=>{
-          console.error(err)
+        .catch((err) => {
+          console.error(err);
         })
         .then(() => {
           return axios.post(`${mlServerUrl}/predict`, {
@@ -234,12 +256,19 @@ export default {
             fuel: this.fuel,
           });
         })
-        .catch((err)=>{
-          console.error(err)
+        .catch((err) => {
+          console.error(err);
         })
         .then((res) => {
           car.predictedPrice = res.data;
           axios.post(`${serverUrl}/car/register`, car);
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .then(() => {
+          this.completeSnackbar = true;
+          this.$store.dispatch("register_car/clearState");
         })
         .catch((err) => {
           console.error(err);

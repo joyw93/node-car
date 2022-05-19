@@ -137,12 +137,12 @@
         </v-row>
       </v-col>
       <v-col cols="9">
+        <v-divider class="divider"></v-divider>
         <v-btn
           id="submit-button"
           @click="dialog = false"
           type="submit"
           x-large
-          block
           color="primary"
         >
           <div v-if="isLoading">
@@ -154,8 +154,6 @@
           </div>
           <div v-else>시세확인</div>
         </v-btn>
-
-        <v-divider class="divider"></v-divider>
       </v-col>
     </v-row>
   </v-form>
@@ -313,7 +311,6 @@ export default {
 .input {
   max-width: 500px;
 }
-
 
 #text {
   margin-bottom: 15px;

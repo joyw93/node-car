@@ -4,6 +4,10 @@ module.exports = class Car extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
+        userId: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
         brand: {
           type: Sequelize.STRING(50),
           allowNull: false,
@@ -44,29 +48,29 @@ module.exports = class Car extends Sequelize.Model {
           type: Sequelize.TEXT,
           allowNull: true,
         },
-        needFix: { 
+        needFix: {
           type: Sequelize.STRING(50),
           allowNull: false,
         },
         needFixDetail: {
-            type: Sequelize.TEXT,
-            allowNull: true,
+          type: Sequelize.TEXT,
+          allowNull: true,
         },
         regions: {
-            type: Sequelize.STRING,
-            allowNull: false,
+          type: Sequelize.STRING,
+          allowNull: false,
         },
         feature: {
-            type: Sequelize.TEXT,
-            allowNull: false,
+          type: Sequelize.TEXT,
+          allowNull: false,
         },
         isRecommend: {
-            type: Sequelize.STRING(50),
-            allowNull: false,
+          type: Sequelize.STRING(50),
+          allowNull: false,
         },
         images: {
-            type: Sequelize.STRING(500),
-            allowNull: false,
+          type: Sequelize.STRING(500),
+          allowNull: false,
         },
         price: {
           type: Sequelize.INTEGER,
@@ -75,7 +79,7 @@ module.exports = class Car extends Sequelize.Model {
         predictedPrice: {
           type: Sequelize.INTEGER,
           allowNull: false,
-        }
+        },
       },
       {
         sequelize,
