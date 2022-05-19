@@ -240,7 +240,9 @@ export default {
       };
       this.dialog = false;
       axios
-        .post(`${serverUrl}/car/imageUpload`, this.imageFormData)
+        .post(`${serverUrl}/car/imageUpload`, this.imageFormData, {
+          withCredentials: true,
+        })
         .then((res) => {
           car.images = res.data;
         })
