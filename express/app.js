@@ -24,7 +24,7 @@ passportConfig();
 
 app.set("port", process.env.PORT || 3080);
 sequelize
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     console.log("데이터베이스 연결 성공");
   })
