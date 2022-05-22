@@ -62,7 +62,7 @@
               v-model="termsAll"
               required
               label="전체동의"
-              @click="checkAll"
+              @click="checkPolicyAll"
               :rules="termsRules"
             />
             <v-checkbox
@@ -71,7 +71,7 @@
               v-model="terms1"
               required
               label="개인정보처리방침에 동의"
-              @click="check1"
+              @click="checkPolicy"
               :rules="termsRules"
               ><span class="detail">자세히보기</span></v-checkbox
             >
@@ -81,7 +81,7 @@
               v-model="terms2"
               required
               label="이용약관에 동의"
-              @click="check2"
+              @click="checkPolicy"
               :rules="termsRules"
             />
             <v-btn
@@ -142,8 +142,7 @@ export default {
   },
   methods: {
     onSubmitForm() {
-      let isValid = this.$refs.form.validate();
-      if (isValid) {
+      if (this.$refs.form.validate()) {
         this.$store
           .dispatch("users/signUp", {
             name: this.name,
@@ -160,26 +159,12 @@ export default {
         console.log("회원가입 양식이 유효하지 않습니다.");
       }
     },
-    checkAll() {
-      if (this.termsAll) {
-        (this.terms1 = true), (this.terms2 = true);
-      }
+    checkPolicyAll() {
+      this.terms1 = this.termsAll;
+      this.terms2 = this.termsAll;
     },
-    check1() {
-      if (!this.terms1) {
-        this.termsAll = false;
-      }
-      if (this.terms1 && this.terms2) {
-        this.termsAll = true;
-      }
-    },
-    check2() {
-      if (!this.terms2) {
-        this.termsAll = false;
-      }
-      if (this.terms1 && this.terms2) {
-        this.termsAll = true;
-      }
+    checkPolicy() {
+      this.termsAll = this.terms1 && this.terms2;
     },
   },
 };

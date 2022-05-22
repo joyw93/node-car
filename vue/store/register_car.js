@@ -8,7 +8,7 @@ export const state = () => ({
   price: null,
   isRented: null,
   options: null,
-  accident: "true",
+  accident: "true", // 토글은 0,1,2로 해라.
   accidentDetail: null,
   needFix: "true",
   needFixDetail: null,

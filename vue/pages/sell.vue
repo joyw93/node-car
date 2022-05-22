@@ -189,32 +189,42 @@ export default {
     imageFormData() {
       return this.$store.state.register_car.imageFormData;
     },
+    sellCheckMsg() {
+      return this.$store.state.static.sellCheckMsg;
+    },
   },
   methods: {
     onSubmit() {
-      if (!this.me) {
-        alert("로그인이 필요합니다.");
-      } else if (!this.brand) {
-        alert("제조사를 선택하세요");
-      } else if (!this.model) {
-        alert("모델을 선택하세요");
-      } else if (!this.odo) {
-        alert("주행거리를 입력하세요");
-      } else if (!this.age) {
-        alert("연식을 선택하세요");
-      } else if (!this.fuel) {
-        alert("연료타입을 선택하세요");
-      } else if (!this.color) {
-        alert("색상을 선택하세요");
-      } else if (!this.isRented) {
-        alert("렌트이력 여부를 선택하세요");
-      } else if (!this.regions) {
-        alert("판매 지역을 선택하세요");
-      } else if (!this.feature) {
-        alert("차량 특징을 입력하세요");
-      } else {
-        this.dialog = true;
+      for (let [condition, msg] of Object.entries(this.sellCheckMsg)) {
+        if (!this[condition]) {
+          alert(msg);
+          return;
+        }
       }
+      this.dialog = true;
+      // if (!this.me) {
+      //   alert("로그인이 필요합니다.");
+      // } else if (!this.brand) {
+      //   alert("제조사를 선택하세요");
+      // } else if (!this.model) {
+      //   alert("모델을 선택하세요");
+      // } else if (!this.odo) {
+      //   alert("주행거리를 입력하세요");
+      // } else if (!this.age) {
+      //   alert("연식을 선택하세요");
+      // } else if (!this.fuel) {
+      //   alert("연료타입을 선택하세요");
+      // } else if (!this.color) {
+      //   alert("색상을 선택하세요");
+      // } else if (!this.isRented) {
+      //   alert("렌트이력 여부를 선택하세요");
+      // } else if (!this.regions) {
+      //   alert("판매 지역을 선택하세요");
+      // } else if (!this.feature) {
+      //   alert("차량 특징을 입력하세요");
+      // } else {
+      //   this.dialog = true;
+      // }
     },
     register() {
       const car = {

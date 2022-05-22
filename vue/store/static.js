@@ -101,6 +101,18 @@ export const state = () => ({
     "초록색",
     "노란색",
   ],
+  sellCheckMsg: {
+    me: "로그인이 필요합니다.",
+    brand: "제조사를 선택하세요.",
+    model: "모델을 선택하세요.",
+    odo: "주행거리를 선택하세요.",
+    age: "연식을 선택하세요",
+    fuel: "연료타입을 선택하세요",
+    color: "색상을 선택하세요",
+    isRented: "렌트이력 여부를 선택하세요",
+    regions: "판매 지역을 선택하세요",
+    feature: "차량 특징을 입력하세요",
+  },
 });
 
 export const mutations = {};
