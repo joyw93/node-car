@@ -228,7 +228,6 @@ export default {
     },
     register() {
       const car = {
-        userId: this.me.id,
         brand: this.brand,
         model: this.model,
         odo: this.odo,

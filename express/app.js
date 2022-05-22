@@ -56,7 +56,8 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false,
-      domain: process.env.NODE_ENV === "production" ? ".nodecar.co.kr" : "127.0.0.1",
+      domain:
+        process.env.NODE_ENV === "production" ? ".nodecar.co.kr" : "127.0.0.1",
     },
   })
 );
