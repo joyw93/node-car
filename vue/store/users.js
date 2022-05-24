@@ -35,7 +35,6 @@ export const actions = {
       )
       .then((data) => {
         console.log(data);
-        commit("setMe", payload);
       })
       .catch((err) => {
         console.error(err);
