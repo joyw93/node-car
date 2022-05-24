@@ -12,10 +12,14 @@
         <v-spacer />
         <v-toolbar-items v-if="!me">
           <login-form
+            :loginDialog="loginDialog"
+            :signupDialog="signupDialog"
             id="loginform"
             :style="{ display: 'flex', alignItems: 'center', color: '#2196F3' }"
           />
           <signup-form
+            :loginDialog="loginDialog"
+            :signupDialog="signupDialog"
             :style="{ display: 'flex', alignItems: 'center', color: '#2196F3' }"
           />
         </v-toolbar-items>
@@ -55,7 +59,10 @@ export default {
     FloatingButton,
   },
   data() {
-    return {};
+    return {
+      loginDialog: false,
+      signupDialog: false,
+    };
   },
   computed: {
     me() {

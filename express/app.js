@@ -55,7 +55,7 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     cookie: {
       httpOnly: true,
-      secure: false,
+      secure: false, 
       domain:
         process.env.NODE_ENV === "production" ? ".nodecar.co.kr" : "127.0.0.1",
     },

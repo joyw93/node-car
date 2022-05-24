@@ -95,14 +95,13 @@ import PriceRange from "./chart/PriceRange.vue";
 import PriceRemain from "./chart/PriceRemain.vue";
 import PricePredict from "./chart/PricePredict.vue";
 export default {
-  beforeCreate() {
-
-  },
+  beforeCreate() {},
   filters: {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
+
   computed: {
     car() {
       return this.$store.state.buy_car.car;
