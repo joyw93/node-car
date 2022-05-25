@@ -1,41 +1,24 @@
 <template>
   <div>
-    <div id="text-block"></div>
-    <div id="info-block">
-      <div id="info"></div>
-      <div id="img"></div>
-    </div>
+    <v-btn @click="send">HTTP테스트버튼</v-btn>
   </div>
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+const serverUrl = process.env.serverUrl;
+const mlServerUrl = process.env.mlServerUr;
+export default {
+  methods: {
+    send() {
+      axios.post(
+        `${serverUrl}/car/test`,
+        { data: "hello server" },
+        { withCredentials: true }
+      );
+    },
+  },
+};
 </script>
 
-<style scoped>
-#text-block {
-  display: inline-block;
-  height: 200px;
-  width: 400px;
-  background-color: aqua;
-}
-
-#info-block {
-  
-  float: right;
-}
-
-#info {
-  display: inline-block;
-  width: 400px;
-  height: 200px;
-  background-color: rgb(43, 136, 74);
-}
-
-#img {
-  display: inline-block;
-  width: 400px;
-  height: 200px;
-  background-color: rgb(138, 37, 96);
-}
-</style>
+<style scoped></style>

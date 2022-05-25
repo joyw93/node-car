@@ -31,7 +31,7 @@ const upload = multer({
 
 router.post("/register", async (req, res, next) => {
   const car = req.body;
-  if(req.isAuthenticated()) car.userId = req.user.id
+  if (req.isAuthenticated()) car.userId = req.user.id;
   car.options = car.options.join();
   car.regions = car.regions.join();
   car.images = car.images.join();
@@ -80,6 +80,11 @@ router.post("/loadCars", async (req, res, next) => {
   });
   console.log(req.body.tag);
   res.send(cars);
+});
+
+router.post("/test", async (req, res, next) => {
+  console.log(req.body);
+  if(req.user) console.log('hello user')
 });
 
 module.exports = router;

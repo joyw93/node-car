@@ -8,6 +8,7 @@ const dotenv = require("dotenv");
 const passport = require("passport");
 const helmet = require("helmet");
 const hpp = require("hpp");
+const isProd = process.env.NODE_ENV === "production";
 
 dotenv.config();
 const authRouter = require("./routes/auth");
@@ -55,15 +56,15 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     cookie: {
       httpOnly: true,
-      secure: false, 
-      domain:
-        process.env.NODE_ENV === "production" ? ".nodecar.co.kr" : "127.0.0.1",
+      secure: false,
+      domain: isProd && ".nodecar.co.kr",
     },
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
+  if(req.user) console.log(req.user.id)
   next();
 });
 
