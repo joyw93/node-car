@@ -11,8 +11,11 @@ const hpp = require("hpp");
 const isProd = process.env.NODE_ENV === "production";
 
 dotenv.config();
-const authRouter = require("./routes/auth");
+//const authRouter = require("./routes/auth");
 const carRouter = require("./routes/car");
+
+const authRouter = require("./src/app/Auth/authRoute");
+
 const { sequelize } = require("./models");
 const passportConfig = require("./passport");
 const frontUrl =
@@ -68,7 +71,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/auth", authRouter);
+//app.use("/auth", authRouter);
+
+authRouter(app);
 app.use("/car", carRouter);
 
 app.get("/", (req, res, next) => {
