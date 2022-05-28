@@ -56,22 +56,22 @@ module.exports = {
     message: "닉네임은 최대 20자리를 입력해주세요.",
   },
 
-  SIGNIN_EMAIL_EMPTY: {
+  LOGIN_EMAIL_EMPTY: {
     isSuccess: false,
     code: 2008,
     message: "이메일을 입력해주세요",
   },
-  SIGNIN_EMAIL_LENGTH: {
+  LOGIN_EMAIL_LENGTH: {
     isSuccess: false,
     code: 2009,
     message: "이메일은 30자리 미만으로 입력해주세요.",
   },
-  SIGNIN_EMAIL_ERROR_TYPE: {
+  LOGIN_EMAIL_TYPE_ERROR: {
     isSuccess: false,
     code: 2010,
     message: "이메일을 형식을 정확하게 입력해주세요.",
   },
-  SIGNIN_PASSWORD_EMPTY: {
+  LOGNIN_PASSWORD_EMPTY: {
     isSuccess: false,
     code: 2011,
     message: "비밀번호를 입력 해주세요.",

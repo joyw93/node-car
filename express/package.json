@@ -1,11 +1,11 @@
 {
   "name": "express",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "test": "jest --watchAll",
-    "dev": "cross-env NODE_ENV=development nodemon app",
-    "start": "cross-env PORT=80 NODE_ENV=production pm2 start app.js"
+    "test": "cross-env NODE_ENV=test jest --watchAll",
+    "dev": "cross-env NODE_ENV=development nodemon server",
+    "start": "cross-env PORT=80 NODE_ENV=production pm2 start server.js"
   },
   "author": "",
   "license": "ISC",

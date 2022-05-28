@@ -3,15 +3,15 @@ require("dotenv").config();
 module.exports = {
   development: {
     username: "root",
-    password: "sodaus",
+    password: process.env.MYSQL_PW,
     database: "cocoding",
-    host: "127.0.0.1",
+    host: process.env.MYSQL_HOST,
     dialect: "mysql",
   },
   test: {
     username: "root",
     password: process.env.MYSQL_PW,
-    database: "cocoding",
+    database: "cocoding_test",
     host: process.env.MYSQL_HOST,
     dialect: "mysql",
   },

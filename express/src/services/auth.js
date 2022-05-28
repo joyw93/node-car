@@ -1,8 +1,8 @@
 const { User } = require("../models");
+const passport = require("passport");
 const bcrypt = require("bcrypt");
 const status = require("../../config/responseStatus");
 const { response, errResponse } = require("../../config/responseFormat");
-
 
 exports.createUser = async (user) => {
   try {
@@ -19,10 +19,31 @@ exports.createUser = async (user) => {
       email: user.email,
       password: hashedPassword,
     });
-
     return response(status.SUCCESS);
+  } catch (err) {
+    return errResponse(status.DB_ERROR);
+  }
+};
 
-    
+exports.loginUser = async (user) => {
+  try {
+    passport.authenticate("local", (authError, user, info) => {
+      if (authError) {
+        console.error(authError);
+        return next(authError);
+      }
+      if (info) {
+        return res.status(401).send(info.message);
+      }
+      return req.login(user, (loginError) => {
+        if (loginError) {
+          console.error(loginError);
+          return next(loginError);
+        }
+        return res.json(user);
+      });
+    });
+    return response(status.SUCCESS);
   } catch (err) {
     return errResponse(status.DB_ERROR);
   }
