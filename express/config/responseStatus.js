@@ -30,7 +30,7 @@ module.exports = {
     code: 2002,
     message: "이메일은 30자리 미만으로 입력해주세요.",
   },
-  SIGNUP_EMAIL_ERROR_TYPE: {
+  SIGNUP_EMAIL_TYPE_ERROR: {
     isSuccess: false,
     code: 2003,
     message: "이메일을 형식을 정확하게 입력해주세요.",

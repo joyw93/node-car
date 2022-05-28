@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const multer = require("multer");
-const Car = require("../models/car");
+const Car = require("../src/models/car");
 const AWS = require("aws-sdk");
 const multerS3 = require("multer-s3");
 const { Op } = require("sequelize");
@@ -84,7 +84,7 @@ router.post("/loadCars", async (req, res, next) => {
 
 router.post("/test", async (req, res, next) => {
   console.log(req.body);
-  if(req.user) console.log('hello user')
+  if (req.user) console.log("hello user");
 });
 
 module.exports = router;

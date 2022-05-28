@@ -14,9 +14,9 @@ dotenv.config();
 //const authRouter = require("./routes/auth");
 const carRouter = require("./routes/car");
 
-const authRouter = require("./src/app/Auth/authRoute");
+const authRouter = require("./src/routes/auth");
 
-const { sequelize } = require("./models");
+const { sequelize } = require("./src/models");
 const passportConfig = require("./passport");
 const frontUrl =
   process.env.NODE_ENV === "production"
@@ -40,6 +40,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(morgan("combined"));
   app.use(helmet());
   app.use(hpp());
+  app.disable("x-powered-by");
 } else {
   app.use(morgan("dev"));
 }
@@ -67,7 +68,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
-  if(req.user) console.log(req.user.id)
   next();
 });
 
@@ -97,3 +97,5 @@ app.listen(app.get("port"), () => {
   console.log(process.env.PORT);
   console.log("http://localhost:3080");
 });
+
+module.exports = app;

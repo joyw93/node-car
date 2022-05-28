@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const User = require("../models/user");
+const User = require("../src/models/user");
 const passport = require("passport");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
