@@ -13,20 +13,13 @@ const hpp = require("hpp");
 const app = express();
 
 /* load routers */
-const carRouter = require("../routes/car");
+const carRouter = require("./routes/car");
 const authRouter = require("./routes/auth");
 
 const isProd = process.env.NODE_ENV === "production";
-const passportConfig = require("../passport");
-passportConfig();
+const passportConfig = require("../config/passport");
 
-app.use(express.static(path.join(__dirname, "public")));
-app.use(
-  cors({
-    origin: ["http://nodecar.co.kr", "http://127.0.0.1:800"],
-    credentials: true,
-  })
-);
+passportConfig();
 
 if (isProd) {
   app.use(morgan("combined"));
@@ -36,9 +29,15 @@ if (isProd) {
 } else {
   app.use(morgan("dev"));
 }
-
+app.use(
+  cors({
+    origin: ["http://nodecar.co.kr", "http://127.0.0.1:800"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({
@@ -55,27 +54,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req, res, next) => {
-  console.log(req.isAuthenticated());
-  next();
-});
-
 authRouter(app);
-app.use("/car", carRouter);
-
-app.get("/", (req, res) => {
-  res.send("hello express");
-});
-
-app.use((req, res, next) => {
-  const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
-  error.status = 404;
-  next(error);
-});
-
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.send(err);
-});
+carRouter(app);
 
 module.exports = app;

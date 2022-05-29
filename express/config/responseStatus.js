@@ -87,12 +87,6 @@ module.exports = {
     code: 2013,
     message: "해당 회원이 존재하지 않습니다.",
   },
-
-  USER_USEREMAIL_EMPTY: {
-    isSuccess: false,
-    code: 2014,
-    message: "이메일을 입력해주세요.",
-  },
   LOGIN_USER_NOT_EXIST: {
     isSuccess: false,
     code: 2015,

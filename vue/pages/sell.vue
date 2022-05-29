@@ -51,7 +51,7 @@
                   <v-btn large id="cancel-button" @click="dialog = false">
                     취소
                   </v-btn>
-                  <v-btn large id="confirm-button" @click="register">
+                  <v-btn large id="confirm-button" @click="regist">
                     확인
                   </v-btn>
                 </v-card-actions>
@@ -81,6 +81,7 @@
                 <ImageCard />
               </div>
             </v-responsive>
+            <v-btn @click="test">테스트</v-btn>
           </v-card>
         </v-col>
       </v-row>
@@ -203,7 +204,19 @@ export default {
       }
       this.dialog = true;
     },
-    register() {
+    test() {
+      axios
+        .post(`http://127.0.0.1:3080/car/imageUpload`, this.imageFormData, {
+          withCredentials: true,
+        })
+        .then((res)=>{
+          console.log(res)
+        })
+        .catch((err)=>{
+          console.log(err)
+        });
+    },
+    regist() {
       const car = {
         brand: this.brand,
         model: this.model,
@@ -230,7 +243,7 @@ export default {
           withCredentials: true,
         })
         .then((res) => {
-          car.images = res.data;
+          car.images = res.data.result;
         })
         .catch((err) => {
           console.error(err);
@@ -249,7 +262,7 @@ export default {
         })
         .then((res) => {
           car.predictedPrice = res.data;
-          axios.post(`${serverUrl}/car/register`, car, {
+          axios.post(`${serverUrl}/car/regist`, car, {
             withCredentials: true,
           });
         })

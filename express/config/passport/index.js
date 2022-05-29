@@ -1,6 +1,6 @@
 const passport = require("passport");
 const local = require("./localStrategy");
-const User = require("../src/models/user");
+const User = require("../../src/models/user");
 
 module.exports = () => {
   passport.serializeUser((user, done) => {

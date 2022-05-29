@@ -44,3 +44,15 @@ exports.loginUser = async (req, res, next) => {
     });
   })(req, res, next);
 };
+
+exports.logoutUser = async (req, res) => {
+  try {
+    req.logout();
+    req.session.destroy();
+  } catch (err) {
+    console.log(err);
+    return response(status.SERVER_ERROR);
+  }
+
+  return response(status.SUCCESS);
+};

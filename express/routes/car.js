@@ -29,6 +29,10 @@ const upload = multer({
   limit: { fileSize: 20 * 1024 * 1024 },
 });
 
+router.post("/imageUpload", upload.array("image"), async (req, res, next) => {
+  res.json(req.files.map((v) => v.location));
+});
+
 router.post("/register", async (req, res, next) => {
   const car = req.body;
   if (req.isAuthenticated()) car.userId = req.user.id;
@@ -42,10 +46,6 @@ router.post("/register", async (req, res, next) => {
   } catch (err) {
     console.error(err);
   }
-});
-
-router.post("/imageUpload", upload.array("image"), async (req, res, next) => {
-  res.json(req.files.map((v) => v.location));
 });
 
 router.post("/loadCar", async (req, res, next) => {

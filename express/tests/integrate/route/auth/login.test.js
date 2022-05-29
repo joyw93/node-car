@@ -12,52 +12,43 @@ beforeAll(async () => {
 /* control layer */
 
 // 유효성 검사
-describe("POST /signup", () => {
+describe("POST /login", () => {
   test("empty email", (done) => {
     request(app)
-      .post("/auth/signup")
-      .send({ name: "tester", password: "test123" })
-      .expect(response(status.SIGNUP_EMAIL_EMPTY), done);
+      .post("/auth/login")
+      .send({ password: "test123" })
+      .expect(response(status.LOGIN_EMAIL_EMPTY), done);
   });
 });
 
-describe("POST /signup", () => {
-  test("empty name", (done) => {
-    request(app)
-      .post("/auth/signup")
-      .send({ email: "test@naver.com", password: "test1234" })
-      .expect(response(status.SIGNUP_NAME_EMPTY), done);
-  });
-});
-
-describe("POST /signup", () => {
+describe("POST /login", () => {
   test("empty password", (done) => {
     request(app)
-      .post("/auth/signup")
-      .send({ email: "test@naver.com", name: "tester" })
-      .expect(response(status.SIGNUP_PASSWORD_EMPTY), done);
+      .post("/auth/login")
+      .send({ email: "test@naver.com" })
+      .expect(response(status.LOGIN_PASSWORD_EMPTY), done);
   });
 });
 
-describe("POST /signup", () => {
+describe("POST /login", () => {
   test("이메일 길이 30이상", (done) => {
     request(app)
-      .post("/auth/signup")
+      .post("/auth/login")
       .send({
         email: "t111112222233333444445555566666@naver.com",
         name: "tester",
         password: "test1234",
       })
-      .expect(response(status.SIGNUP_EMAIL_LENGTH), done);
+      .expect(response(status.LOGIN_EMAIL_LENGTH), done);
   });
 });
 
-describe("POST /signup", () => {
+describe("POST /login", () => {
   test("유효하지 않은 이메일양식(@생략)", (done) => {
     request(app)
-      .post("/auth/signup")
+      .post("/auth/login")
       .send({ email: "testnaver.com", name: "tester", password: "test1234" })
-      .expect(response(status.SIGNUP_EMAIL_TYPE_ERROR), done);
+      .expect(response(status.LOGIN_EMAIL_TYPE_ERROR), done);
   });
 });
 
@@ -66,25 +57,25 @@ describe("POST /signup", () => {
     request(app)
       .post("/auth/signup")
       .send({ email: "test@navercom", name: "tester", password: "test1234" })
-      .expect(response(status.SIGNUP_EMAIL_TYPE_ERROR), done);
+      .expect(response(status.LOGIN_EMAIL_TYPE_ERROR), done);
   });
 });
 
 /* service layer */
 
-describe("POST /signup", () => {
+describe("POST /login", () => {
   test("정상요청", (done) => {
     request(app)
-      .post("/auth/signup")
+      .post("/auth/login")
       .send({ email: "test@naver.com", name: "tester", password: "test1234" })
       .expect(response(status.SUCCESS), done);
   });
 });
 
-describe("POST /signup", () => {
+describe("POST /login", () => {
   test("중복된 이메일", (done) => {
     request(app)
-      .post("/auth/signup")
+      .post("/auth/login")
       .send({ email: "test@naver.com", name: "tester", password: "test1234" })
       .expect(response(status.SIGNUP_REDUNDANT_EMAIL), done);
   });
