@@ -71,7 +71,7 @@ module.exports = {
     code: 2010,
     message: "이메일을 형식을 정확하게 입력해주세요.",
   },
-  LOGNIN_PASSWORD_EMPTY: {
+  LOGIN_PASSWORD_EMPTY: {
     isSuccess: false,
     code: 2011,
     message: "비밀번호를 입력 해주세요.",
@@ -93,7 +93,7 @@ module.exports = {
     code: 2014,
     message: "이메일을 입력해주세요.",
   },
-  USER_USEREMAIL_NOT_EXIST: {
+  LOGIN_USER_NOT_EXIST: {
     isSuccess: false,
     code: 2015,
     message: "해당 이메일을 가진 회원이 존재하지 않습니다.",
@@ -132,7 +132,7 @@ module.exports = {
     code: 3003,
     message: "아이디가 잘못 되었습니다.",
   },
-  SIGNIN_PASSWORD_WRONG: {
+  LOGIN_PASSWORD_WRONG: {
     isSuccess: false,
     code: 3004,
     message: "비밀번호가 잘못 되었습니다.",

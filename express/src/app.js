@@ -56,7 +56,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
-  console.log(req.isAuthenticated())
+  console.log(req.isAuthenticated());
   next();
 });
 
@@ -74,10 +74,8 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  res.locals.message = err.message;
-  res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
   res.status(err.status || 500);
-  res.send("error");
+  res.send(err);
 });
 
 module.exports = app;

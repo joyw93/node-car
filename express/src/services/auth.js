@@ -25,26 +25,22 @@ exports.createUser = async (user) => {
   }
 };
 
-exports.loginUser = async (user) => {
-  try {
-    passport.authenticate("local", (authError, user, info) => {
-      if (authError) {
-        console.error(authError);
-        return next(authError);
+exports.loginUser = async (req, res, next) => {
+  passport.authenticate("local", (authError, user, info) => {
+    if (authError) {
+      console.log(authError);
+      return res.send(response(status.SERVER_ERROR));
+    }
+
+    if (info) return res.send(info.message);
+
+    return req.login(user, (loginError) => {
+      if (loginError) {
+        console.log(loginError);
+        return res.send(response(status.SERVER_ERROR));
       }
-      if (info) {
-        return res.status(401).send(info.message);
-      }
-      return req.login(user, (loginError) => {
-        if (loginError) {
-          console.error(loginError);
-          return next(loginError);
-        }
-        return res.json(user);
-      });
+
+      return res.send(response(status.SUCCESS, user.id));
     });
-    return response(status.SUCCESS);
-  } catch (err) {
-    return errResponse(status.DB_ERROR);
-  }
+  })(req, res, next);
 };
