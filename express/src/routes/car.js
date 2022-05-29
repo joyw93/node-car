@@ -4,5 +4,5 @@ module.exports = (app) => {
   const car = require("../controllers/car");
 
   app.post("/car/imageUpload", upload.array("image"), car.imageUpload);
-  app.post("/car/regist", car.regist);
+  app.post("/car/register", car.register);
 };

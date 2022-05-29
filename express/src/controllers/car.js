@@ -12,10 +12,10 @@ exports.imageUpload = async (req, res) => {
   }
 };
 
-exports.regist = async (req, res) => {
+exports.register = async (req, res) => {
   const carDTO = req.body;
 
   // 유효성 검사
-  const isValid = validator.regist(carDTO);
+  const isValid = validator.register(carDTO);
   
 };

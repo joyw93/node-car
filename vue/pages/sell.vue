@@ -51,7 +51,7 @@
                   <v-btn large id="cancel-button" @click="dialog = false">
                     취소
                   </v-btn>
-                  <v-btn large id="confirm-button" @click="regist">
+                  <v-btn large id="confirm-button" @click="register">
                     확인
                   </v-btn>
                 </v-card-actions>
@@ -262,7 +262,7 @@ export default {
         })
         .then((res) => {
           car.predictedPrice = res.data;
-          axios.post(`${serverUrl}/car/regist`, car, {
+          axios.post(`${serverUrl}/car/register`, car, {
             withCredentials: true,
           });
         })
