@@ -6,8 +6,8 @@ exports.signup = async (req, res) => {
   const signupUser = req.body;
 
   // 유효성 검사
-  const unvalidMessage = validator.signup(signupUser);
-  if (unvalidMessage) return res.send(unvalidMessage);
+  const invalidMessage = validator.signup(signupUser);
+  if (invalidMessage) return res.send(invalidMessage);
 
   // 유저등록 요청
   const signupResponse = await authService.createUser(signupUser);
@@ -18,8 +18,8 @@ exports.login = async (req, res, next) => {
   const loginUser = req.body;
 
   // 유효성 검사
-  const unvalidMessage = validator.login(loginUser);
-  if (unvalidMessage) return res.status(400).send(unvalidMessage);
+  const invalidMessage = validator.login(loginUser);
+  if (invalidMessage) return res.status(400).send(invalidMessage);
 
   // 로그인 요청
   await authService.loginUser(req, res, next);

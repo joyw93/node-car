@@ -17,8 +17,8 @@ exports.register = async (req, res) => {
   const carDTO = req.body;
 
   // 유효성 검사
-  const unvalidMessage = validator.register(carDTO);
-  if (unvalidMessage) return res.send(unvalidMessage);
+  const invalidMessage = validator.register(carDTO);
+  if (invalidMessage) return res.send(invalidMessage);
 
   // 매물 등록 요청
   const registerResponse = await carService.registerCar(carDTO);
