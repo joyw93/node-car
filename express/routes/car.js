@@ -40,7 +40,7 @@ router.post("/register", async (req, res, next) => {
   car.regions = car.regions.join();
   car.images = car.images.join();
   car.age = car.age.replace("년", "");
-
+ 
   try {
     await Car.create(car);
   } catch (err) {
@@ -82,9 +82,6 @@ router.post("/loadCars", async (req, res, next) => {
   res.send(cars);
 });
 
-router.post("/test", async (req, res, next) => {
-  console.log(req.body);
-  if (req.user) console.log("hello user");
-});
+
 
 module.exports = router;

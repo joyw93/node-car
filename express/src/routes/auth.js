@@ -3,5 +3,5 @@ module.exports = (app) => {
 
   app.post("/auth/signup", auth.signup);
   app.post("/auth/login", auth.login);
-  app.post("/auth/logout", auth.logout);
+  app.get("/auth/logout", auth.logout);
 };

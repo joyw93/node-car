@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const env = process.env.NODE_ENV || 'development';
-const config = require('../../config/mysql')[env];
+const config = require('../../config/sequelize/mysql')[env];
 const User = require('./user');
 const Car = require('./car');
 

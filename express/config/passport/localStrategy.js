@@ -2,8 +2,8 @@ const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const User = require("../../src/models/user");
-const status = require("../responseStatus");
-const { response } = require("../responseFormat");
+const status = require("../response/auth");
+const { response } = require("../response/format");
 
 module.exports = () => {
   passport.use(

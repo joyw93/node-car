@@ -1,6 +1,7 @@
 const carService = require("../services/car");
-const status = require("../../config/responseStatus");
-const { response, errResponse } = require("../../config/responseFormat");
+const status = require("../../config/response/car");
+const { response, errResponse } = require("../../config/response/format");
+const validator = require("../validators/car");
 
 exports.imageUpload = async (req, res) => {
   try {
@@ -16,6 +17,11 @@ exports.register = async (req, res) => {
   const carDTO = req.body;
 
   // 유효성 검사
-  const isValid = validator.register(carDTO);
-  
+  const unvalidMessage = validator.register(carDTO);
+  if (unvalidMessage) return res.send(unvalidMessage);
+
+  // 매물 등록 요청
+  const registerResponse = await carService.registerCar(carDTO);
+
+  return res.send(registerResponse);
 };

@@ -1,8 +1,9 @@
 const { User } = require("../models");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const status = require("../../config/responseStatus");
-const { response, errResponse } = require("../../config/responseFormat");
+const status = require("../../config/response/auth");
+const { response, errResponse } = require("../../config/response/format");
+
 
 exports.createUser = async (user) => {
   try {
@@ -19,40 +20,38 @@ exports.createUser = async (user) => {
       email: user.email,
       password: hashedPassword,
     });
-    return response(status.SUCCESS);
+    return response(status.SIGNUP_SUCCESS);
   } catch (err) {
-    return errResponse(status.DB_ERROR);
+    return errResponse(status.SERVER_ERROR);
   }
 };
+
 
 exports.loginUser = async (req, res, next) => {
   passport.authenticate("local", (authError, user, info) => {
     if (authError) {
       console.log(authError);
-      return res.send(response(status.SERVER_ERROR));
+      return res.send(errResponse(status.SERVER_ERROR));
     }
-
     if (info) return res.send(info.message);
-
     return req.login(user, (loginError) => {
       if (loginError) {
         console.log(loginError);
-        return res.send(response(status.SERVER_ERROR));
+        return res.send(errResponse(status.SERVER_ERROR));
       }
-
-      return res.send(response(status.SUCCESS, user.id));
+      return res.send(response(status.LOGIN_SUCCESS, user.id));
     });
   })(req, res, next);
 };
+
 
 exports.logoutUser = async (req, res) => {
   try {
     req.logout();
     req.session.destroy();
+    return response(status.LOGOUT_SUCCESS);
   } catch (err) {
     console.log(err);
-    return response(status.SERVER_ERROR);
+    return errResponse(status.SERVER_ERROR);
   }
-
-  return response(status.SUCCESS);
 };

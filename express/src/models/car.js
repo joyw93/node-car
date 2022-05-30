@@ -86,7 +86,7 @@ module.exports = class Car extends Sequelize.Model {
         timestamps: true,
         underscored: false,
         modelName: "Car",
-        tableName: "car",
+        tableName: "cars",
         paranoid: true,
         charset: "utf8",
         collate: "utf8_general_ci",

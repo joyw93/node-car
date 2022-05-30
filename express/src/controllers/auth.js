@@ -1,33 +1,25 @@
 const authService = require("../services/auth");
-const status = require("../../config/responseStatus");
-const { response } = require("../../config/responseFormat");
-const regexEmail = require("regex-email");
+const validator = require("../validators/auth");
 
 
 exports.signup = async (req, res) => {
-  const userDTO = req.body; // {email, name, password}
+  const signupUser = req.body;
 
   // 유효성 검사
-  if (!userDTO.email) return res.send(response(status.SIGNUP_EMAIL_EMPTY));
-  if (!userDTO.name) return res.send(response(status.SIGNUP_NAME_EMPTY));
-  if (!userDTO.password) return res.send(response(status.SIGNUP_PASSWORD_EMPTY));
-  if (userDTO.email.length > 30) return res.send(response(status.SIGNUP_EMAIL_LENGTH));
-  if (!regexEmail.test(userDTO.email)) return res.send(response(status.SIGNUP_EMAIL_TYPE_ERROR));
+  const unvalidMessage = validator.signup(signupUser);
+  if (unvalidMessage) return res.send(unvalidMessage);
 
   // 유저등록 요청
-  const signupResponse = await authService.createUser(userDTO);
-
+  const signupResponse = await authService.createUser(signupUser);
   return res.send(signupResponse);
 };
 
 exports.login = async (req, res, next) => {
-  const { email, password } = req.body;
+  const loginUser = req.body;
 
   // 유효성 검사
-  if (!email) return res.send(response(status.LOGIN_EMAIL_EMPTY));
-  if (!password) return res.send(response(status.LOGIN_PASSWORD_EMPTY));
-  if (email.length > 30) return res.send(response(status.LOGIN_EMAIL_LENGTH));
-  if (!regexEmail.test(email)) return res.send(response(status.LOGIN_EMAIL_TYPE_ERROR));
+  const unvalidMessage = validator.login(loginUser);
+  if (unvalidMessage) return res.status(400).send(unvalidMessage);
 
   // 로그인 요청
   await authService.loginUser(req, res, next);
@@ -35,7 +27,7 @@ exports.login = async (req, res, next) => {
 
 exports.logout = async (req, res) => {
 
-  // 로그아웃
+  // 로그아웃 요청
   const logoutResponse = await authService.logoutUser(req, res);
-  return res.send(logoutResponse)
+  return res.send(logoutResponse);
 };
