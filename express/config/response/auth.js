@@ -48,12 +48,12 @@ module.exports = {
   SIGNUP_NAME_EMPTY: {
     isSuccess: false,
     code: 4006,
-    message: "닉네임을 입력 해주세요.",
+    message: "이름을 입력 해주세요.",
   },
-  SIGNUP_NICKNAME_LENGTH: {
+  SIGNUP_NAME_LENGTH: {
     isSuccess: false,
     code: 4007,
-    message: "닉네임은 최대 20자리를 입력해주세요.",
+    message: "이름은 최대 20자리를 입력해주세요.",
   },
 
   LOGIN_EMAIL_EMPTY: {
@@ -115,11 +115,7 @@ module.exports = {
     code: 5001,
     message: "중복된 이메일입니다.",
   },
-  SIGNUP_REDUNDANT_NICKNAME: {
-    isSuccess: false,
-    code: 5002,
-    message: "중복된 닉네임입니다.",
-  },
+
 
   LOGIN_EMAIL_WRONG: {
     isSuccess: false,

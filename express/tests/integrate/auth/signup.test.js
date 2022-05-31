@@ -12,7 +12,7 @@ beforeAll(async () => {
 /* control layer */
 
 // 유효성 검사
-describe("POST", () => {
+describe("Signup", () => {
   test("empty email", (done) => {
     request(app)
       .post("/auth/signup")
@@ -21,7 +21,7 @@ describe("POST", () => {
   });
 });
 
-describe("POST", () => {
+describe("Signup", () => {
   test("empty name", (done) => {
     request(app)
       .post("/auth/signup")
@@ -30,7 +30,7 @@ describe("POST", () => {
   });
 });
 
-describe("POST", () => {
+describe("Signup", () => {
   test("empty password", (done) => {
     request(app)
       .post("/auth/signup")
@@ -39,7 +39,7 @@ describe("POST", () => {
   });
 });
 
-describe("POST", () => {
+describe("Signup", () => {
   test("이메일 길이 30이상", (done) => {
     request(app)
       .post("/auth/signup")
@@ -52,7 +52,7 @@ describe("POST", () => {
   });
 });
 
-describe("POST", () => {
+describe("Signup", () => {
   test("유효하지 않은 이메일양식( @ 생략 )", (done) => {
     request(app)
       .post("/auth/signup")
@@ -61,7 +61,7 @@ describe("POST", () => {
   });
 });
 
-describe("POST", () => {
+describe("Signup", () => {
   test("유효하지 않은 이메일양식( . 생략 )", (done) => {
     request(app)
       .post("/auth/signup")
@@ -72,7 +72,7 @@ describe("POST", () => {
 
 /* service layer */
 
-describe("POST", () => {
+describe("Signup", () => {
   test("정상요청", (done) => {
     request(app)
       .post("/auth/signup")
@@ -81,7 +81,7 @@ describe("POST", () => {
   });
 });
 
-describe("POST", () => {
+describe("Signup", () => {
   test("중복이메일 가입요청 거부", (done) => {
     request(app)
       .post("/auth/signup")

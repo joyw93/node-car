@@ -39,7 +39,7 @@ exports.loginUser = async (req, res, next) => {
         console.log(loginError);
         return res.send(errResponse(status.SERVER_ERROR));
       }
-      return res.send(response(status.LOGIN_SUCCESS, user.id));
+      return res.send(response(status.LOGIN_SUCCESS));
     });
   })(req, res, next);
 };

@@ -8,13 +8,13 @@ export const state = () => ({
   price: null,
   isRented: null,
   options: null,
-  accident: "true", // 토글은 0,1,2로 해라.
+  accident: "Y",
   accidentDetail: null,
-  needFix: "true",
+  needFix: "Y",
   needFixDetail: null,
   regions: null,
   feature: null,
-  isRecommend: "true",
+  dealerRecommend: "Y",
   images: [0, 0, 0, 0, 0, 0],
   tempImageList: [0, 0, 0, 0, 0, 0],
   imageFormData: null,
@@ -89,13 +89,13 @@ export const mutations = {
     state.price = null;
     state.isRented = null;
     state.options = null;
-    state.accident = "true";
+    state.accident = "Y";
     state.accidentDetail = null;
-    state.needFix = "true";
+    state.needFix = "Y";
     state.needFixDetail = null;
     state.regions = null;
     state.feature = null;
-    state.isRecommen = "true";
+    state.isRecommend = "Y";
     state.images = [0, 0, 0, 0, 0, 0];
     state.tempImageList = [0, 0, 0, 0, 0, 0];
     state.imageFormData = null;

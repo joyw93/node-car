@@ -19,7 +19,7 @@ exports.login = async (req, res, next) => {
 
   // 유효성 검사
   const invalidMessage = validator.login(loginUser);
-  if (invalidMessage) return res.status(400).send(invalidMessage);
+  if (invalidMessage) return res.send(invalidMessage);
 
   // 로그인 요청
   await authService.loginUser(req, res, next);

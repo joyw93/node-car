@@ -81,7 +81,6 @@
                 <ImageCard />
               </div>
             </v-responsive>
-            <v-btn @click="test">테스트</v-btn>
           </v-card>
         </v-col>
       </v-row>
@@ -181,7 +180,7 @@ export default {
     feature() {
       return this.$store.state.register_car.feature;
     },
-    isRecommend() {
+    dealerRecommend() {
       return this.$store.state.register_car.isRecommend;
     },
     images() {
@@ -204,19 +203,8 @@ export default {
       }
       this.dialog = true;
     },
-    test() {
-      axios
-        .post(`http://127.0.0.1:3080/car/imageUpload`, this.imageFormData, {
-          withCredentials: true,
-        })
-        .then((res)=>{
-          console.log(res)
-        })
-        .catch((err)=>{
-          console.log(err)
-        });
-    },
-    regist() {
+    async register() {
+      this.dialog = false;
       const car = {
         brand: this.brand,
         model: this.model,
@@ -227,17 +215,15 @@ export default {
         isRented: this.isRented,
         options: this.options,
         accident: this.accident,
-        accidentDetail: this.accidentDetail,
         needFix: this.needFix,
-        needFixDetail: this.needFixDetail,
         regions: this.regions,
         feature: this.feature,
-        isRecommend: this.isRecommend,
+        dealerRecommend: this.dealerRecommend,
         images: null,
         price: this.price,
         predictedPrice: null,
       };
-      this.dialog = false;
+
       axios
         .post(`${serverUrl}/car/imageUpload`, this.imageFormData, {
           withCredentials: true,
@@ -277,6 +263,8 @@ export default {
           console.error(err);
         });
     },
+
+
   },
   components: {
     DefaultCard,

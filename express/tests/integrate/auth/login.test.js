@@ -3,8 +3,6 @@ const { sequelize } = require("../../../src/models");
 const app = require("../../../src/app");
 const status = require("../../../config/response/auth");
 const { response, errResponse } = require("../../../config/response/format");
-const { describe } = require("../../../src/models/user");
-const { test } = require("regex-email");
 
 // DB연결
 beforeAll(async () => {
@@ -14,7 +12,7 @@ beforeAll(async () => {
 /* control layer */
 
 // 유효성 검사
-describe("POST", () => {
+describe("Login", () => {
   test("empty email", (done) => {
     request(app)
       .post("/auth/login")
@@ -23,7 +21,7 @@ describe("POST", () => {
   });
 });
 
-describe("POST", () => {
+describe("Login", () => {
   test("empty password", (done) => {
     request(app)
       .post("/auth/login")
@@ -32,7 +30,7 @@ describe("POST", () => {
   });
 });
 
-describe("POST", () => {
+describe("Login", () => {
   test("이메일 길이 30이상", (done) => {
     request(app)
       .post("/auth/login")
@@ -44,7 +42,7 @@ describe("POST", () => {
   });
 });
 
-describe("POST", () => {
+describe("Login", () => {
   test("유효하지 않은 이메일양식(@생략)", (done) => {
     request(app)
       .post("/auth/login")
@@ -53,7 +51,7 @@ describe("POST", () => {
   });
 });
 
-describe("POST", () => {
+describe("Login", () => {
   test("유효하지 않은 이메일양식(.com생략)", (done) => {
     request(app)
       .post("/auth/login")
@@ -64,15 +62,15 @@ describe("POST", () => {
 
 /* service layer */
 
-describe("POST", () => {
-  test("유저생성", (done) => {
-    request(app)
+describe("Login", () => {
+  // 유저 생성
+  const agent = request.agent(app);
+  beforeEach((done) => {
+    agent
       .post("/auth/signup")
-      .send({ email: "test@naver.com", password: "test1234" }, done);
+      .send({ email: "test@naver.com", name: "tester", password: "test1234" })
+      .end(done);
   });
-});
-
-describe("POST", () => {
   test("정상 로그인", (done) => {
     request(app)
       .post("/auth/login")
@@ -81,7 +79,7 @@ describe("POST", () => {
   });
 });
 
-describe("POST", () => {
+describe("Login", () => {
   test("존재하지 않는 유저 로그인", (done) => {
     request(app)
       .post("/auth/login")
@@ -90,10 +88,10 @@ describe("POST", () => {
   });
 });
 
-describe("POST", () => {
+describe("Login", () => {
   test("비밀번호 불일치", (done) => {
     request(app)
-      .post("auth/login")
+      .post("/auth/login")
       .send({ email: "test@naver.com", password: "wrongpassword" })
       .expect(response(status.LOGIN_PASSWORD_WRONG), done);
   });

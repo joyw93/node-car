@@ -18,11 +18,11 @@
       ></v-textarea>
       <h3>최고가 딜러의 추천을 받으시겠어요?</h3>
       <v-radio-group column v-model="isRecommend">
-        <v-radio label="네, 연락주세요" color="primary" value="true"></v-radio>
+        <v-radio label="네, 연락주세요" color="primary" value="Y"></v-radio>
         <v-radio
           label="아니오, 직접 연락할게요."
           color="primary"
-          value="false"
+          value="N"
         ></v-radio>
       </v-radio-group>
     </v-card-text>
@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       feature: "",
-      isRecommend: "true",
+      isRecommend: "Y",
     };
   },
   watch: {
