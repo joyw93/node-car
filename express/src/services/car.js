@@ -1,7 +1,6 @@
-const { Car } = require("../models");
+const Car = require("../models/car");
 const status = require("../../config/response/car");
 const { response, errResponse } = require("../../config/response/format");
-
 
 exports.registerCar = async (carDTO) => {
   try {

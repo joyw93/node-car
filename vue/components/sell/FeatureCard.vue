@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       feature: "",
-      isRecommend: "Y",
+      isRecommend: "N",
     };
   },
   watch: {

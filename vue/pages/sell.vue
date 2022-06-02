@@ -123,7 +123,6 @@ export default {
         "판매지역",
         "특이사항",
         "차량사진",
-        "등록완료",
       ],
       selected: "",
       dialog: false,
@@ -162,11 +161,11 @@ export default {
     options() {
       return this.$store.state.register_car.options;
     },
-    accident() {
-      return this.$store.state.register_car.accident;
+    isAccident() {
+      return this.$store.state.register_car.isAccident;
     },
-    needFix() {
-      return this.$store.state.register_car.needFix;
+    isNeedFix() {
+      return this.$store.state.register_car.isNeedFix;
     },
     accidentDetail() {
       return this.$store.state.register_car.accidentDetail;
@@ -181,13 +180,10 @@ export default {
       return this.$store.state.register_car.feature;
     },
     dealerRecommend() {
-      return this.$store.state.register_car.isRecommend;
+      return this.$store.state.register_car.dealerRecommend;
     },
     images() {
       return this.$store.state.register_car.images;
-    },
-    imageFormData() {
-      return this.$store.state.register_car.imageFormData;
     },
     sellCheckMsg() {
       return this.$store.state.static.sellCheckMsg;
@@ -205,7 +201,7 @@ export default {
     },
     async register() {
       this.dialog = false;
-      const car = {
+      const carDTO = {
         brand: this.brand,
         model: this.model,
         odo: this.odo,
@@ -214,8 +210,10 @@ export default {
         color: this.color,
         isRented: this.isRented,
         options: this.options,
-        accident: this.accident,
-        needFix: this.needFix,
+        isAccident: this.isAccident,
+        accidentDetail: this.accidentDetail,
+        isNeedFix: this.isNeedFix,
+        needFixDetail: this.needFixDetail,
         regions: this.regions,
         feature: this.feature,
         dealerRecommend: this.dealerRecommend,
@@ -224,47 +222,73 @@ export default {
         predictedPrice: null,
       };
 
-      axios
-        .post(`${serverUrl}/car/imageUpload`, this.imageFormData, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          car.images = res.data.result;
-        })
-        .catch((err) => {
-          console.error(err);
-        })
-        .then(() => {
-          return axios.post(`${mlServerUrl}/predict`, {
-            model: this.model,
-            age: this.age,
-            odo: this.odo,
-            color: this.color,
-            fuel: this.fuel,
-          });
-        })
-        .catch((err) => {
-          console.error(err);
-        })
-        .then((res) => {
-          car.predictedPrice = res.data;
-          axios.post(`${serverUrl}/car/register`, car, {
-            withCredentials: true,
-          });
-        })
-        .catch((err) => {
-          console.error(err);
-        })
-        .then(() => {
-          this.completeSnackbar = true;
-          this.$store.dispatch("register_car/clearState");
-        })
-        .catch((err) => {
-          console.error(err);
+      try {
+        const imgUrls = await axios.post(
+          `${serverUrl}/car/imageUpload`,
+          this.images
+        );
+        const predictedPrice = await axios.post(`${mlServerUrl}/predict`, {
+          model: this.model,
+          age: this.age,
+          odo: this.odo,
+          color: this.color,
+          fuel: this.fuel,
         });
+        carDTO.images = imgUrls.data;
+        carDTO.predictedPrice = predictedPrice.data;
+        carDTO.options = carDTO.options.join();
+        carDTO.regions = carDTO.regions.join();
+        carDTO.images = carDTO.images.join();
+        carDTO.age = carDTO.age.replace("년", "");
+        carDTO.odo = parseInt(carDTO.odo)
+        carDTO.age = parseInt(carDTO.age)
+        carDTO.price = parseInt(carDTO.price)
+        const result = await axios.post(`${serverUrl}/car/register`, carDTO, {
+          withCredentials: true,
+        });
+        console.log(result)
+      } catch (err) {
+        console.log(err);
+      }
+      // axios
+      //   .post(`${serverUrl}/car/imageUpload`, this.images, {
+      //     withCredentials: true,
+      //   })
+      //   .then((res) => {
+      //     car.images = res.data.result;
+      //   })
+      //   .catch((err) => {
+      //     console.error(err);
+      //   })
+      //   .then(() => {
+      //     return axios.post(`${mlServerUrl}/predict`, {
+      //       model: this.model,
+      //       age: this.age,
+      //       odo: this.odo,
+      //       color: this.color,
+      //       fuel: this.fuel,
+      //     });
+      //   })
+      //   .catch((err) => {
+      //     console.error(err);
+      //   })
+      //   .then((res) => {
+      //     car.predictedPrice = res.data;
+      //     axios.post(`${serverUrl}/car/register`, car, {
+      //       withCredentials: true,
+      //     });
+      //   })
+      //   .catch((err) => {
+      //     console.error(err);
+      //   })
+      //   .then(() => {
+      //     this.completeSnackbar = true;
+      //     this.$store.dispatch("register_car/clearState");
+      //   })
+      //   .catch((err) => {
+      //     console.error(err);
+      //   });
     },
-
-
   },
   components: {
     DefaultCard,

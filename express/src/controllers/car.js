@@ -6,7 +6,7 @@ const validator = require("../validators/car");
 exports.imageUpload = async (req, res) => {
   try {
     const fileUrls = req.files.map((file) => file.location);
-    return res.send(response(status.SUCCESS, fileUrls));
+    return res.send(fileUrls);
   } catch (err) {
     console.log(err);
     return res.send(errResponse(status.SERVER_ERROR));
@@ -15,6 +15,7 @@ exports.imageUpload = async (req, res) => {
 
 exports.register = async (req, res) => {
   const carDTO = req.body;
+  carDTO.userId = req.user.id;
 
   // 유효성 검사
   const invalidMessage = validator.register(carDTO);

@@ -6,18 +6,16 @@ export const state = () => ({
   fuel: null,
   color: null,
   price: null,
-  isRented: null,
+  isRented: "N",
   options: null,
-  accident: "Y",
+  isAccident: "N",
   accidentDetail: null,
-  needFix: "Y",
+  isNeedFix: "N",
   needFixDetail: null,
   regions: null,
   feature: null,
-  dealerRecommend: "Y",
-  images: [0, 0, 0, 0, 0, 0],
-  tempImageList: [0, 0, 0, 0, 0, 0],
-  imageFormData: null,
+  dealerRecommend: "N",
+  images: null,
 });
 
 export const mutations = {
@@ -48,14 +46,14 @@ export const mutations = {
   setOptions(state, payload) {
     state.options = payload.options;
   },
-  setAccident(state, payload) {
-    state.accident = payload.accident;
+  setIsAccident(state, payload) {
+    state.isAccident = payload.isAccident;
   },
   setAccidentDetail(state, payload) {
     state.accidentDetail = payload.accidentDetail;
   },
-  setNeedFix(state, payload) {
-    state.needFix = payload.needFix;
+  setIsNeedFix(state, payload) {
+    state.isNeedFix = payload.isNeedFix;
   },
   setNeedFixDetail(state, payload) {
     state.needFixDetail = payload.needFixDetail;
@@ -70,14 +68,11 @@ export const mutations = {
     state.isRecommend = payload.isRecommend;
   },
   setImages(state, payload) {
-    const { image, index, file } = payload;
-    const imageData = new FormData();
-    state.images.splice(index, 1, image);
-    state.tempImageList.splice(index, 1, file);
-    state.tempImageList.forEach((file) => {
-      imageData.append("image", file);
+    const imgFormData = new FormData();
+    payload.imgFiles.forEach((imgFile) => {
+      imgFormData.append("image", imgFile);
     });
-    state.imageFormData = imageData;
+    state.images = imgFormData;
   },
   clearState(state) {
     state.brand = null;
@@ -89,16 +84,14 @@ export const mutations = {
     state.price = null;
     state.isRented = null;
     state.options = null;
-    state.accident = "Y";
+    state.isAccident = "Y";
     state.accidentDetail = null;
-    state.needFix = "Y";
+    state.isNeedFix = "Y";
     state.needFixDetail = null;
     state.regions = null;
     state.feature = null;
-    state.isRecommend = "Y";
-    state.images = [0, 0, 0, 0, 0, 0];
-    state.tempImageList = [0, 0, 0, 0, 0, 0];
-    state.imageFormData = null;
+    state.dealerRecommend = "Y";
+    state.images = null;
   },
 };
 
@@ -130,14 +123,14 @@ export const actions = {
   setOptions({ commit }, payload) {
     commit("setOptions", payload);
   },
-  setAccident({ commit }, payload) {
-    commit("setAccident", payload);
+  setIsAccident({ commit }, payload) {
+    commit("setIsAccident", payload);
   },
   setAccidentDetail({ commit }, payload) {
     commit("setAccidentDetail", payload);
   },
-  setNeedFix({ commit }, payload) {
-    commit("setNeedFix", payload);
+  setIsNeedFix({ commit }, payload) {
+    commit("setIsNeedFix", payload);
   },
   setNeedFixDetail({ commit }, payload) {
     commit("setNeedFixDetail", payload);

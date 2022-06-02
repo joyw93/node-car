@@ -40,16 +40,16 @@ module.exports = class Car extends Sequelize.Model {
           type: Sequelize.STRING,
           allowNull: true,
         },
-        accident: {
-          type: Sequelize.INTEGER,
+        isAccident: {
+          type: Sequelize.STRING,
           allowNull: false,
         },
         accidentDetail: {
           type: Sequelize.TEXT,
           allowNull: true,
         },
-        needFix: {
-          type: Sequelize.INTEGER,
+        isNeedFix: {
+          type: Sequelize.STRING,
           allowNull: false,
         },
         needFixDetail: {
@@ -64,8 +64,8 @@ module.exports = class Car extends Sequelize.Model {
           type: Sequelize.TEXT,
           allowNull: false,
         },
-        isRecommend: {
-          type: Sequelize.BOOLEAN,
+        dealerRecommend: {
+          type: Sequelize.STRING,
           allowNull: false,
         },
         images: {

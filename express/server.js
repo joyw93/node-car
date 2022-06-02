@@ -13,5 +13,5 @@ sequelize
 
 
 app.listen(PORT, () => {
-  console.log(`🚀 server is running - port ${PORT}`);
+  console.log(`🚀 server is running at - port ${PORT}`);
 });

@@ -4,7 +4,7 @@
       <h2><span>사고, 수리이력</span>을 알려주세요</h2>
       <h4>과거 사고이력이 있나요?</h4>
       <h4 class="muted">ex) 단순 교환, 도장 판금, 그 외 경미사고는 사고없음</h4>
-      <v-item-group v-model="accident" mandatory>
+      <v-item-group v-model="isAccident" mandatory>
         <v-row>
           <v-col cols="2">
             <v-item value="N" class="option" v-slot="{ active, toggle }">
@@ -56,7 +56,7 @@
             </v-item>
           </v-col>
         </v-row>
-        <template v-if="accident == 'Y'">
+        <template v-if="isAccident == 'Y'">
           <v-textarea
             v-model="accidentDetail"
             hint="예) 골격사고, 뒤 팬더 교환, 전손, 침수 등"
@@ -69,7 +69,7 @@
         </template>
       </v-item-group>
       <h4 id="need-fix-text">현재 수리가 필요한 부위가 있나요?</h4>
-      <v-item-group class="item-group" v-model="needFix" mandatory>
+      <v-item-group class="item-group" v-model="isNeedFix" mandatory>
         <v-row>
           <v-col cols="2">
             <v-item value="N" class="option" v-slot="{ active, toggle }">
@@ -122,7 +122,7 @@
           </v-col>
         </v-row>
       </v-item-group>
-      <template v-if="needFix == 'Y'">
+      <template v-if="isNeedFix == 'Y'">
         <v-textarea
           v-model="needFixDetail"
           hint="예) 운전석 뒷문과 뒷휀더 스크래치가 있으며 뒷범퍼 주차기스있음."
@@ -141,21 +141,21 @@
 export default {
   data() {
     return {
-      accident: "N",
-      accidentDetail: "",
-      needFix: "N",
-      needFixDetail: "",
+      isAccident: "N",
+      accidentDetail: null,
+      isNeedFix: "N",
+      needFixDetail: null,
     };
   },
   watch: {
-    accident(newVal) {
-      this.$store.dispatch("register_car/setAccident", {
-        accident: newVal,
+    isAccident(newVal) {
+      this.$store.dispatch("register_car/setIsAccident", {
+        isAccident: newVal,
       });
     },
-    needFix(newVal) {
-      this.$store.dispatch("register_car/setNeedFix", {
-        needFix: newVal,
+    isNeedFix(newVal) {
+      this.$store.dispatch("register_car/setIsNeedFix", {
+        isNeedFix: newVal,
       });
     },
     accidentDetail(newVal) {
