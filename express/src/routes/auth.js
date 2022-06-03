@@ -1,7 +1,7 @@
 module.exports = (app) => {
-  const auth = require("../controllers/auth");
+  const controller = require("../controllers/auth");
 
-  app.post("/auth/signup", auth.signup);
-  app.post("/auth/login", auth.login);
-  app.get("/auth/logout", auth.logout);
+  app.post("/auth/signup", controller.signup);
+  app.post("/auth/login", controller.login);
+  app.get("/auth/logout", controller.logout);
 };

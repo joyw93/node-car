@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <v-container>
     <div class="header">
       <span>홈</span>
@@ -221,4 +221,4 @@ export default {
   justify-content: center;
   align-items: center;
 }
-</style> -->
+</style>

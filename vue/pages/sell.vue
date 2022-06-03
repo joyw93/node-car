@@ -234,19 +234,23 @@ export default {
           color: this.color,
           fuel: this.fuel,
         });
+
         carDTO.images = imgUrls.data;
         carDTO.predictedPrice = predictedPrice.data;
         carDTO.options = carDTO.options.join();
         carDTO.regions = carDTO.regions.join();
         carDTO.images = carDTO.images.join();
         carDTO.age = carDTO.age.replace("년", "");
-        carDTO.odo = parseInt(carDTO.odo)
-        carDTO.age = parseInt(carDTO.age)
-        carDTO.price = parseInt(carDTO.price)
+        carDTO.odo = parseInt(carDTO.odo);
+        carDTO.age = parseInt(carDTO.age);
+        carDTO.price = parseInt(carDTO.price);
+
         const result = await axios.post(`${serverUrl}/car/register`, carDTO, {
           withCredentials: true,
         });
-        console.log(result)
+        console.log(result);
+        this.completeSnackbar = true;
+        await this.$store.dispatch("register_car/clearState");
       } catch (err) {
         console.log(err);
       }

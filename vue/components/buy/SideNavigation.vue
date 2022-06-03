@@ -211,10 +211,10 @@ export default {
       if (this.odoMin === null && this.odoMax === null) {
         return null;
       } else {
-        const odoMin = this.odoMin
-          ? this.odoMin
-          : this.odos[0];
-        const odoMax = this.odoMax ? this.odoMax : this.odos[this.odos.length - 1];
+        const odoMin = this.odoMin ? this.odoMin : this.odos[0];
+        const odoMax = this.odoMax
+          ? this.odoMax
+          : this.odos[this.odos.length - 1];
         return `${odoMin} ~ ${odoMax}`;
       }
     },
@@ -319,11 +319,11 @@ export default {
       }
     },
     cvtOdoType(odoString) {
-      if (odoString) return odoString.replace("km", "").replace(",", "");
+      if (odoString) return parseInt(odoString.replace("km", "").replace(",", ""));
       else return odoString;
     },
     cvtAgeType(ageString) {
-      if (ageString) return ageString.replace("년", "");
+      if (ageString) return parseInt(ageString.replace("년", ""));
       else return ageString;
     },
   },

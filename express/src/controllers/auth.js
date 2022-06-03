@@ -1,4 +1,4 @@
-const authService = require("../services/auth");
+const service = require("../services/auth");
 const validator = require("../validators/auth");
 
 
@@ -10,7 +10,7 @@ exports.signup = async (req, res) => {
   if (invalidMessage) return res.send(invalidMessage);
 
   // 유저등록 요청
-  const signupResponse = await authService.createUser(signupUser);
+  const signupResponse = await service.createUser(signupUser);
   return res.send(signupResponse);
 };
 
@@ -22,12 +22,12 @@ exports.login = async (req, res, next) => {
   if (invalidMessage) return res.send(invalidMessage);
 
   // 로그인 요청
-  await authService.loginUser(req, res, next);
+  await service.loginUser(req, res, next);
 };
 
 exports.logout = async (req, res) => {
 
   // 로그아웃 요청
-  const logoutResponse = await authService.logoutUser(req, res);
+  const logoutResponse = await service.logoutUser(req, res);
   return res.send(logoutResponse);
 };
