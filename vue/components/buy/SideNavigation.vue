@@ -319,12 +319,14 @@ export default {
       }
     },
     cvtOdoType(odoString) {
-      if (odoString) return parseInt(odoString.replace("km", "").replace(",", ""));
-      else return odoString;
+      if (odoString)
+        return parseInt(odoString.replace("km", "").replace(",", ""));
+      return odoString;
     },
     cvtAgeType(ageString) {
-      if (ageString) return parseInt(ageString.replace("년", ""));
-      else return ageString;
+      if (ageString)
+        return parseInt(ageString.replace("년", ""));
+      return ageString;
     },
   },
   watch: {

@@ -223,10 +223,12 @@ export default {
       };
 
       try {
+        // S3에 차량 사진 저장 요청
         const imgUrls = await axios.post(
           `${serverUrl}/car/imageUpload`,
           this.images
         );
+        // ML 서버에 차량 예측가격 요청
         const predictedPrice = await axios.post(`${mlServerUrl}/predict`, {
           model: this.model,
           age: this.age,
@@ -235,8 +237,11 @@ export default {
           fuel: this.fuel,
         });
 
+        // S3에 저장된 이미지 주소와 차량 예측가격을 프로퍼티에 추가
         carDTO.images = imgUrls.data;
         carDTO.predictedPrice = predictedPrice.data;
+
+        // api 서버에 보내기 전 데이터 가공
         carDTO.options = carDTO.options.join();
         carDTO.regions = carDTO.regions.join();
         carDTO.images = carDTO.images.join();
@@ -245,53 +250,14 @@ export default {
         carDTO.age = parseInt(carDTO.age);
         carDTO.price = parseInt(carDTO.price);
 
+        // DB에 매물 정보 저장요청
         const result = await axios.post(`${serverUrl}/car/register`, carDTO, {
           withCredentials: true,
         });
-        console.log(result);
         this.completeSnackbar = true;
-        await this.$store.dispatch("register_car/clearState");
       } catch (err) {
         console.log(err);
       }
-      // axios
-      //   .post(`${serverUrl}/car/imageUpload`, this.images, {
-      //     withCredentials: true,
-      //   })
-      //   .then((res) => {
-      //     car.images = res.data.result;
-      //   })
-      //   .catch((err) => {
-      //     console.error(err);
-      //   })
-      //   .then(() => {
-      //     return axios.post(`${mlServerUrl}/predict`, {
-      //       model: this.model,
-      //       age: this.age,
-      //       odo: this.odo,
-      //       color: this.color,
-      //       fuel: this.fuel,
-      //     });
-      //   })
-      //   .catch((err) => {
-      //     console.error(err);
-      //   })
-      //   .then((res) => {
-      //     car.predictedPrice = res.data;
-      //     axios.post(`${serverUrl}/car/register`, car, {
-      //       withCredentials: true,
-      //     });
-      //   })
-      //   .catch((err) => {
-      //     console.error(err);
-      //   })
-      //   .then(() => {
-      //     this.completeSnackbar = true;
-      //     this.$store.dispatch("register_car/clearState");
-      //   })
-      //   .catch((err) => {
-      //     console.error(err);
-      //   });
     },
   },
   components: {

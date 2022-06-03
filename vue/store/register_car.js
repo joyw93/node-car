@@ -74,25 +74,6 @@ export const mutations = {
     });
     state.images = imgFormData;
   },
-  clearState(state) {
-    state.brand = null;
-    state.model = null;
-    state.odo = null;
-    state.age = null;
-    state.fuel = null;
-    state.color = null;
-    state.price = null;
-    state.isRented = null;
-    state.options = null;
-    state.isAccident = "Y";
-    state.accidentDetail = null;
-    state.isNeedFix = "Y";
-    state.needFixDetail = null;
-    state.regions = null;
-    state.feature = null;
-    state.dealerRecommend = "Y";
-    state.images = null;
-  },
 };
 
 export const actions = {
