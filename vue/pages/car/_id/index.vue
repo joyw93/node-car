@@ -95,7 +95,7 @@ import PriceRange from "./chart/PriceRange.vue";
 import PriceRemain from "./chart/PriceRemain.vue";
 import PricePredict from "./chart/PricePredict.vue";
 export default {
-  beforeCreate() {},
+
   filters: {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");

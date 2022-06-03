@@ -75,7 +75,7 @@
             <v-row>
               <v-col cols="5">
                 <v-item
-                  value="false"
+                  value="N"
                   class="option"
                   v-slot="{ active, toggle }"
                 >
@@ -93,7 +93,7 @@
                 </v-item>
               </v-col>
               <v-col cols="5">
-                <v-item value="true" class="option" v-slot="{ active, toggle }">
+                <v-item value="Y" class="option" v-slot="{ active, toggle }">
                   <v-card
                     :class="{ 'card-selected': active }"
                     :color="active ? 'primary' : ''"
@@ -131,7 +131,7 @@ export default {
     return {
       brand: null,
       model: null,
-      isRented: false,
+      isRented: "N",
       price: null,
       odo: null,
       color: null,

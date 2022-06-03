@@ -1,11 +1,11 @@
 {
   "name": "express",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env NODE_ENV=development nodemon app",
-    "start": "cross-env PORT=80 NODE_ENV=production pm2 start app.js"
+    "test": "cross-env NODE_ENV=test jest --watchAll",
+    "dev": "cross-env NODE_ENV=development nodemon server",
+    "start": "cross-env PORT=80 NODE_ENV=production pm2 start server.js"
   },
   "author": "",
   "license": "ISC",
@@ -35,7 +35,8 @@
   },
   "devDependencies": {
     "jest": "^28.1.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.3"
   },
   "description": ""
 }

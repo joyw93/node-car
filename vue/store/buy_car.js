@@ -20,6 +20,9 @@ export const mutations = {
   removeTag(state, payload) {
     state.tags.splice(state.tags.indexOf(payload), 1);
   },
+  initTag(state) {
+    state.tags = [];
+  },
 };
 
 export const actions = {
@@ -62,5 +65,9 @@ export const actions = {
 
   removeTag({ commit }, payload) {
     commit("removeTag", payload);
+  },
+
+  initTag({ commit }) {
+    commit("initTag");
   },
 };

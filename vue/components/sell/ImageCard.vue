@@ -21,10 +21,10 @@
               type="file"
               multiple
               hidden
-              @change="onChangeImages($event, 0)"
+              @change="onChangeImage($event, 0)"
             />
-            <template v-if="imageUrls[0]">
-              <img :src="imageUrls[0]" class="image" />
+            <template v-if="imgUrls[0]">
+              <img :src="imgUrls[0]" class="image" />
             </template>
             <template v-else> <v-icon x-large> mdi-plus </v-icon> </template>
           </v-card>
@@ -41,10 +41,10 @@
               type="file"
               multiple
               hidden
-              @change="onChangeImages($event, 1)"
+              @change="onChangeImage($event, 1)"
             />
-            <template v-if="imageUrls[1]">
-              <img :src="imageUrls[1]" class="image" />
+            <template v-if="imgUrls[1]">
+              <img :src="imgUrls[1]" class="image" />
             </template>
             <template v-else> <v-icon x-large> mdi-plus </v-icon> </template>
           </v-card>
@@ -61,10 +61,10 @@
               type="file"
               multiple
               hidden
-              @change="onChangeImages($event, 2)"
+              @change="onChangeImage($event, 2)"
             />
-            <template v-if="imageUrls[2]">
-              <img :src="imageUrls[2]" class="image" />
+            <template v-if="imgUrls[2]">
+              <img :src="imgUrls[2]" class="image" />
             </template>
             <template v-else> <v-icon x-large> mdi-plus </v-icon> </template>
           </v-card>
@@ -83,10 +83,10 @@
               type="file"
               multiple
               hidden
-              @change="onChangeImages($event, 3)"
+              @change="onChangeImage($event, 3)"
             />
-            <template v-if="imageUrls[3]">
-              <img :src="imageUrls[3]" class="image" />
+            <template v-if="imgUrls[3]">
+              <img :src="imgUrls[3]" class="image" />
             </template>
             <template v-else> <v-icon x-large> mdi-plus </v-icon> </template>
           </v-card>
@@ -103,10 +103,10 @@
               type="file"
               multiple
               hidden
-              @change="onChangeImages($event, 4)"
+              @change="onChangeImage($event, 4)"
             />
-            <template v-if="imageUrls[4]">
-              <img :src="imageUrls[4]" class="image" />
+            <template v-if="imgUrls[4]">
+              <img :src="imgUrls[4]" class="image" />
             </template>
             <template v-else> <v-icon x-large> mdi-plus </v-icon> </template>
           </v-card>
@@ -123,10 +123,10 @@
               type="file"
               multiple
               hidden
-              @change="onChangeImages($event, 5)"
+              @change="onChangeImage($event, 5)"
             />
-            <template v-if="imageUrls[5]">
-              <img :src="imageUrls[5]" class="image" />
+            <template v-if="imgUrls[5]">
+              <img :src="imgUrls[5]" class="image" />
             </template>
             <template v-else> <v-icon x-large> mdi-plus </v-icon> </template>
           </v-card>
@@ -139,20 +139,11 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      imgUrls: new Array(6),
+      imgFiles: new Array(6),
+    };
   },
-  computed: {
-    imageUrls() {
-      return this.$store.state.register_car.images;
-    },
-    tempImageList() {
-      return this.$store.state.register_car.tempImageList;
-    },
-    imageFormData() {
-      return this.$store.state.register_car.imageFormData;
-    },
-  },
-  watch: {},
   methods: {
     onClickImageUpload(index) {
       const imageInputs = [
@@ -165,15 +156,16 @@ export default {
       ];
       imageInputs[index].click();
     },
-    onChangeImages(event, index) {
-      const files = event.target.files;
-      const file = files[0];
-      if (files["length"] === 1) {
-        const image = URL.createObjectURL(file);
+    onChangeImage(event, index) {
+      if (event.target.files.length > 0) {
+        const imgFile = event.target.files[0];
+        const imgUrl = URL.createObjectURL(imgFile);
+
+        this.imgUrls.splice(index, 1, imgUrl);
+        this.imgFiles.splice(index, 1, imgFile);
+
         this.$store.dispatch("register_car/setImages", {
-          index,
-          image,
-          file,
+          imgFiles: this.imgFiles,
         });
       }
     },

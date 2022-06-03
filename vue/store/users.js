@@ -62,16 +62,15 @@ export const actions = {
   },
   logout({ commit }) {
     axios
-      .post(
+      .get(
         `${serverUrl}/auth/logout`,
-        {},
         {
           withCredentials: true,
         }
       )
-      .then(() => {
+      .then((res) => {
         commit("setMe", null);
-        console.log("로그아웃되었습니다.");
+        console.log(res.data);
       })
       .catch((err) => {
         console.error(err);

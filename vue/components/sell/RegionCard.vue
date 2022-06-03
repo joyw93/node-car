@@ -35,23 +35,12 @@ export default {
   data() {
     return {
       regionSelected: [],
-      regions: [
-        "서울",
-        "경기",
-        "부산",
-        "울산",
-        "대전",
-        "대구",
-        "광주",
-        "경남",
-        "경북",
-        "전남",
-        "전북",
-        "충남",
-        "충북",
-        "제주",
-      ],
     };
+  },
+  computed: {
+    regions() {
+      return this.$store.state.static.regions;
+    },
   },
   watch: {
     regionSelected(newVal) {

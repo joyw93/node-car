@@ -1,7 +1,9 @@
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
-const User = require("../models/user");
+const User = require("../../src/models/user");
+const status = require("../response/auth");
+const { response } = require("../response/format");
 
 module.exports = () => {
   passport.use(
@@ -18,10 +20,12 @@ module.exports = () => {
             if (result) {
               done(null, exUser);
             } else {
-              done(null, false, { message: "비밀번호가 일치하지 않습니다." });
+              done(null, false, {
+                message: response(status.LOGIN_PASSWORD_WRONG),
+              });
             }
           } else {
-            done(null, false, { message: "가입되지 않은 회원입니다." });
+            done(null, false, { message: response(status.LOGIN_USER_NOT_EXIST) });
           }
         } catch (error) {
           console.error(error);

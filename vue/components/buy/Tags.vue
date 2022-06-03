@@ -17,15 +17,13 @@
 
 <script>
 export default {
-  data() {
-    return {
-      
-    };
+  beforeCreate() {
+    this.$store.dispatch("buy_car/initTag");
   },
   methods: {
     remove(tag) {
       this.$nuxt.$emit("updateFiltCond", tag);
-      console.log(tag)
+      console.log(tag);
     },
   },
   computed: {

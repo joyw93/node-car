@@ -123,7 +123,6 @@ export default {
         "판매지역",
         "특이사항",
         "차량사진",
-        "등록완료",
       ],
       selected: "",
       dialog: false,
@@ -162,11 +161,11 @@ export default {
     options() {
       return this.$store.state.register_car.options;
     },
-    accident() {
-      return this.$store.state.register_car.accident;
+    isAccident() {
+      return this.$store.state.register_car.isAccident;
     },
-    needFix() {
-      return this.$store.state.register_car.needFix;
+    isNeedFix() {
+      return this.$store.state.register_car.isNeedFix;
     },
     accidentDetail() {
       return this.$store.state.register_car.accidentDetail;
@@ -180,14 +179,11 @@ export default {
     feature() {
       return this.$store.state.register_car.feature;
     },
-    isRecommend() {
-      return this.$store.state.register_car.isRecommend;
+    dealerRecommend() {
+      return this.$store.state.register_car.dealerRecommend;
     },
     images() {
       return this.$store.state.register_car.images;
-    },
-    imageFormData() {
-      return this.$store.state.register_car.imageFormData;
     },
     sellCheckMsg() {
       return this.$store.state.static.sellCheckMsg;
@@ -203,8 +199,9 @@ export default {
       }
       this.dialog = true;
     },
-    register() {
-      const car = {
+    async register() {
+      this.dialog = false;
+      const carDTO = {
         brand: this.brand,
         model: this.model,
         odo: this.odo,
@@ -213,56 +210,54 @@ export default {
         color: this.color,
         isRented: this.isRented,
         options: this.options,
-        accident: this.accident,
+        isAccident: this.isAccident,
         accidentDetail: this.accidentDetail,
-        needFix: this.needFix,
+        isNeedFix: this.isNeedFix,
         needFixDetail: this.needFixDetail,
         regions: this.regions,
         feature: this.feature,
-        isRecommend: this.isRecommend,
+        dealerRecommend: this.dealerRecommend,
         images: null,
         price: this.price,
         predictedPrice: null,
       };
-      this.dialog = false;
-      axios
-        .post(`${serverUrl}/car/imageUpload`, this.imageFormData, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          car.images = res.data;
-        })
-        .catch((err) => {
-          console.error(err);
-        })
-        .then(() => {
-          return axios.post(`${mlServerUrl}/predict`, {
-            model: this.model,
-            age: this.age,
-            odo: this.odo,
-            color: this.color,
-            fuel: this.fuel,
-          });
-        })
-        .catch((err) => {
-          console.error(err);
-        })
-        .then((res) => {
-          car.predictedPrice = res.data;
-          axios.post(`${serverUrl}/car/register`, car, {
-            withCredentials: true,
-          });
-        })
-        .catch((err) => {
-          console.error(err);
-        })
-        .then(() => {
-          this.completeSnackbar = true;
-          this.$store.dispatch("register_car/clearState");
-        })
-        .catch((err) => {
-          console.error(err);
+
+      try {
+        // S3에 차량 사진 저장 요청
+        const imgUrls = await axios.post(
+          `${serverUrl}/car/imageUpload`,
+          this.images
+        );
+        // ML 서버에 차량 예측가격 요청
+        const predictedPrice = await axios.post(`${mlServerUrl}/predict`, {
+          model: this.model,
+          age: this.age,
+          odo: this.odo,
+          color: this.color,
+          fuel: this.fuel,
         });
+
+        // S3에 저장된 이미지 주소와 차량 예측가격을 프로퍼티에 추가
+        carDTO.images = imgUrls.data;
+        carDTO.predictedPrice = predictedPrice.data;
+
+        // api 서버에 보내기 전 데이터 가공
+        carDTO.options = carDTO.options.join();
+        carDTO.regions = carDTO.regions.join();
+        carDTO.images = carDTO.images.join();
+        carDTO.age = carDTO.age.replace("년", "");
+        carDTO.odo = parseInt(carDTO.odo);
+        carDTO.age = parseInt(carDTO.age);
+        carDTO.price = parseInt(carDTO.price);
+
+        // DB에 매물 정보 저장요청
+        const result = await axios.post(`${serverUrl}/car/register`, carDTO, {
+          withCredentials: true,
+        });
+        this.completeSnackbar = true;
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
   components: {
