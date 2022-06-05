@@ -24,14 +24,6 @@
         </p>
         <v-divider />
         <div>
-          <span class="watched">
-            <v-icon :style="{ fontSize: '20px' }">mdi-eye</v-icon>
-            <span>&nbsp;2,965</span>
-            <v-icon :style="{ marginLeft: '18px', fontSize: '18px' }"
-              >mdi-heart</v-icon
-            >
-            <span>&nbsp;3</span>
-          </span>
           <span class="detail">
             {{ car.age }}년식 &nbsp;|&nbsp; {{ car.odo | comma }} km
             &nbsp;|&nbsp; {{ car.fuel }} &nbsp;|&nbsp;
@@ -52,13 +44,11 @@
           <span class="history-icon"
             ><v-icon size="40" color="primary">mdi-car-hatchback</v-icon></span
           >
-          <span class="history-icon" id="history-text">많음</span>
         </div>
         <div class="history">
           <span class="history-icon">성능점검</span>
           <span class="history-icon">보험이력</span>
           <span class="history-icon">기본정보</span>
-          <span class="history-icon">주행거리</span>
         </div>
       </v-col>
     </v-row>
@@ -71,7 +61,7 @@
         <h2 id="price-range">
           {{ priceMin | comma }} ~ {{ priceMax | comma }}만원
         </h2>
-        <PriceRange :price="predictedPrice" />
+        <PriceRange :predictedPrice="predictedPrice" :price="price" />
       </v-col>
       <v-col cols="12" sm="8" md="4" lg="4">
         <h3>신차 가격대비 잔존율</h3>
@@ -95,7 +85,6 @@ import PriceRange from "./chart/PriceRange.vue";
 import PriceRemain from "./chart/PriceRemain.vue";
 import PricePredict from "./chart/PricePredict.vue";
 export default {
-
   filters: {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -108,6 +97,9 @@ export default {
     },
     predictedPrice() {
       return this.car.predictedPrice;
+    },
+    price() {
+      return this.car.price;
     },
     priceMin() {
       return parseInt(this.predictedPrice * 0.95);

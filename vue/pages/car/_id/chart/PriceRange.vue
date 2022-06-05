@@ -4,7 +4,7 @@
       <span id="badge"
         >시세안심지수&nbsp;<span
           :style="{ fontSize: '17px', fontWeight: 'bolder', color: '#1565C0' }"
-          >적정</span
+          >{{ priceRate }}</span
         >&nbsp;
         <v-tooltip right>
           <template v-slot:activator="{ on, attrs }">
@@ -28,11 +28,19 @@
     </div>
 
     <div class="price-text">
-      <span class="price-item">{{ parseInt(price * 0.4) | comma }}</span>
-      <span class="price-item">{{ parseInt(price * 0.7) | comma }}</span>
-      <span class="price-item">{{ parseInt(price * 1) | comma }}</span>
-      <span class="price-item">{{ parseInt(price * 1.3) | comma }}</span>
-      <span class="price-item">{{ parseInt(price * 1.6) | comma }}</span>
+      <span class="price-item">{{
+        parseInt(predictedPrice * 0.4) | comma
+      }}</span>
+      <span class="price-item">{{
+        parseInt(predictedPrice * 0.7) | comma
+      }}</span>
+      <span class="price-item">{{ parseInt(predictedPrice * 1) | comma }}</span>
+      <span class="price-item">{{
+        parseInt(predictedPrice * 1.3) | comma
+      }}</span>
+      <span class="price-item">{{
+        parseInt(predictedPrice * 1.6) | comma
+      }}</span>
     </div>
     <div id="text-under">시세는 인공지능시스템으로 산출됩니다.</div>
   </div>
@@ -40,6 +48,18 @@
 
 <script>
 export default {
+  data() {
+    return {};
+  },
+  computed: {
+    priceRate() {
+      if (this.predictedPrice*0.5 > this.price ) {
+        return "주의";
+      } else {
+        return "적정"
+      }
+    },
+  },
   filters: {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -47,6 +67,7 @@ export default {
   },
   props: {
     price: Number,
+    predictedPrice: Number,
   },
 };
 </script>

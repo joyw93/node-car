@@ -7,4 +7,5 @@ AWS.config.update({
   region: "ap-northeast-2",
 });
 
+
 module.exports = AWS

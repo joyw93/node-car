@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const status = require("../../config/response/auth");
 const { response, errResponse } = require("../../config/response/format");
 
-
 exports.createUser = async (user) => {
   try {
     // 이메일 중복 확인
@@ -26,14 +25,15 @@ exports.createUser = async (user) => {
   }
 };
 
-
 exports.loginUser = async (req, res, next) => {
   passport.authenticate("local", (authError, user, info) => {
     if (authError) {
       console.log(authError);
       return res.send(errResponse(status.SERVER_ERROR));
     }
-    if (info) return res.send(info.message);
+    if (info) {
+      return res.send(info.message);
+    }
     return req.login(user, (loginError) => {
       if (loginError) {
         console.log(loginError);
@@ -43,7 +43,6 @@ exports.loginUser = async (req, res, next) => {
     });
   })(req, res, next);
 };
-
 
 exports.logoutUser = async (req, res) => {
   try {

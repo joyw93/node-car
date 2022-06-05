@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 const status = require("../../config/response/car");
 const { response, errResponse } = require("../../config/response/format");
 
+
 exports.registerCar = async (carDTO) => {
   try {
     await Car.create(carDTO);

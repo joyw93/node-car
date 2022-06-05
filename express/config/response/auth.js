@@ -18,7 +18,6 @@ module.exports = {
     message: "로그아웃 성공",
   },
 
-  
   //Request Error
   SIGNUP_EMAIL_EMPTY: {
     isSuccess: false,
@@ -92,21 +91,10 @@ module.exports = {
     code: 4014,
     message: "해당 이메일을 가진 회원이 존재하지 않습니다.",
   },
-  USER_ID_NOT_MATCH: {
+  LOGIN_REQUIRED: {
     isSuccess: false,
     code: 4015,
-    message: "유저 아이디 값을 확인해주세요",
-  },
-  USER_NICKNAME_EMPTY: {
-    isSuccess: false,
-    code: 4016,
-    message: "변경할 닉네임 값을 입력해주세요",
-  },
-
-  USER_STATUS_EMPTY: {
-    isSuccess: false,
-    code: 4017,
-    message: "회원 상태값을 입력해주세요",
+    message: "로그인이 필요합니다.",
   },
 
   // Response error
@@ -115,7 +103,6 @@ module.exports = {
     code: 5001,
     message: "중복된 이메일입니다.",
   },
-
 
   LOGIN_EMAIL_WRONG: {
     isSuccess: false,
