@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-for="car in Cars" :key="car.id" md="4" lg="3" sm="6" cols="12">
+      <v-col v-for="car in cars" :key="car.id" md="4" lg="3" sm="6" cols="12">
         <v-card
           class="card"
           min-width="200"
@@ -46,7 +46,7 @@ export default {
     },
   },
   computed: {
-    Cars() {
+    cars() {
       return this.$store.state.buy_car.cars;
     },
     price() {

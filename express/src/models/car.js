@@ -12,6 +12,10 @@ module.exports = class Car extends Sequelize.Model {
           type: Sequelize.STRING(50),
           allowNull: false,
         },
+        isDomestic: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
         model: {
           type: Sequelize.STRING(50),
           allowNull: false,

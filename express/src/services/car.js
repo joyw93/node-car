@@ -29,6 +29,7 @@ exports.loadCars = async (tag) => {
     const condition = {};
     !tag.brand ? null : (condition.brand = tag.brand);
     !tag.model ? null : (condition.model = tag.model);
+    !tag.isDomestic ? null : (condition.isDomestic = tag.isDomestic);
     !tag.fuel ? null : (condition.fuel = tag.fuel);
     !tag.color ? null : (condition.color = tag.color);
     condition.odo = {

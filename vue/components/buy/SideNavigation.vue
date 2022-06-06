@@ -2,12 +2,15 @@
   <div>
     <v-card>
       <v-tabs class="tabs">
-        <v-tab>전체</v-tab>
-        <v-tab>국산</v-tab>
-        <v-tab>수입</v-tab>
+        <v-tab @click="showWholeCars">전체</v-tab>
+        <v-tab @click="showDomesticCars">국산</v-tab>
+        <v-tab @click="showImportedCars">수입</v-tab>
       </v-tabs>
       <v-divider></v-divider>
-      <div id="head"><h1>32,403대</h1></div>
+      <div id="head">
+        <h2 id="head-text">검색 결과</h2>
+        <h1 id="head-number">{{ carAmount }}대</h1>
+      </div>
       <v-divider></v-divider>
       <div id="brand">
         <v-expansion-panels>
@@ -26,7 +29,7 @@
               <div
                 class="element"
                 :class="{ 'element-selected': brand == _brand }"
-                v-for="_brand in Object.keys(models)"
+                v-for="_brand in brands"
                 :key="_brand"
                 @click="brandSelect(_brand)"
               >
@@ -158,6 +161,7 @@ export default {
   data() {
     return {
       brand: null,
+      isDomestic: null,
       model: null,
       fuel: null,
       color: null,
@@ -169,8 +173,26 @@ export default {
   },
 
   computed: {
+    domesticBrands() {
+      return this.$store.state.static.domesticBrands;
+    },
     models() {
       return this.$store.state.static.models;
+    },
+    brands() {
+      const allBrands = Object.keys(this.models);
+      const domesticBrands = allBrands.filter((brand) => {
+        return this.domesticBrands.includes(brand);
+      });
+      const importedBrands = allBrands.filter((brand) => {
+        return !this.domesticBrands.includes(brand);
+      });
+      if (this.isDomestic === "Y") {
+        return domesticBrands;
+      } else if (this.isDomestic === "N") {
+        return importedBrands;
+      }
+      return allBrands;
     },
     fuels() {
       return this.$store.state.static.fuels;
@@ -249,6 +271,13 @@ export default {
         return `${ageMin} ~ ${ageMax}`;
       }
     },
+    carAmount() {
+      const cars = this.$store.state.buy_car.cars;
+      if (cars) {
+        return cars.length;
+      }
+      return 0;
+    },
   },
   created() {
     this.$nuxt.$on("updateFiltCond", (tag) => {
@@ -290,21 +319,22 @@ export default {
     reloadCars() {
       this.$store.dispatch("buy_car/loadCars", {
         brand: this.brand,
+        isDomestic: this.isDomestic,
         model: this.model,
         fuel: this.fuel,
         color: this.color,
         odoMin: this.odoMin
-          ? this.cvtOdoType(this.odoMin)
-          : this.cvtOdoType(this.odos[0]),
+          ? this.convertOdoType(this.odoMin)
+          : this.convertOdoType(this.odos[0]),
         odoMax: this.odoMax
-          ? this.cvtOdoType(this.odoMax)
-          : this.cvtOdoType(this.odos[this.odos.length - 1]),
+          ? this.convertOdoType(this.odoMax)
+          : this.convertOdoType(this.odos[this.odos.length - 1]),
         ageMin: this.ageMin
-          ? this.cvtAgeType(this.ageMin)
-          : this.cvtAgeType(this.ages[this.ages.length - 1]),
+          ? this.convertAgeType(this.ageMin)
+          : this.convertAgeType(this.ages[this.ages.length - 1]),
         ageMax: this.ageMax
-          ? this.cvtAgeType(this.ageMax)
-          : this.cvtAgeType(this.ages[0]),
+          ? this.convertAgeType(this.ageMax)
+          : this.convertAgeType(this.ages[0]),
       });
     },
     updateTags(newVal, oldVal) {
@@ -318,15 +348,34 @@ export default {
         }
       }
     },
-    cvtOdoType(odoString) {
-      if (odoString)
+    convertOdoType(odoString) {
+      if (odoString) {
         return parseInt(odoString.replace("km", "").replace(",", ""));
-      return odoString;
+      } else {
+        return odoString;
+      }
     },
-    cvtAgeType(ageString) {
-      if (ageString)
+    convertAgeType(ageString) {
+      if (ageString) {
         return parseInt(ageString.replace("년", ""));
-      return ageString;
+      } else {
+        return ageString;
+      }
+    },
+    showWholeCars() {
+      this.isDomestic = null;
+      this.brand = null;
+      this.reloadCars();
+    },
+    showDomesticCars() {
+      this.isDomestic = "Y";
+      this.brand = null;
+      this.reloadCars();
+    },
+    showImportedCars() {
+      this.isDomestic = "N";
+      this.brand = null;
+      this.reloadCars();
     },
   },
   watch: {
@@ -359,10 +408,6 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  color: #2196f3;
-}
-
 .tabs {
   display: flex;
   justify-content: center;
@@ -406,8 +451,17 @@ h1 {
   margin-top: 20px;
 }
 
-#head {
-  margin-top: 30px;
+#head-text {
+  color: #757575;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#head-number {
+  color: #2196f3;
+  margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
   justify-content: center;

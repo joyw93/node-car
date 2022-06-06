@@ -25,9 +25,8 @@ export default {
     Carousel,
     Tags,
   },
-
-  fetch({ store }) {
-    store.dispatch("buy_car/loadAllCars");
+  created() {
+    this.$store.dispatch("buy_car/loadAllCars");
   },
 
   data() {

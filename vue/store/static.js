@@ -169,6 +169,7 @@ export const state = () => ({
     "충북",
     "제주",
   ],
+  domesticBrands: ["현대", "제네시스", "기아", "쌍용", "르노삼성", "한국GM"],
   sellCheckMsg: {
     me: "로그인이 필요합니다.",
     brand: "제조사를 선택하세요.",

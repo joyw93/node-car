@@ -7,6 +7,9 @@
 <script>
 import Chart from "chart.js";
 export default {
+  props: {
+    price: Number,
+  },
   data() {
     return {
       planetChartData: {
@@ -16,7 +19,7 @@ export default {
           datasets: [
             {
               label: "잔존가치",
-              data: [5890, 5536],
+              data: [this.price, parseInt(this.price * 0.9)],
               backgroundColor: "rgba(100, 181, 246, .5)",
               borderColor: "#448AFF",
               borderWidth: 3,
@@ -25,7 +28,12 @@ export default {
             },
             {
               label: "잔존가치",
-              data: [5890, 5536, 5337, 4593],
+              data: [
+                this.price,
+                parseInt(this.price * 0.9),
+                parseInt(this.price * 0.7),
+                parseInt(this.price * 0.4),
+              ],
               backgroundColor: "rgba(100, 181, 246, .5)",
               borderColor: "#448AFF",
               borderWidth: 3,
@@ -37,19 +45,19 @@ export default {
               type: "bubble",
               data: [
                 {
-                  y: 5890,
+                  y: this.price,
                   r: 11,
                 },
                 {
-                  y: 5536,
+                  y: parseInt(this.price * 0.9),
                   r: 11,
                 },
                 {
-                  y: 5337,
+                  y: parseInt(this.price * 0.7),
                   r: 11,
                 },
                 {
-                  y: 4593,
+                  y: parseInt(this.price * 0.4),
                   r: 11,
                 },
               ],
@@ -92,7 +100,7 @@ export default {
               {
                 display: true,
                 ticks: {
-                  suggestedMin: 4000,
+                  suggestedMax: parseInt(this.price*1.2),
                   stepSize: 500,
                   padding: 25,
                 },

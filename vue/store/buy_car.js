@@ -59,6 +59,10 @@ export const actions = {
       });
   },
 
+  predictPrice({commit}, payload) {
+
+  },
+
   addTag({ commit }, payload) {
     commit("addTag", payload);
   },
@@ -70,4 +74,5 @@ export const actions = {
   initTag({ commit }) {
     commit("initTag");
   },
+
 };

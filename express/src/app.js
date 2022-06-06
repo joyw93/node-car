@@ -1,13 +1,13 @@
 require("dotenv").config();
 
 /* import middlewares */
+const express = require("express");
+const path = require("path");
+const morgan = require("morgan");
+const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("passport");
-const express = require("express");
-const morgan = require("morgan");
-const helmet = require("helmet");
-const path = require("path");
 const cors = require("cors");
 const hpp = require("hpp");
 const app = express();

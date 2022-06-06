@@ -2,10 +2,11 @@
   <div>
     <div class="badge">
       <span id="badge"
-        >2년 2개월 /&nbsp;<span
+        >{{carAge}}년 경과 /&nbsp;<span
           :style="{ fontSize: '22px', fontWeight: 'bolder', color: '#1565C0' }"
           >32%감가</span
         >
+        
       </span>
     </div>
     <canvas id="residual-chart"></canvas>
@@ -18,6 +19,8 @@ import ResidualChart from "chart.js";
 export default {
   props: {
     price: Number,
+    predictedPrice: Number,
+    age: Number,
   },
   data() {
     return {
@@ -28,7 +31,10 @@ export default {
           datasets: [
             {
               label: "가격",
-              data: [parseInt(this.price*1.8), parseInt(this.price)],
+              data: [
+                parseInt(this.predictedPrice * 1.8),
+                parseInt(this.predictedPrice),
+              ],
               backgroundColor: [
                 "rgba(13, 71, 161, 0.8)",
                 "rgba(233, 30, 99, 0.8)",
@@ -83,6 +89,13 @@ export default {
         },
       },
     };
+  },
+  computed: {
+    carAge() {
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      return currentYear - this.age;
+    },
   },
   mounted() {
     const ctx = document.getElementById("residual-chart");

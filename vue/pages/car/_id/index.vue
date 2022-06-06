@@ -65,7 +65,11 @@
       </v-col>
       <v-col cols="12" sm="8" md="4" lg="4">
         <h3>신차 가격대비 잔존율</h3>
-        <PriceRemain :price="predictedPrice" />
+        <PriceRemain
+          :predictedPrice="predictedPrice"
+          :price="price"
+          :age="age"
+        />
       </v-col>
       <v-col cols="12" sm="8" md="4" lg="4">
         <div>
@@ -73,7 +77,7 @@
           <span :style="{ float: 'right' }">[단위 : 만원]</span>
         </div>
         <div id="predict-text">판매가 기준 감가 예측 그래프입니다.</div>
-        <PricePredict :price="predictedPrice" />
+        <PricePredict :predictedPrice="predictedPrice" :price="price" />
       </v-col>
     </v-row>
     <v-divider />
@@ -90,6 +94,9 @@ export default {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
+  created() {
+    this.$store.dispatch("buy_car/loadAllCars");
+  },
 
   computed: {
     car() {
@@ -100,6 +107,9 @@ export default {
     },
     price() {
       return this.car.price;
+    },
+    age() {
+      return this.car.age;
     },
     priceMin() {
       return parseInt(this.predictedPrice * 0.95);

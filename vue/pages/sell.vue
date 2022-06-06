@@ -185,6 +185,9 @@ export default {
     images() {
       return this.$store.state.register_car.images;
     },
+    domesticBrands() {
+      return this.$store.state.static.domesticBrands;
+    },
     sellCheckMsg() {
       return this.$store.state.static.sellCheckMsg;
     },
@@ -203,6 +206,7 @@ export default {
       this.dialog = false;
       const carDTO = {
         brand: this.brand,
+        isDomestic: this.domesticBrands.includes(this.brand) ? "Y" : "N",
         model: this.model,
         odo: this.odo,
         age: this.age,
@@ -217,10 +221,9 @@ export default {
         regions: this.regions,
         feature: this.feature,
         dealerRecommend: this.dealerRecommend,
-        images: null,
         price: this.price,
-        predictedPrice: null,
       };
+      console.log(carDTO)
 
       try {
         // S3에 차량 사진 저장 요청
@@ -241,7 +244,7 @@ export default {
         carDTO.images = imgUrls.data;
         carDTO.predictedPrice = predictedPrice.data;
 
-        // api 서버에 보내기 전 데이터 가공
+        // DB에 저장요청 전 데이터 가공
         carDTO.options = carDTO.options.join();
         carDTO.regions = carDTO.regions.join();
         carDTO.images = carDTO.images.join();

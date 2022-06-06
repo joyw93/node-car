@@ -16,6 +16,7 @@ export const state = () => ({
   feature: null,
   dealerRecommend: "N",
   images: null,
+  isDomestic: null,
 });
 
 export const mutations = {
