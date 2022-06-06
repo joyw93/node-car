@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     showDetail(id) {
-      this.$store.dispatch("buy_car/loadCar", { id: id });
+      this.$store.dispatch("buy_car/loadCar", { id });
       this.$router.push({
         path: `/car/${id}`,
       });

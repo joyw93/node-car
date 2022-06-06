@@ -260,10 +260,10 @@ export default {
             fuel: this.fuel,
           })
           .then(() => {
-            console.log("ML데이터 수신 성공");
+            console.log("응답 성공");
           })
           .catch(() => {
-            console.log("ML데이터 수신 실패");
+            console.log("응답 실패");
           });
       } else {
         console.log("양식이 유효하지 않습니다.");
