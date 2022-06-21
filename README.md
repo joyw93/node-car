@@ -24,5 +24,3 @@
 
 </br>
 
-## 3. 프로젝트 구조
-![Untitled Diagram drawio (2)](https://user-images.githubusercontent.com/48177285/165429379-715c50a0-4061-41e5-8737-4c84cf375ba8.png)
