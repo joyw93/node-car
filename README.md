@@ -12,14 +12,14 @@
 ## 2. 사용 기술
 
 #### `언어`
-  - Javascript
+  - Node.js
 
 #### `Back-end`
-  - express
+  - Express
   - MySQL
   - AWS
 #### `Front-end`
-  - Vue
+  - Vue.js
 
 </br>
 
