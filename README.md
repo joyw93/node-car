@@ -12,10 +12,13 @@
 ## 2. 사용 기술
 
 #### `언어`
-  - Node.js
+  - JavaScript
+  - Python 3
 
 #### `Back-end`
+  - Node.js
   - Express.js
+  - Flask
   - MySQL
   - AWS
 #### `Front-end`
@@ -27,7 +30,7 @@
 <img width="515" alt="캡처" src="https://user-images.githubusercontent.com/48177285/185836959-6b77c74c-a26c-4e7b-80d6-a575fdc9df5b.PNG">
 
 
-## 4. UI
+## 4. 기능
 
 <details>
 <summary><b>시세조회</b></summary>
@@ -86,27 +89,6 @@
 
 </div>
 </details>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
