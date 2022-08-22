@@ -15,7 +15,7 @@
   - Node.js
 
 #### `Back-end`
-  - Express
+  - Express.js
   - MySQL
   - AWS
 #### `Front-end`
@@ -23,7 +23,11 @@
 
 </br>
 
-## 3. UI
+## 3. 프로젝트 구조
+<img width="515" alt="캡처" src="https://user-images.githubusercontent.com/48177285/185836959-6b77c74c-a26c-4e7b-80d6-a575fdc9df5b.PNG">
+
+
+## 4. UI
 
 <details>
 <summary><b>시세조회</b></summary>
